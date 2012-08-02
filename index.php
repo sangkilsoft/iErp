@@ -1,7 +1,7 @@
 <?php
 /*
  * Initial creation by Mujib Masyhudi
- * 02-08-2012
+ * 02-08-2012 09:40:00
  */
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../framework/yii.php';
