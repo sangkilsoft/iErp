@@ -1,5 +1,8 @@
 <?php
-
+/*
+ * Initial creation by Mujib Masyhudi
+ * 02-08-2012
+ */
 // change the following paths if necessary
 $yii=dirname(__FILE__).'/../framework/yii.php';
 $config=dirname(__FILE__).'/protected/config/main.php';
