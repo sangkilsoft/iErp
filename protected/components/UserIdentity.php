@@ -34,11 +34,68 @@ class UserIdentity extends CUserIdentity {
         /*
          * Set menu according to user role
          * make generator function from database model
+         * set static for now
          */
         $this->_menu = array(
             'items' => array(
                 array('label' => 'Dashboard', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
-                array('label' => 'Theme Pages',
+                array('label' => 'Admin Tools',
+                    'items' => array(
+                        array('label' => 'Organization', 'url' => array('/theme/index')),
+                        array('label' => 'Users', 'url' => array('/theme/index')),
+                        array('label' => 'User to Organization', 'url' => array('/theme/index')),
+                        array('label' => 'Authentification & Roles', 'url' => array('/theme/index')),
+                    ),
+                    'visible' => true,
+                ),
+                array('label' => 'Data Master',
+                    'items' => array(
+                        array('label' => 'Categories', 'url' => array('/theme/create')),
+                        array('label' => 'Supplier', 'url' => array('/theme/index')),
+                        array('label' => 'Customer', 'url' => array('/theme/index')),
+                        array('label' => 'Items Master', 'url' => array('/theme/index')),
+                        array('label' => 'Items to Supplier', 'url' => array('/theme/index')),
+                        array('label' => 'Items Pricing', 'url' => array('/theme/admin')),
+                    ),
+                ),
+                array('label' => 'Purcahasing',
+                    'items' => array(
+                        array('label' => 'Items', 'url' => array('/theme/index')),
+                        array('label' => 'Create Item', 'url' => array('/theme/create')),
+                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                    ),
+                    'visible' => false,
+                ),
+                array('label' => 'Inventory',
+                    'items' => array(
+                        array('label' => 'Warehouse', 'url' => array('/theme/index')),
+                        array('label' => 'Locators', 'url' => array('/theme/create')),
+                        array('label' => 'Good Receipt', 'url' => array('/theme/admin')),
+                        array('label' => 'Good Issue', 'url' => array('/theme/admin')),
+                        array('label' => 'Moves history', 'url' => array('/theme/admin')),
+                        array('label' => 'Stock valuation', 'url' => array('/theme/admin')),
+                        array('label' => 'Stock Opname', 'url' => array('/theme/admin')),
+                        array('label' => 'Barcode Generator', 'url' => array('/theme/admin')),
+                        
+                    ),
+                ),
+                array('label' => 'Sales & Distribution',
+                    'items' => array(
+                        array('label' => 'Items', 'url' => array('/theme/index')),
+                        array('label' => 'Create Item', 'url' => array('/theme/create')),
+                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                    ),
+                    'visible' => false,
+                ),
+                array('label' => 'Finance & Costing',
+                    'items' => array(
+                        array('label' => 'Items', 'url' => array('/theme/index')),
+                        array('label' => 'Create Item', 'url' => array('/theme/create')),
+                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                    ),
+                    'visible' => false,
+                ),
+                array('label' => 'Theme Fiture',
                     'items' => array(
                         array('label' => 'Graphs & Charts', 'url' => array('/site/page', 'view' => 'graphs'), 'itemOptions' => array('class' => 'icon_chart')),
                         array('label' => 'Form Elements', 'url' => array('/site/page', 'view' => 'forms')),
@@ -48,14 +105,7 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Buttons & Icons', 'url' => array('/site/page', 'view' => 'buttons_and_icons')),
                     ),
                 ),
-                array('label' => 'Gii Generated Module',
-                    'items' => array(
-                        array('label' => 'Items', 'url' => array('/theme/index')),
-                        array('label' => 'Create Item', 'url' => array('/theme/create')),
-                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
-                    ),
-                ),
-                array('label' => 'Contact', 'url' => array('/site/contact')),
+                //array('label' => 'Contact', 'url' => array('/site/contact')),
                 //array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
                 array('label' => 'Logout (' . $users[$this->username] . ')', 'url' => array('/site/logout')),
             ),

@@ -32,7 +32,7 @@
 #nav ul a,
 #nav li.active li { font-weight:normal; background-color:#F1F1F1;}
 
-/*#nav ul li ul li a:hover{ text-decoration:underline!important;}*/
+#nav ul li ul li a:hover{ text-decoration:underline!important;}
 
 
 /************ 2ND LEVEL ************/
