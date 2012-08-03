@@ -34,7 +34,7 @@ class UserIdentity extends CUserIdentity {
         /*
          * Set menu according to user role
          * make generator function from database model
-         * set static for now
+         * set static for now again
          */
         $this->_menu = array(
             'items' => array(
