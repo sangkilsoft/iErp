@@ -12,7 +12,7 @@
 
 
 /************ 1ST LEVEL  ***************/
-#nav li { float:left; background-image:url(../images/el_bg2.png); margin:0; margin-left:0.1em;margin-right:0.1em;padding:3px 10px 3px 10px;  border:solid 1px #222222;border-bottom:none;}
+#nav li { float:left; background-image:url(el_bg2.png); margin:0; margin-left:0.1em;margin-right:0.1em;padding:3px 10px 3px 10px;  border:solid 1px #222222;border-bottom:none;}
 #nav li.active, #nav li.active a { background-color:#F1F1F1; color:#333; font-weight:normal;  }
 #nav li a:hover{ background-color:#3333;}
 #nav li.active em { display:block; position:absolute; top:0; right:-1px; width:3px; height:27px; }
