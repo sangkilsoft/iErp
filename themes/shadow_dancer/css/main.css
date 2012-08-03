@@ -19,7 +19,7 @@ body
 	margin: 0;
 	padding: 5px;
 	background-color:#000000;
-	color:#FFFF;
+	color:#FFF;
 	text-align:right;
 }
 
@@ -83,7 +83,7 @@ body
 
 #mainmenu ul li
 {
-	display: inline;
+  display: inline;
   background-attachment:initial;
   background-clip:initial;
   background-color:#333333;
