@@ -68,7 +68,7 @@ class UserIdentity extends CUserIdentity {
                 ),
                 array('label' => 'Inventory',
                     'items' => array(
-                        array('label' => 'Warehouse', 'url' => array('/theme/index')),
+                        array('label' => 'Warehouse', 'url' => array('/Whse/index')),
                         array('label' => 'Locators', 'url' => array('/theme/create')),
                         array('label' => 'Good Receipt', 'url' => array('/theme/admin')),
                         array('label' => 'Good Issue', 'url' => array('/theme/admin')),
