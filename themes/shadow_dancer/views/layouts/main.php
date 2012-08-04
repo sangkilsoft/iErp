@@ -31,12 +31,13 @@
                 <div class="topnav_text"><a href='#'>Home</a> | <a href='#'>My Account</a> | <a href='#'>Settings</a> | <a href='#'>Logout</a> </div>
             </div>
             <div id="header">
-                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);  ?></div>
+                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);   ?></div>
             </div><!-- header -->
 
             <?php
-            $this->widget('application.extensions.mbmenu.MbMenu',$this->menu);
-            ?>   <!--
+            $this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
+            ?>   
+            <!--
       <div id="mainmenu">
   
             <?php
@@ -60,14 +61,14 @@
                     'links' => $this->breadcrumbs,
                 ));
                 ?><!-- breadcrumbs -->
-                <?php endif ?>
+            <?php endif ?>
 
-<?php echo $content; ?>
+            <?php echo $content; ?>
 
             <div id="footer">
                 Copyright &copy; <?php echo date('Y'); ?> by webapplicationthemes.com<br/>
                 All Rights Reserved.<br/>
-<?php echo Yii::powered(); ?>
+                <?php echo Yii::powered(); ?>
             </div><!-- footer -->
 
         </div><!-- page -->

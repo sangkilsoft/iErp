@@ -15,15 +15,14 @@ return array(
         'application.components.*',
     ),
     'modules' => array(
-    // uncomment the following to enable the Gii tool
-    /*
-      'gii'=>array(
-      'class'=>'system.gii.GiiModule',
-      'password'=>'Enter Your Password Here',
-      // If removed, Gii defaults to localhost only. Edit carefully to taste.
-      'ipFilters'=>array('127.0.0.1','::1'),
-      ),
-     */
+        // uncomment the following to enable the Gii tool
+
+        'gii' => array(
+            'class' => 'system.gii.GiiModule',
+            'password' => 'bismillah',
+            // If removed, Gii defaults to localhost only. Edit carefully to taste.
+            'ipFilters' => array('127.0.0.1', '::1'),
+        ),
     ),
     // application components
     'components' => array(
@@ -42,19 +41,13 @@ return array(
           ),
           ),
          */
+
         'db' => array(
-            'connectionString' => 'sqlite:' . dirname(__FILE__) . '/../data/testdrive.db',
+            //'connectionString' => 'pgsql:host=localhost;port=5432;dbname=sangkilbizdb',
+            'connectionString' => 'pgsql:host=localhost;port=5432;dbname=TinyDB',
+            'username' => 'sangkilsoft',
+            'password' => 'rahasia',
         ),
-        // uncomment the following to use a MySQL database
-        /*
-          'db'=>array(
-          'connectionString' => 'mysql:host=localhost;dbname=testdrive',
-          'emulatePrepare' => true,
-          'username' => 'root',
-          'password' => '',
-          'charset' => 'utf8',
-          ),
-         */
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
@@ -72,6 +65,39 @@ return array(
               'class'=>'CWebLogRoute',
               ),
              */
+            ),
+        ),
+        'widgetFactory' => array(
+            'widgets' => array(
+                'CGridView' => array(
+                    'htmlOptions' => array('cellspacing' => '0', 'cellpadding' => '0'),
+                    'itemsCssClass' => 'item-class',
+                    'pagerCssClass' => 'pager-class'
+                ),
+                'CJuiTabs' => array(
+                    'htmlOptions' => array('class' => 'shadowtabs'),
+                ),
+                'CJuiAccordion' => array(
+                    'htmlOptions' => array('class' => 'shadowaccordion'),
+                ),
+                'CJuiProgressBar' => array(
+                    'htmlOptions' => array('class' => 'shadowprogressbar'),
+                ),
+                'CJuiSlider' => array(
+                    'htmlOptions' => array('class' => 'shadowslider'),
+                ),
+                'CJuiSliderInput' => array(
+                    'htmlOptions' => array('class' => 'shadowslider'),
+                ),
+                'CJuiButton' => array(
+                    'htmlOptions' => array('class' => 'shadowbutton'),
+                ),
+                'CJuiButton' => array(
+                    'htmlOptions' => array('class' => 'shadowbutton'),
+                ),
+                'CJuiButton' => array(
+                    'htmlOptions' => array('class' => 'button green'),
+                ),
             ),
         ),
     ),

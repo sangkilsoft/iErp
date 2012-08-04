@@ -7,7 +7,7 @@ class SiteController extends Controller {
      */
     public function actions() {
         if (isset(Yii::app()->user->mmenu))
-            $this->menu = Yii::app()->user->mmenu;
+            $this->mmenu = Yii::app()->user->mmenu;
         return array(
             // captcha action renders the CAPTCHA image displayed on the contact page
             'captcha' => array(
@@ -30,7 +30,7 @@ class SiteController extends Controller {
         // renders the view file 'protected/views/site/index.php'
         // using the default layout 'protected/views/layouts/main.php'
         if (isset(Yii::app()->user->mmenu))
-            $this->menu = Yii::app()->user->mmenu;
+            $this->mmenu = Yii::app()->user->mmenu;
         $this->render('index');
     }
 
@@ -39,7 +39,7 @@ class SiteController extends Controller {
      */
     public function actionError() {
         if (isset(Yii::app()->user->mmenu))
-            $this->menu = Yii::app()->user->mmenu;
+            $this->mmenu = Yii::app()->user->mmenu;
         if ($error = Yii::app()->errorHandler->error) {
             if (Yii::app()->request->isAjaxRequest)
                 echo $error['message'];
