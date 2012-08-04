@@ -28,7 +28,10 @@
 	</div>
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+		<?php
+                //echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); 
+                echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class'=>'btn-orange'));
+                ?>
 	</div>
 
 <?php $this->endWidget(); ?>

@@ -74,6 +74,11 @@ return array(
                     'itemsCssClass' => 'item-class',
                     'pagerCssClass' => 'pager-class'
                 ),
+                'CListView' => array(
+                    'htmlOptions' => array('cellspacing' => '0', 'cellpadding' => '0'),
+                    'itemsCssClass' => 'item-class',
+                    'pagerCssClass' => 'pager-class'
+                ),
                 'CJuiTabs' => array(
                     'htmlOptions' => array('class' => 'shadowtabs'),
                 ),
@@ -88,9 +93,6 @@ return array(
                 ),
                 'CJuiSliderInput' => array(
                     'htmlOptions' => array('class' => 'shadowslider'),
-                ),
-                'CJuiButton' => array(
-                    'htmlOptions' => array('class' => 'shadowbutton'),
                 ),
                 'CJuiButton' => array(
                     'htmlOptions' => array('class' => 'shadowbutton'),

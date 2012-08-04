@@ -11,5 +11,6 @@ $this->menu=array(
 ?>
 
 <h1>Create Whse</h1>
-
-<?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+<fieldset>
+    <?php echo $this->renderPartial('_form', array('model'=>$model)); ?>
+</fieldset>
