@@ -41,30 +41,40 @@ class UserIdentity extends CUserIdentity {
                 array('label' => 'Dashboard', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
                 array('label' => 'Admin Tools',
                     'items' => array(
-                        array('label' => 'Organization', 'url' => array('/theme/index')),
                         array('label' => 'Users', 'url' => array('/theme/index')),
                         array('label' => 'User to Organization', 'url' => array('/theme/index')),
                         array('label' => 'Authentification & Roles', 'url' => array('/theme/index')),
                     ),
-                    'visible' => true,
+                    'visible' => false,
                 ),
                 array('label' => 'Data Master',
                     'items' => array(
+                        array('label' => 'Organization', 'url' => array('/theme/index')),
+                        array('label' => 'Branch', 'url' => array('/theme/index')),
+                        array('label' => 'Suppliers', 'url' => array('/theme/index')),
+                        array('label' => 'Customers', 'url' => array('/theme/index')),
                         array('label' => 'Categories', 'url' => array('/theme/create')),
-                        array('label' => 'Supplier', 'url' => array('/theme/index')),
-                        array('label' => 'Customer', 'url' => array('/theme/index')),
                         array('label' => 'Items Master', 'url' => array('/theme/index')),
                         array('label' => 'Items to Supplier', 'url' => array('/theme/index')),
-                        array('label' => 'Items Pricing', 'url' => array('/theme/admin')),
                     ),
                 ),
-                array('label' => 'Purcahasing',
+                array('label' => 'Purcahasing', 'url' => 'purhc/index',
                     'items' => array(
-                        array('label' => 'Items', 'url' => array('/theme/index')),
-                        array('label' => 'Create Item', 'url' => array('/theme/create')),
-                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                        array('label' => 'Supplier Price Request', 'url' => array('/purhc/order')),
+                        array('label' => 'Purchase Order', 'url' => array('/theme/create')),
+                        array('label' => 'Goods Receipt', 'url' => array('/theme/create')),
+                        array('label' => 'Control of Invoicing', 'url' => array('/purch/reports')),
+                        array('label' => 'Control of Orders', 'url' => array('/purch/reports')),
+                        array('label' => 'Control of Goods Receipt', 'url' => array('/purch/reports')),
+                        array('label' => 'Tenders', 'url' => array('/purch/reports'),'visible'=>false),
+                        array('label' => 'Price Revisions', 'url' => array('/purch/reports'),
+                            'items' => array(
+                                array('label' => 'Standard Price', 'url' => array('/Whse/admin')),
+                                array('label' => 'Average Price', 'url' => array('/theme/create')),
+                            ),
+                        ),
                     ),
-                    'visible' => false,
+                    'visible' => true,
                 ),
                 array('label' => 'Inventory',
                     'items' => array(
@@ -76,22 +86,51 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Stock valuation', 'url' => array('/theme/admin')),
                         array('label' => 'Stock Opname', 'url' => array('/theme/admin')),
                         array('label' => 'Barcode Generator', 'url' => array('/theme/admin')),
-                        
                     ),
                 ),
                 array('label' => 'Sales & Distribution',
                     'items' => array(
-                        array('label' => 'Items', 'url' => array('/theme/index')),
-                        array('label' => 'Create Item', 'url' => array('/theme/create')),
-                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                        array('label' => 'Items Pricing', 'url' => array('/theme/admin')),
+                        array('label' => 'Sales Orders', 'url' => array('/theme/admin')),
+                        array('label' => 'Invoices', 'url' => array('/theme/admin')),
                     ),
                     'visible' => false,
+//    Managing your Sales Quotations
+//    Packaging
+//    Alerts
+//    Control Deliveries and Invoicing
+//        Configuring Orders
+//        Picking Mode
+//    Management of Carriers
+//        Tariff Grids
+//        Delivery Modes
+//        Delivery based on Ordered Quantities
+//        Delivery based on Shipped Quantities
+//    Keep Track of your Margins
+//        Margins on Sales Orders
+//        Margins by Product
+//        Margins by Project
+//    Pricing Policies
+//        Creating Price Lists
+//            Price List Versions
+//            Calculation Rules
+//            Decimal Accuracy
+//        Example of a Pricelist
+//            Default Price Lists
+//            Trading Company
+//            Establishing Customer Contract Conditions
+//        Pricelists and Managing Currencies
+//    Rebates at the End of a Campaign
+//    Keeping Track of Open Orders
+//    Changing Order Layout
+
                 ),
                 array('label' => 'Finance & Costing',
                     'items' => array(
-                        array('label' => 'Items', 'url' => array('/theme/index')),
-                        array('label' => 'Create Item', 'url' => array('/theme/create')),
-                        array('label' => 'Manage Items', 'url' => array('/theme/admin')),
+                        array('label' => 'Coa', 'url' => array('/theme/index')),
+                        array('label' => 'Payment In', 'url' => array('/theme/create')),
+                        array('label' => 'Payment Out', 'url' => array('/theme/create')),
+                        array('label' => 'Reports', 'url' => array('/theme/create')),
                     ),
                     'visible' => false,
                 ),
@@ -104,6 +143,7 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Calendar', 'url' => array('/site/page', 'view' => 'calendar')),
                         array('label' => 'Buttons & Icons', 'url' => array('/site/page', 'view' => 'buttons_and_icons')),
                     ),
+                    'visible' => false,
                 ),
                 //array('label' => 'Contact', 'url' => array('/site/contact')),
                 //array('label' => 'Login', 'url' => array('/site/login'), 'visible' => Yii::app()->user->isGuest),
