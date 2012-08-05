@@ -41,36 +41,40 @@ class UserIdentity extends CUserIdentity {
                 array('label' => 'Dashboard', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
                 array('label' => 'Admin Tools',
                     'items' => array(
-                        array('label' => 'Users', 'url' => array('/theme/index')),
-                        array('label' => 'User to Organization', 'url' => array('/theme/index')),
-                        array('label' => 'Authentification & Roles', 'url' => array('/theme/index')),
+                        array('label' => 'Users', 'url' => array('/admin/index')),
+                        array('label' => 'User to Organization', 'url' => array('/admin/index')),
+                        array('label' => 'Authentification & Roles', 'url' => array('/admin/index')),
                     ),
                     'visible' => false,
                 ),
                 array('label' => 'Data Master',
                     'items' => array(
-                        array('label' => 'Organization', 'url' => array('/theme/index')),
-                        array('label' => 'Branch', 'url' => array('/theme/index')),
-                        array('label' => 'Suppliers', 'url' => array('/theme/index')),
-                        array('label' => 'Customers', 'url' => array('/theme/index')),
-                        array('label' => 'Categories', 'url' => array('/theme/create')),
-                        array('label' => 'Items Master', 'url' => array('/theme/index')),
-                        array('label' => 'Items to Supplier', 'url' => array('/theme/index')),
+                        array('label' => 'Organization', 'url' => array('/master/org')),
+                        array('label' => 'Branch', 'url' => array('/master/branch')),
+                        array('label' => 'Suppliers', 'url' => array('/master/supp')),
+                        array('label' => 'Customers', 'url' => array('/master/cust')),
+                        array('label' => 'Categories', 'url' => array('/master/cats')),
+                        array('label' => 'Items Master', 'url' => array('/master/items')),
+                        array('label' => 'Items to Supplier', 'url' => array('/master/item_supp')),
                     ),
                 ),
                 array('label' => 'Purcahasing', 'url' => 'purhc/index',
                     'items' => array(
-                        array('label' => 'Supplier Price Request', 'url' => array('/purhc/order')),
-                        array('label' => 'Purchase Order', 'url' => array('/theme/create')),
-                        array('label' => 'Goods Receipt', 'url' => array('/theme/create')),
-                        array('label' => 'Control of Invoicing', 'url' => array('/purch/reports')),
-                        array('label' => 'Control of Orders', 'url' => array('/purch/reports')),
-                        array('label' => 'Control of Goods Receipt', 'url' => array('/purch/reports')),
-                        array('label' => 'Tenders', 'url' => array('/purch/reports'),'visible'=>false),
-                        array('label' => 'Pricing Methode', 'url' => array('/purch/reports'),
+                        array('label' => 'Supplier Price Request', 'url' => array('/purhc/price_req')),
+                        array('label' => 'Purchase Order', 'url' => array('/purhc/order')),
+                        array('label' => 'Goods Receipt', 'url' => array('/purhc/receipt')),
+                        array('label' => 'Invoicing', 'url' => array('/purch/invoice_control')),
+                        array('label' => 'Pricing Methode',
                             'items' => array(
-                                array('label' => 'Standard Price', 'url' => array('/Whse/admin')),
-                                array('label' => 'Average Price', 'url' => array('/theme/create')),
+                                array('label' => 'Standard Price', 'url' => array('/purhc/sprice')),
+                                array('label' => 'Average Price', 'url' => array('/purhc/aprice')),
+                            ),
+                        ),
+                        array('label' => 'Reports',
+                            'items' => array(
+                                array('label' => 'Orders', 'url' => array('/purhc/orders')),
+                                array('label' => 'Receipt', 'url' => array('/purhc/receipts')),
+                                array('label' => 'Invoices', 'url' => array('/purhc/invoices')),
                             ),
                         ),
                     ),
@@ -78,52 +82,27 @@ class UserIdentity extends CUserIdentity {
                 ),
                 array('label' => 'Inventory',
                     'items' => array(
-                        array('label' => 'Warehouse', 'url' => array('/Whse/admin')),
-                        array('label' => 'Locators', 'url' => array('/theme/create')),
-                        array('label' => 'Good Receipt', 'url' => array('/theme/admin')),
-                        array('label' => 'Good Issue', 'url' => array('/theme/admin')),
-                        array('label' => 'Moves history', 'url' => array('/theme/admin')),
-                        array('label' => 'Stock valuation', 'url' => array('/theme/admin')),
-                        array('label' => 'Stock Opname', 'url' => array('/theme/admin')),
-                        array('label' => 'Barcode Generator', 'url' => array('/theme/admin')),
+                        array('label' => 'Warehouse',
+                            'items' => array(
+                                array('label' => 'Create New', 'url' => array('/Whse/create')),
+                                array('label' => 'Manage Exist', 'url' => array('/Whse/admin')),
+                        )),
+                        array('label' => 'Locators', 'url' => array('/invt/create')),
+                        array('label' => 'Good Receipt', 'url' => array('/invt/admin')),
+                        array('label' => 'Good Issue', 'url' => array('/invt/admin')),
+                        array('label' => 'Moves history', 'url' => array('/invt/admin')),
+                        array('label' => 'Stock valuation', 'url' => array('/invt/admin')),
+                        array('label' => 'Stock Opname', 'url' => array('/invt/admin')),
+                        array('label' => 'Barcode Generator', 'url' => array('/invt/admin')),
                     ),
                 ),
                 array('label' => 'Sales & Distribution',
                     'items' => array(
-                        array('label' => 'Items Pricing', 'url' => array('/theme/admin')),
-                        array('label' => 'Sales Orders', 'url' => array('/theme/admin')),
-                        array('label' => 'Invoices', 'url' => array('/theme/admin')),
+                        array('label' => 'Items Pricing', 'url' => array('/sales/admin')),
+                        array('label' => 'Sales Orders', 'url' => array('/sales/admin')),
+                        array('label' => 'Invoices', 'url' => array('/sales/admin')),
                     ),
                     'visible' => false,
-//    Managing your Sales Quotations
-//    Packaging
-//    Alerts
-//    Control Deliveries and Invoicing
-//        Configuring Orders
-//        Picking Mode
-//    Management of Carriers
-//        Tariff Grids
-//        Delivery Modes
-//        Delivery based on Ordered Quantities
-//        Delivery based on Shipped Quantities
-//    Keep Track of your Margins
-//        Margins on Sales Orders
-//        Margins by Product
-//        Margins by Project
-//    Pricing Policies
-//        Creating Price Lists
-//            Price List Versions
-//            Calculation Rules
-//            Decimal Accuracy
-//        Example of a Pricelist
-//            Default Price Lists
-//            Trading Company
-//            Establishing Customer Contract Conditions
-//        Pricelists and Managing Currencies
-//    Rebates at the End of a Campaign
-//    Keeping Track of Open Orders
-//    Changing Order Layout
-
                 ),
                 array('label' => 'Finance & Costing',
                     'items' => array(
