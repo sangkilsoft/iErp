@@ -37,24 +37,6 @@
             <?php
             $this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
             ?>   
-            <!--
-      <div id="mainmenu">
-  
-            <?php
-//            $this->widget('zii.widgets.CMenu', array(
-//                'items' => array(
-//                    array('label' => 'Dashboard', 'url' => array('/site/index')),
-//                    array('label' => 'Graphs', 'url' => array('/site/page', 'view' => 'graphs'), 'itemOptions' => array('class' => 'icon_chart')),
-//                    array('label' => 'Form', 'url' => array('/site/page', 'view' => 'forms')),
-//                    array('label' => 'Interface', 'url' => array('/site/page', 'view' => 'interface')),
-//                    array('label' => 'Buttons & Icons', 'url' => array('/site/page', 'view' => 'buttons_and_icons')),
-//                    array('label' => 'Error Pages', 'url' => array('/site/page', 'view' => 'Demo 404 page')),
-//                ),
-//            ));
-            ?>
-      </div> 
-  --->
-            <!--mainmenu -->
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
                 $this->widget('zii.widgets.CBreadcrumbs', array(
@@ -66,11 +48,9 @@
             <?php echo $content; ?>
 
             <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> by webapplicationthemes.com<br/>
-                All Rights Reserved.<br/>
-                <?php echo Yii::powered(); ?>
+                Copyright &copy; <?php echo date('Y'); ?> SangkilSoft.com<br/>
+                <?php echo Yii::powered()." theme by webapplicationthemes.com"; ?>
             </div><!-- footer -->
-
         </div><!-- page -->
 
     </body>

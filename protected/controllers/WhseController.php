@@ -84,6 +84,8 @@ class WhseController extends Controller {
      * @param integer $id the ID of the model to be updated
      */
     public function actionUpdate($id) {
+        if (isset(Yii::app()->user->mmenu))
+            $this->mmenu = Yii::app()->user->mmenu;
         $model = $this->loadModel($id);
 
         // Uncomment the following line if AJAX validation is needed

@@ -55,21 +55,19 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Customers', 'url' => array('/master/cust')),
                         array('label' => 'Categories', 'url' => array('/master/cats')),
                         array('label' => 'Items Master', 'url' => array('/master/items')),
-                        array('label' => 'Items to Supplier', 'url' => array('/master/item_supp')),
                     ),
                 ),
                 array('label' => 'Purcahasing', 'url' => 'purhc/index',
                     'items' => array(
-                        array('label' => 'Supplier Price Request', 'url' => array('/purhc/price_req')),
+                        array('label' => 'Setup',
+                            'items' => array(
+                                array('label' => 'Pricing Methode', 'url' => array('/purhc/sprice')),
+                                array('label' => 'Items to Supplier', 'url' => array('/master/item_supp')),
+                            ),
+                        ),array('label' => 'Supplier Price Request', 'url' => array('/purhc/price_req')),
                         array('label' => 'Purchase Order', 'url' => array('/purhc/order')),
                         array('label' => 'Goods Receipt', 'url' => array('/purhc/receipt')),
                         array('label' => 'Invoicing', 'url' => array('/purch/invoice_control')),
-                        array('label' => 'Pricing Methode',
-                            'items' => array(
-                                array('label' => 'Standard Price', 'url' => array('/purhc/sprice')),
-                                array('label' => 'Average Price', 'url' => array('/purhc/aprice')),
-                            ),
-                        ),
                         array('label' => 'Reports',
                             'items' => array(
                                 array('label' => 'Orders', 'url' => array('/purhc/orders')),
@@ -82,12 +80,16 @@ class UserIdentity extends CUserIdentity {
                 ),
                 array('label' => 'Inventory',
                     'items' => array(
-                        array('label' => 'Warehouse',
+                        array('label' => 'Warehouse', 'url' => array('/Whse/admin'),
+                            'items' => array(
+                                array('label' => 'Create New', 'url' => array('/Whse/create')),
+                                array('label' => 'Manage Exist', 'url' => array('/Whse/index')),
+                        )),
+                        array('label' => 'Locators', 'url' => array('/invt/create'),
                             'items' => array(
                                 array('label' => 'Create New', 'url' => array('/Whse/create')),
                                 array('label' => 'Manage Exist', 'url' => array('/Whse/admin')),
                         )),
-                        array('label' => 'Locators', 'url' => array('/invt/create')),
                         array('label' => 'Good Receipt', 'url' => array('/invt/admin')),
                         array('label' => 'Good Issue', 'url' => array('/invt/admin')),
                         array('label' => 'Moves history', 'url' => array('/invt/admin')),
