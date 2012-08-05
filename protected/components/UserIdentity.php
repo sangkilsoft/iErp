@@ -67,7 +67,7 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Control of Orders', 'url' => array('/purch/reports')),
                         array('label' => 'Control of Goods Receipt', 'url' => array('/purch/reports')),
                         array('label' => 'Tenders', 'url' => array('/purch/reports'),'visible'=>false),
-                        array('label' => 'Price Revisions', 'url' => array('/purch/reports'),
+                        array('label' => 'Pricing Methode', 'url' => array('/purch/reports'),
                             'items' => array(
                                 array('label' => 'Standard Price', 'url' => array('/Whse/admin')),
                                 array('label' => 'Average Price', 'url' => array('/theme/create')),
