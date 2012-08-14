@@ -13,7 +13,7 @@
 
     <div class="row">
         <?php echo $form->labelEx($model, 'cd_whse'); ?>
-        <?php echo $form->textField($model, 'cd_whse', array('size' => 4, 'maxlength' => 4)); ?>
+        <?php echo $form->textField($model, 'cd_whse', array('size' => 4, 'maxlength' => 4, 'readonly'=>$model->isNewRecord ? false : true)); ?>
         <?php echo $form->error($model, 'cd_whse'); ?>
     </div>
 

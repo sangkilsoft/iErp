@@ -47,9 +47,9 @@
 
             <?php echo $content; ?>
 
-            <div id="footer">
-                Copyright &copy; <?php echo date('Y'); ?> SangkilSoft.com<br/>
-                <?php echo Yii::powered()." theme by webapplicationthemes.com"; ?>
+            <div id="footer" >
+                Copyright &copy; <?php echo date('Y')." ".Yii::app()->params['company'] ?><br/>
+                <?php echo Yii::powered(); //echo " theme by webapplicationthemes.com";  ?>
             </div><!-- footer -->
         </div><!-- page -->
 
