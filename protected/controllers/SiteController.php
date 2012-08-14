@@ -31,7 +31,7 @@ class SiteController extends Controller {
         // using the default layout 'protected/views/layouts/main.php'
         if (isset(Yii::app()->user->mmenu))
             $this->mmenu = Yii::app()->user->mmenu;
-        $this->render('index');
+        $this->render('index', array('client_ip' => $this->getRealIpAddr()));
     }
 
     /**
@@ -93,6 +93,17 @@ class SiteController extends Controller {
     public function actionLogout() {
         Yii::app()->user->logout();
         $this->redirect(Yii::app()->homeUrl);
+    }
+
+    function getRealIpAddr() {
+        if (!empty($_SERVER['HTTP_CLIENT_IP'])) {   //check ip from share internet
+            $ip = $_SERVER['HTTP_CLIENT_IP'];
+        } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {   //to check ip is pass from proxy
+            $ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+        } else {
+            $ip = $_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 
 }
