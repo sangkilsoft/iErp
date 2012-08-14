@@ -34,7 +34,7 @@
 #nav ul li ul li a:hover{ text-decoration:none!important;}
 
 /************ 2ND LEVEL ************/
-#nav ul { list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0 0 3px 0; position:absolute; width:189px; top:27px; left:-10000px; border-top:0; }
+#nav ul { list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0 0 3px 0; position:absolute; width:160px; top:27px; left:-10000px; border-top:0; }
 #nav ul ul  { list-style-image:none;list-style-position:outside;list-style-type:none;margin:0;padding:0px 0 0 0; border-top:0; left:100px; top:0px; }
 
 /* Show menu */
