@@ -31,17 +31,15 @@ return array(
             'allowAutoLogin' => true,
         ),
         // uncomment the following to enable URLs in path-format
-        /*
-          'urlManager'=>array(
-          'urlFormat'=>'path',
-          'rules'=>array(
-          '<controller:\w+>/<id:\d+>'=>'<controller>/view',
-          '<controller:\w+>/<action:\w+>/<id:\d+>'=>'<controller>/<action>',
-          '<controller:\w+>/<action:\w+>'=>'<controller>/<action>',
-          ),
-          ),
-         */
 
+        'urlManager' => array(
+            'urlFormat' => 'path',
+            'rules' => array(
+                '<controller:\w+>/<id:\d+>' => '<controller>/view',
+                '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
+                '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
+            ),
+        ),
         'db' => array(
             //'connectionString' => 'pgsql:host=localhost;port=5432;dbname=sangkilbizdb',
             'connectionString' => 'pgsql:host=localhost;port=5432;dbname=TinyDB',
@@ -107,8 +105,9 @@ return array(
     // using Yii::app()->params['paramName']
     'params' => array(
         // this is used in contact page
-        'adminEmail' => 'webmaster@example.com',
+        'company' => 'SangkilSoft.com',
+        'adminEmail' => 'mujib.masyhudi@gmail.com',
     ),
-    //'theme' => 'basic',    
+    //'theme' => 'classic',    
     'theme' => 'shadow_dancer',
 );
