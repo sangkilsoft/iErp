@@ -38,7 +38,7 @@ class UserIdentity extends CUserIdentity {
          */
         $this->_menu = array(
             'items' => array(
-                array('label' => 'Dashboard', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
+                array('label' => 'Home', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
                 array('label' => 'Admin Tools',
                     'items' => array(
                         array('label' => 'Users', 'url' => array('/admin/index')),
@@ -52,22 +52,43 @@ class UserIdentity extends CUserIdentity {
                         array('label' => 'Organization', 'url' => array('/master/org')),
                         array('label' => 'Branch', 'url' => array('/master/branch')),
                         array('label' => 'Suppliers', 'url' => array('/master/supp')),
-                        array('label' => 'Customers', 'url' => array('/master/cust')),
-                        array('label' => 'Categories', 'url' => array('/master/cats')),
-                        array('label' => 'Items Master', 'url' => array('/master/items')),
+                        array('label' => 'Customers', 'url' => array('/master/cust'),
+                            'items' => array(
+                                array('label' => 'Districs', 'url' => array('/master/cats')),
+                                array('label' => 'Kecamatan', 'url' => array('/master/cats')),
+                                array('label' => 'Customer Groups', 'url' => array('/master/cats')),//MT,GT
+                                array('label' => 'Customer Class', 'url' => array('/sales/admin')),//SUPER_MARKET,MINI_MARKET,WARUNG,DLL.
+                                array('label' => 'Customer Detail', 'url' => array('/master/cats'),
+                                    'items'=>array(
+                                        array('label' => 'Create New', 'url' => array('/master/cats')),
+                                        array('label' => 'Manage Exits', 'url' => array('/master/cats')),
+                                    )),
+                            )
+                        ),
+                        array('label' => 'Items Master', 'url' => array('/master/items'),
+                            'items' => array(
+                                array('label' => 'Categories', 'url' => array('/master/cats')),
+                                array('label' => 'Types', 'url' => array('/master/cats')), 
+                                array('label' => 'Uom', 'url' => array('/master/cats')), 
+                                array('label' => 'Items Master', 'url' => array('/master/cats')), 
+                                array('label' => 'Items to Vendors', 'url' => array('/master/cats')), 
+                                array('label' => 'Items to Customers', 'url' => array('/master/cats')), 
+                                array('label' => 'Items to Principals', 'url' => array('/master/cats')),  
+                            )
+                        ),
                     ),
                 ),
-                array('label' => 'Purcahasing', 'url' => 'purhc/index',
+                array('label' => 'Purcahasing', 'url' => array('purch/index'),
                     'items' => array(
                         array('label' => 'Setup',
                             'items' => array(
-                                array('label' => 'Pricing Methode', 'url' => array('/purhc/sprice')),
+                                array('label' => 'Costing Methode', 'url' => array('/purhc/sprice')),
                                 array('label' => 'Items to Supplier', 'url' => array('/master/item_supp')),
                             ),
-                        ),array('label' => 'Supplier Price Request', 'url' => array('/purhc/price_req')),
-                        array('label' => 'Purchase Order', 'url' => array('/purhc/order')),
-                        array('label' => 'Goods Receipt', 'url' => array('/purhc/receipt')),
-                        array('label' => 'Invoicing', 'url' => array('/purch/invoice_control')),
+                        ),
+                        array('label' => 'Supplier Price Request', 'url' => array('/purhc/price_req')),
+                        array('label' => 'Sales Order', 'url' => array('/purhc/receipt')),
+                        array('label' => 'Supplier Invoicing', 'url' => array('/purch/invoice_control')),
                         array('label' => 'Reports',
                             'items' => array(
                                 array('label' => 'Orders', 'url' => array('/purhc/orders')),
@@ -80,31 +101,53 @@ class UserIdentity extends CUserIdentity {
                 ),
                 array('label' => 'Inventory',
                     'items' => array(
+                        array('label' => 'Setup',
+                            'items' => array(
+                                array('label' => 'Min-Max Control', 'url' => array('/purhc/sprice')),
+                                array('label' => 'Service Level', 'url' => array('/master/item_supp')),
+                            ),
+                        ),
                         array('label' => 'Warehouse', 'url' => array('/Whse/admin'),
                             'items' => array(
                                 array('label' => 'Create New', 'url' => array('/Whse/create')),
-                                array('label' => 'Manage Exist', 'url' => array('/Whse/index')),
+                                array('label' => 'Manage Exists', 'url' => array('/Whse/index')),
                         )),
                         array('label' => 'Locators', 'url' => array('/invt/create'),
                             'items' => array(
                                 array('label' => 'Create New', 'url' => array('/Whse/create')),
-                                array('label' => 'Manage Exist', 'url' => array('/Whse/admin')),
+                                array('label' => 'Manage Exists', 'url' => array('/Whse/admin')),
                         )),
                         array('label' => 'Good Receipt', 'url' => array('/invt/admin')),
-                        array('label' => 'Good Issue', 'url' => array('/invt/admin')),
-                        array('label' => 'Moves history', 'url' => array('/invt/admin')),
-                        array('label' => 'Stock valuation', 'url' => array('/invt/admin')),
+                        array('label' => 'Stock Transfer', 'url' => array('/invt/admin')),
+                        array('label' => 'M2M Transfer', 'url' => array('/invt/admin')),
+                        array('label' => 'Movements History', 'url' => array('/invt/admin')),
+                        array('label' => 'Stock Valuation', 'url' => array('/invt/admin')),
                         array('label' => 'Stock Opname', 'url' => array('/invt/admin')),
                         array('label' => 'Barcode Generator', 'url' => array('/invt/admin')),
                     ),
                 ),
                 array('label' => 'Sales & Distribution',
                     'items' => array(
-                        array('label' => 'Items Pricing', 'url' => array('/sales/admin')),
+                        array('label' => 'Setup',
+                            'items' => array(
+                                array('label' => 'Salesman', 'url' => array('/purhc/sprice')),
+                                array('label' => 'Ekspedition/Canvas', 'url' => array('/master/item_supp')),
+                                array('label' => 'Items Pricing', 'url' => array('/master/item_supp')),
+                            ),
+                        ),
+                        array('label' => 'Journey Plan', 'url' => array('/master/item_supp')),
                         array('label' => 'Sales Orders', 'url' => array('/sales/admin')),
-                        array('label' => 'Invoices', 'url' => array('/sales/admin')),
+                        array('label' => 'Order Delivery', 'url' => array('/sales/admin')),
+                        array('label' => 'Customer Invoicing', 'url' => array('/sales/admin')),
+                        array('label' => 'Reports',
+                            'items' => array(
+                                array('label' => 'Orders', 'url' => array('/purhc/orders')),
+                                array('label' => 'Receipt', 'url' => array('/purhc/receipts')),
+                                array('label' => 'Invoices', 'url' => array('/purhc/invoices')),
+                            ),
+                        ),
                     ),
-                    'visible' => false,
+                    'visible' => true,
                 ),
                 array('label' => 'Finance & Costing',
                     'items' => array(
