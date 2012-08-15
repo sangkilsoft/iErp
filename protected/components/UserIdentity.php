@@ -28,7 +28,7 @@ class UserIdentity extends CUserIdentity {
             $this->errorCode = self::ERROR_USERNAME_INVALID;
         else if ($users[$this->username] !== $this->password)
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
-        else
+        else{
             $this->errorCode = self::ERROR_NONE;
 
         /*
@@ -175,6 +175,7 @@ class UserIdentity extends CUserIdentity {
             ),
         );
         $this->setMMenu($this->_menu);
+        }
         return !$this->errorCode;
     }
 
