@@ -1,18 +1,18 @@
 <?php
 
 /**
- * This is the model class for table "whse".
+ * This is the model class for table "tbl_role".
  *
- * The followings are the available columns in table 'whse':
- * @property string $cd_whse
- * @property string $nm_whse
- * @property integer $create_by
+ * The followings are the available columns in table 'tbl_role':
+ * @property integer $role_id
+ * @property string $role
+ * @property string $deskripsi
  */
-class Whse extends CActiveRecord
+class Role extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Whse the static model class
+	 * @return Role the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +24,7 @@ class Whse extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'whse';
+		return 'tbl_role';
 	}
 
 	/**
@@ -35,13 +35,12 @@ class Whse extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_whse, nm_whse, create_by', 'required'),
-			array('create_by', 'numerical', 'integerOnly'=>true),
-			array('cd_whse', 'length', 'max'=>4),
-			array('nm_whse', 'length', 'max'=>32),
+			array('role', 'required'),
+			array('role', 'length', 'max'=>45),
+			array('deskripsi', 'length', 'max'=>100),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cd_whse, nm_whse, create_by', 'safe', 'on'=>'search'),
+			array('role_id, role, deskripsi', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,9 +61,9 @@ class Whse extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cd_whse' => 'Cd Whse',
-			'nm_whse' => 'Nm Whse',
-			'create_by' => 'Create By',
+			'role_id' => 'Role',
+			'role' => 'Role',
+			'deskripsi' => 'Deskripsi',
 		);
 	}
 
@@ -79,9 +78,9 @@ class Whse extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cd_whse',$this->cd_whse,true);
-		$criteria->compare('nm_whse',$this->nm_whse,true);
-		$criteria->compare('create_by',$this->create_by);
+		$criteria->compare('role_id',$this->role_id);
+		$criteria->compare('role',$this->role,true);
+		$criteria->compare('deskripsi',$this->deskripsi,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

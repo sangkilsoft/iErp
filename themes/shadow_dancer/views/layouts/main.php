@@ -35,7 +35,8 @@
             </div><!-- header -->
 
             <?php
-            $this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
+            //$this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
+            $this->widget('ext.mbmenu.MbMenu',array('items'=> MdmMenuGenerator::getItems())); 
             ?>   
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php

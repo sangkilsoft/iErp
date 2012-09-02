@@ -1,18 +1,19 @@
 <?php
 
 /**
- * This is the model class for table "whse".
+ * This is the model class for table "tbl_menu".
  *
- * The followings are the available columns in table 'whse':
- * @property string $cd_whse
- * @property string $nm_whse
- * @property integer $create_by
+ * The followings are the available columns in table 'tbl_menu':
+ * @property integer $menu_id
+ * @property integer $parent_id
+ * @property string $label
+ * @property string $url
  */
-class Whse extends CActiveRecord
+class Menu extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Whse the static model class
+	 * @return Menu the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +25,7 @@ class Whse extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'whse';
+		return 'tbl_menu';
 	}
 
 	/**
@@ -35,13 +36,12 @@ class Whse extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_whse, nm_whse, create_by', 'required'),
-			array('create_by', 'numerical', 'integerOnly'=>true),
-			array('cd_whse', 'length', 'max'=>4),
-			array('nm_whse', 'length', 'max'=>32),
+			array('label', 'required'),
+			array('parent_id', 'numerical', 'integerOnly'=>true),
+			array('label, url', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cd_whse, nm_whse, create_by', 'safe', 'on'=>'search'),
+			array('menu_id, parent_id, label, url', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,9 +62,10 @@ class Whse extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cd_whse' => 'Cd Whse',
-			'nm_whse' => 'Nm Whse',
-			'create_by' => 'Create By',
+			'menu_id' => 'Menu',
+			'parent_id' => 'Parent',
+			'label' => 'Label',
+			'url' => 'Url',
 		);
 	}
 
@@ -79,9 +80,10 @@ class Whse extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cd_whse',$this->cd_whse,true);
-		$criteria->compare('nm_whse',$this->nm_whse,true);
-		$criteria->compare('create_by',$this->create_by);
+		$criteria->compare('menu_id',$this->menu_id);
+		$criteria->compare('parent_id',$this->parent_id);
+		$criteria->compare('label',$this->label,true);
+		$criteria->compare('url',$this->url,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

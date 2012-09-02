@@ -1,18 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "whse".
+ * This is the model class for table "tbl_user".
  *
- * The followings are the available columns in table 'whse':
- * @property string $cd_whse
- * @property string $nm_whse
- * @property integer $create_by
+ * The followings are the available columns in table 'tbl_user':
+ * @property integer $user_id
+ * @property string $username
+ * @property string $password
+ * @property string $email
+ *
+ * The followings are the available model relations:
+ * @property Role[] $tblRoles
  */
-class Whse extends CActiveRecord
+class User extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Whse the static model class
+	 * @return User the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +28,7 @@ class Whse extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'whse';
+		return 'tbl_user';
 	}
 
 	/**
@@ -35,13 +39,12 @@ class Whse extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_whse, nm_whse, create_by', 'required'),
-			array('create_by', 'numerical', 'integerOnly'=>true),
-			array('cd_whse', 'length', 'max'=>4),
-			array('nm_whse', 'length', 'max'=>32),
+			array('user_id, username, password, email', 'required'),
+			array('user_id', 'numerical', 'integerOnly'=>true),
+			array('username, password, email', 'length', 'max'=>128),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cd_whse, nm_whse, create_by', 'safe', 'on'=>'search'),
+			array('user_id, username, password, email', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -53,6 +56,7 @@ class Whse extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'tblRoles' => array(self::MANY_MANY, 'Role', 'tbl_user_role(user_id, role_id)'),
 		);
 	}
 
@@ -62,9 +66,10 @@ class Whse extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cd_whse' => 'Cd Whse',
-			'nm_whse' => 'Nm Whse',
-			'create_by' => 'Create By',
+			'user_id' => 'User',
+			'username' => 'Username',
+			'password' => 'Password',
+			'email' => 'Email',
 		);
 	}
 
@@ -79,9 +84,10 @@ class Whse extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cd_whse',$this->cd_whse,true);
-		$criteria->compare('nm_whse',$this->nm_whse,true);
-		$criteria->compare('create_by',$this->create_by);
+		$criteria->compare('user_id',$this->user_id);
+		$criteria->compare('username',$this->username,true);
+		$criteria->compare('password',$this->password,true);
+		$criteria->compare('email',$this->email,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

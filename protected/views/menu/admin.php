@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Whses'=>array('index'),
+	'Menus'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Whse', 'url'=>array('index')),
-	array('label'=>'Create Whse', 'url'=>array('create')),
+	array('label'=>'List Menu', 'url'=>array('index')),
+	array('label'=>'Create Menu', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('whse-grid', {
+	$.fn.yiiGridView.update('menu-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Whses</h1>
+<h1>Manage Menus</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,13 +38,14 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'whse-grid',
+	'id'=>'menu-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-		'cd_whse',
-		'nm_whse',
-		'create_by',
+		'menu_id',
+		'parent_id',
+		'label',
+		'url',
 		array(
 			'class'=>'CButtonColumn',
 		),

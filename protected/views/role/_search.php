@@ -6,18 +6,18 @@
 )); ?>
 
 	<div class="row">
-		<?php echo $form->label($model,'cd_whse'); ?>
-		<?php echo $form->textField($model,'cd_whse',array('size'=>4,'maxlength'=>4)); ?>
+		<?php echo $form->label($model,'role_id'); ?>
+		<?php echo $form->textField($model,'role_id'); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'nm_whse'); ?>
-		<?php echo $form->textField($model,'nm_whse',array('size'=>32,'maxlength'=>32)); ?>
+		<?php echo $form->label($model,'role'); ?>
+		<?php echo $form->textField($model,'role',array('size'=>45,'maxlength'=>45)); ?>
 	</div>
 
 	<div class="row">
-		<?php echo $form->label($model,'create_by'); ?>
-		<?php echo $form->textField($model,'create_by'); ?>
+		<?php echo $form->label($model,'deskripsi'); ?>
+		<?php echo $form->textField($model,'deskripsi',array('size'=>60,'maxlength'=>100)); ?>
 	</div>
 
 	<div class="row buttons">

@@ -1,15 +1,15 @@
 <?php
 $this->breadcrumbs=array(
-	'Whses',
+	'Users',
 );
 
 $this->menu=array(
-	array('label'=>'Create Whse', 'url'=>array('create')),
-	array('label'=>'Manage Whse', 'url'=>array('admin')),
+	array('label'=>'Create User', 'url'=>array('create')),
+	array('label'=>'Manage User', 'url'=>array('admin')),
 );
 ?>
 
-<h1>Whses</h1>
+<h1>Users</h1>
 
 <?php $this->widget('zii.widgets.CListView', array(
 	'dataProvider'=>$dataProvider,
