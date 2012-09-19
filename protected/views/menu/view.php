@@ -15,12 +15,13 @@ $this->menu=array(
 
 <h1>View Menu #<?php echo $model->menu_id; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('MCDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'menu_id',
 		'parent_id',
 		'label',
 		'url',
+		'urutan',
 	),
 )); ?>

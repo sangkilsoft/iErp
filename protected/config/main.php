@@ -40,18 +40,18 @@ return array(
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
             ),
         ),
-        'db' => array(
-            'connectionString' => 'mysql:host=localhost;dbname=tiny_db',
-            'emulatePrepare' => true,
-            'username' => 'root',
-            'password' => 'rahasia',
-            'charset' => 'utf8',
-        ),
 //        'db' => array(
-//            'connectionString' => 'pgsql:host=localhost;port=5432;dbname=TinyDB',
-//            'username' => 'sangkilsoft',
+//            'connectionString' => 'mysql:host=localhost;dbname=tiny_db',
+//            'emulatePrepare' => true,
+//            'username' => 'root',
 //            'password' => 'rahasia',
+//            'charset' => 'utf8',
 //        ),
+        'db' => array(
+            'connectionString' => 'pgsql:host=localhost;port=5432;dbname=TinyDB',
+            'username' => 'sangkilsoft',
+            'password' => 'rahasia',
+        ),
         'errorHandler' => array(
             // use 'site/error' action to display errors
             'errorAction' => 'site/error',
@@ -73,6 +73,15 @@ return array(
         ),
         'widgetFactory' => array(
             'widgets' => array(
+                'MCDetailView' => array(
+                    'htmlOptions' => array('class' => 'item-class', 'cellspacing' => '0', 'cellpadding' => '0'),
+                    //'itemsCssClass' => 'item-class' 
+                ),
+                'GroupGridView' => array(
+                    'htmlOptions' => array('cellspacing' => '0', 'cellpadding' => '0'),
+                    'itemsCssClass' => 'item-class',
+                    'pagerCssClass' => 'pager-class'
+                ),
                 'CGridView' => array(
                     'htmlOptions' => array('cellspacing' => '0', 'cellpadding' => '0'),
                     'itemsCssClass' => 'item-class',

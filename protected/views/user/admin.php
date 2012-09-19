@@ -44,7 +44,7 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'columns'=>array(
 		'user_id',
 		'username',
-		'password',
+		//'password',
 		'email',
 		array(
 			'class'=>'CButtonColumn',

@@ -1,18 +1,22 @@
 <?php
 
 /**
- * This is the model class for table "whse".
+ * This is the model class for table "manufacturer".
  *
- * The followings are the available columns in table 'whse':
- * @property string $cd_whse
- * @property string $nm_whse
+ * The followings are the available columns in table 'manufacturer':
+ * @property integer $id_manfrs
+ * @property string $cd_manf
+ * @property string $nm_manufacturer
  * @property integer $create_by
+ * @property string $update_date
+ * @property integer $update_by
+ * @property string $create_date
  */
-class Whse extends CActiveRecord
+class Manufacturer extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return Whse the static model class
+	 * @return Manufacturer the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -24,7 +28,7 @@ class Whse extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'whse';
+		return 'manufacturer';
 	}
 
 	/**
@@ -35,13 +39,13 @@ class Whse extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_whse, nm_whse, create_by', 'required'),
-			array('create_by', 'numerical', 'integerOnly'=>true),
-			array('cd_whse', 'length', 'max'=>4),
-			array('nm_whse', 'length', 'max'=>32),
+			array('cd_manf, nm_manufacturer, create_by, update_date, update_by, create_date', 'required'),
+			array('create_by, update_by', 'numerical', 'integerOnly'=>true),
+			array('cd_manf', 'length', 'max'=>4),
+			array('nm_manufacturer', 'length', 'max'=>32),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('cd_whse, nm_whse, create_by', 'safe', 'on'=>'search'),
+			array('id_manfrs, cd_manf, nm_manufacturer, create_by, update_date, update_by, create_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -62,9 +66,13 @@ class Whse extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'cd_whse' => 'Cd Whse',
-			'nm_whse' => 'Nm Whse',
+			'id_manfrs' => 'Id Manfrs',
+			'cd_manf' => 'Cd Manf',
+			'nm_manufacturer' => 'Nm Manufacturer',
 			'create_by' => 'Create By',
+			'update_date' => 'Update Date',
+			'update_by' => 'Update By',
+			'create_date' => 'Create Date',
 		);
 	}
 
@@ -79,9 +87,13 @@ class Whse extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('cd_whse',$this->cd_whse,true);
-		$criteria->compare('nm_whse',$this->nm_whse,true);
+		$criteria->compare('id_manfrs',$this->id_manfrs);
+		$criteria->compare('cd_manf',$this->cd_manf,true);
+		$criteria->compare('nm_manufacturer',$this->nm_manufacturer,true);
 		$criteria->compare('create_by',$this->create_by);
+		$criteria->compare('update_date',$this->update_date,true);
+		$criteria->compare('update_by',$this->update_by);
+		$criteria->compare('create_date',$this->create_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

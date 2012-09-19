@@ -25,6 +25,11 @@
 		<?php echo $form->textField($model,'url',array('size'=>60,'maxlength'=>128)); ?>
 	</div>
 
+	<div class="row">
+		<?php echo $form->label($model,'urutan'); ?>
+		<?php echo $form->textField($model,'urutan'); ?>
+	</div>
+
 	<div class="row buttons">
 		<?php echo CHtml::submitButton('Search'); ?>
 	</div>

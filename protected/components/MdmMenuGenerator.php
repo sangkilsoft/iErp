@@ -26,7 +26,7 @@ class MdmMenuGenerator {
         where r.role=:param
 SQL;
         } else {
-            $param=$user->id;
+            $param = $user->id;
             $sql = <<<SQL
         select distinct m.*
         from tbl_menu m
@@ -36,8 +36,8 @@ SQL;
         where u.username=:param
 SQL;
         }
-        $menus = Yii::app()->db->createCommand($sql)->queryAll(true,array(':param'=>$param));
-        $menu_ids = Yii::app()->db->createCommand($sql)->queryColumn(array(':param'=>$param));
+        $menus = Yii::app()->db->createCommand($sql)->queryAll(true, array(':param' => $param));
+        $menu_ids = Yii::app()->db->createCommand($sql)->queryColumn(array(':param' => $param));
         self::addParentMenu($menus, $menu_ids);
         $_menus = array();
         foreach ($menus as $menu)
@@ -60,7 +60,7 @@ SQL;
                 $result[] = $child;
             }
         }
-        array_multisort($orders,$result);
+        array_multisort($orders, $result);
         return $result;
     }
 
@@ -78,7 +78,7 @@ SQL;
                 $result[] = $child;
             }
         }
-        array_multisort($orders,$result);
+        array_multisort($orders, $result);
         return $result;
     }
 

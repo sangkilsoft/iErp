@@ -16,5 +16,9 @@
 	<?php echo CHtml::encode($data->url); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('urutan')); ?>:</b>
+	<?php echo CHtml::encode($data->urutan); ?>
+	<br />
+
 
 </div>
