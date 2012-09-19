@@ -13,16 +13,15 @@
 	background:#F9F9F9;
 	padding: 3px;
 	width: 100%;
-    border-collapse: collapse;
-    border-spacing: 0px;
-
+        border-collapse: collapse;
+        border-spacing: 0px;
 }
 
 .grid-view table.item-class th, .grid-view table.item-class td
 {
 	font-size: 0.9em;
-	/*border: 1px white solid;*/
-
+        border-left: 2px white solid;
+	border-bottom: 1px #333333 dotted;
 }
 
 .grid-view table.item-class th
@@ -31,6 +30,7 @@
 	background: url("../images/el_bg.png") repeat-x scroll left top white;/**/
 	background-color:#333333;
 }
+
 .grid-view table.item-class th a
 {
 	color: #FFFFFF;
@@ -57,12 +57,14 @@
 
 .grid-view table.item-class tr.even
 {
-	background: #F9F9F9;
+	background: #F9F9F9;        
+	border-top: 1px #333333 dotted;
 }
 
 .grid-view table.item-class tr.odd
 {
-	background:#F1F1F1;
+	background:#F1F1F1;        
+	border-top: 1px #333333 dotted;
 }
 
 .grid-view table.item-class tr.selected
