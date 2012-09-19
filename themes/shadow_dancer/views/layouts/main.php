@@ -31,12 +31,11 @@
                 <div class="topnav_text"><a href='#'>Home</a> | <a href='#'>My Account</a> | <a href='#'>Settings</a> | <a href='#'>Logout</a> </div>
             </div>
             <div id="header">
-                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);   ?></div>
+                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);    ?></div>
             </div><!-- header -->
-
             <?php
             //$this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
-            $this->widget('ext.mbmenu.MbMenu',array('items'=> MdmMenuGenerator::getItems())); 
+            $this->widget('ext.mbmenu.MbMenu', array('items' => MdmMenuGenerator::getItems()));
             ?>   
             <?php if (isset($this->breadcrumbs)): ?>
                 <?php
@@ -49,7 +48,7 @@
             <?php echo $content; ?>
 
             <div id="footer" >
-                Copyright &copy; <?php echo date('Y')." ".Yii::app()->params['company'] ?><br/>
+                Copyright &copy; <?php echo date('Y') . " " . Yii::app()->params['company'] ?><br/>
                 <?php echo Yii::powered(); //echo " theme by webapplicationthemes.com";  ?>
             </div><!-- footer -->
         </div><!-- page -->
