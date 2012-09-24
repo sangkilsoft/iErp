@@ -6,7 +6,7 @@ $this->beginContent('//layouts/main');
 
 Yii::app()->clientScript->registerScript(
         'myHideEffect', 
-        '$(\'#info\').click(function(){ $(".info").slideUp(100); });',
+        '$(\'#info\').click(function(){ $(".info").slideUp(200); });',
         CClientScript::POS_READY
 );
 
