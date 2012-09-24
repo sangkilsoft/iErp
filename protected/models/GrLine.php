@@ -1,26 +1,27 @@
 <?php
 
 /**
- * This is the model class for table "product".
+ * This is the model class for table "gr_line".
  *
- * The followings are the available columns in table 'product':
+ * The followings are the available columns in table 'gr_line':
+ * @property integer $id_line
+ * @property integer $id_receipt
+ * @property integer $item_line
  * @property integer $id_product
- * @property string $cd_product
- * @property string $nm_product
+ * @property integer $id_locator
+ * @property double $qty_trans
+ * @property double $value_trans
  * @property string $create_date
  * @property integer $create_by
  * @property string $update_date
  * @property integer $update_by
- * @property integer $id_manfrs
  * @property integer $id_uoms
- * @property integer $id_groups
- * @property integer $id_category
  */
-class Product extends CActiveRecord {
+class GrLine extends CActiveRecord {
 
     /**
      * Returns the static model of the specified AR class.
-     * @return Product the static model class
+     * @return GrLine the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -30,7 +31,7 @@ class Product extends CActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'product';
+        return 'gr_line';
     }
 
     /**
@@ -40,15 +41,15 @@ class Product extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('cd_product, nm_product, id_manfrs, id_uoms, id_groups, id_category', 'required'),
-            array('create_by, update_by, id_manfrs, id_uoms, id_groups, id_category', 'numerical', 'integerOnly' => true),
-            array('cd_product', 'length', 'max' => 13),
-            array('nm_product', 'length', 'max' => 64),
-            array('cd_product','unique'),
-            array('id_manfrs','exist','allowEmpty' => true, 'attributeName' => 'id_manfrs', 'className' => 'Manufacturer','message'=>'Id Manufacturer Must be on Manufacturer list'),
+            array('id_receipt, item_line, id_product, id_locator, qty_trans, value_trans, id_uoms', 'required'),
+            array('id_receipt, item_line, id_product, id_locator, create_by, update_by, id_uoms', 'numerical', 'integerOnly' => true),
+            array('qty_trans, value_trans', 'numerical'),            
+            array('id_receipt','exist','allowEmpty' => true, 'attributeName' => 'id_receipt', 'className' => 'GoodReceipt','message'=>'Id Receipt Must be in GoodReceipt list'),
+            array('id_locator','exist','allowEmpty' => true, 'attributeName' => 'id_locator', 'className' => 'Locator','message'=>'Locator Must be in Locators list'),
+            
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id_product, cd_product, nm_product, create_date, create_by, update_date, update_by, id_manfrs, id_uoms, id_groups, id_category', 'safe', 'on' => 'search'),
+            array('id_line, id_receipt, item_line, id_product, id_locator, qty_trans, value_trans, create_date, create_by, update_date, update_by, id_uoms', 'safe', 'on' => 'search'),
         );
     }
 
@@ -59,7 +60,7 @@ class Product extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'gr_lines' => array(self::BELONGS_TO, 'GrLine', 'id_product'),
+            'nm_product' => array(self::BELONGS_TO, 'Product', 'id_product'),
         );
     }
 
@@ -68,17 +69,18 @@ class Product extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
+            'id_line' => 'Id Line',
+            'id_receipt' => 'Id Receipt',
+            'item_line' => 'Item Line',
             'id_product' => 'Id Product',
-            'cd_product' => 'Cd Product',
-            'nm_product' => 'Nm Product',
-            'id_manfrs' => 'Id Manfrs',
-            'id_uoms' => 'Id Uoms',
-            'id_groups' => 'Id Groups',
-            'id_category' => 'Id Category',
+            'id_locator' => 'Id Locator',
+            'qty_trans' => 'Qty Trans',
+            'value_trans' => 'Value Trans',
             'create_date' => 'Create Date',
             'create_by' => 'Create By',
             'update_date' => 'Update Date',
             'update_by' => 'Update By',
+            'id_uoms' => 'Id Uoms',
         );
     }
 
@@ -92,17 +94,18 @@ class Product extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
+        $criteria->compare('id_line', $this->id_line);
+        $criteria->compare('id_receipt', $this->id_receipt);
+        $criteria->compare('item_line', $this->item_line);
         $criteria->compare('id_product', $this->id_product);
-        $criteria->compare('cd_product', $this->cd_product, true);
-        $criteria->compare('nm_product', $this->nm_product, true);
+        $criteria->compare('id_locator', $this->id_locator);
+        $criteria->compare('qty_trans', $this->qty_trans);
+        $criteria->compare('value_trans', $this->value_trans);
         $criteria->compare('create_date', $this->create_date, true);
         $criteria->compare('create_by', $this->create_by);
         $criteria->compare('update_date', $this->update_date, true);
         $criteria->compare('update_by', $this->update_by);
-        $criteria->compare('id_manfrs', $this->id_manfrs);
         $criteria->compare('id_uoms', $this->id_uoms);
-        $criteria->compare('id_groups', $this->id_groups);
-        $criteria->compare('id_category', $this->id_category);
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
@@ -120,6 +123,19 @@ class Product extends CActiveRecord {
             $this->update_date = new CDbExpression('NOW()');
         }
         return parent::beforeSave();
+    }
+
+    public function beforeValidate() {
+        if ($this->isNewRecord) {
+            $this->id_receipt = (int) $this->id_receipt;
+            $this->item_line = (int) $this->item_line;
+            $this->id_product = (int) $this->id_product;
+            $this->id_locator = (int) $this->id_locator;
+            $this->qty_trans = (int) $this->qty_trans;
+            $this->value_trans = (int) $this->value_trans;
+            $this->id_uoms = (int) $this->id_uoms;
+        }
+        return parent::beforeValidate();
     }
 
 }

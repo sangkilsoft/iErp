@@ -42,7 +42,7 @@ class GoodReceipt extends CActiveRecord {
             array('status, create_by, update_by', 'numerical', 'integerOnly' => true),
             array('gr_num', 'length', 'max' => 13),
             array('description', 'length', 'max' => 64),
-            array('gr_num', 'unique', 'message' => 'GR Number must in unique..!'),
+            array('gr_num', 'unique', 'message' => 'GR Number must be unique..!'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
             array('id_receipt, gr_num, description, status, receipt_date, update_date, create_by, update_by, create_date', 'safe', 'on' => 'search'),

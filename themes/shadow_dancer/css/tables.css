@@ -29,6 +29,7 @@
 	color: white;
 	background: url("../images/el_bg.png") repeat-x scroll left top white;/**/
 	background-color:#333333;
+        border-bottom: 2px orange solid;
 }
 
 .grid-view table.item-class th a

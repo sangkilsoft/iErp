@@ -266,14 +266,15 @@ div.search-form
 {
  border: 1px solid #ccc;
  background:#F9F9F9;
- margin-bottom:10px;
+ margin-bottom:10px; 
 }
 
 .portlet-decoration
 {
 	padding: 0px 0px;
 	background-color: #333;
-    background: url("../images/el_bg.png") repeat-x;
+        background: url("../images/el_bg.png") repeat-x;
+	border-bottom: 2px orange solid;
 }
 
 .portlet-title
@@ -287,7 +288,6 @@ div.search-form
 	padding: 10px;
 
 	color: #FFF;
-	
 }
 
 .portlet-content

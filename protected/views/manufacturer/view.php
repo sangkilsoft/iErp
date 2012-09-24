@@ -15,7 +15,7 @@ $this->menu=array(
 
 <h1>View Manufacturer #<?php echo $model->id_manfrs; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('MCDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_manfrs',

@@ -39,7 +39,7 @@ class Category extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_category, create_date, nm_category, create_by, update_date, update_by', 'required'),
+			array('cd_category, nm_category', 'required'),
 			array('create_by, update_by', 'numerical', 'integerOnly'=>true),
 			array('cd_category', 'length', 'max'=>4),
 			array('nm_category', 'length', 'max'=>32),
@@ -99,4 +99,18 @@ class Category extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+        
+    public function beforeSave() {
+        if ($this->isNewRecord) {
+            $this->create_by = Yii::app()->user->Id;
+            $this->create_date = new CDbExpression('NOW()');
+            $this->update_by = Yii::app()->user->Id;
+            $this->update_date = new CDbExpression('NOW()');
+        } else {
+            $this->update_by = Yii::app()->user->Id;
+            $this->update_date = new CDbExpression('NOW()');
+        }
+        return parent::beforeSave();
+    }
+
 }

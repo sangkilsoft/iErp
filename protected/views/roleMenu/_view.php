@@ -5,7 +5,7 @@
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('role_id')); ?>:</b>
-	<?php echo CHtml::encode($data->role->deskripsii); ?>
+	<?php echo CHtml::encode($data->role->deskripsi); ?>
 	<br />
 
 	<b><?php echo CHtml::encode($data->getAttributeLabel('menu_id')); ?>:</b>

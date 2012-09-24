@@ -12,7 +12,7 @@
     <?php
     echo $form->errorSummary($model);
     ?>
-    <fieldset>
+    <fieldset class="formulir">
         <div class="row">
             <?php
             echo $form->labelEx($model, 'parent_id');
@@ -44,11 +44,11 @@
             echo $form->error($model, 'urutan');
             ?>
         </div>
-
-        <div class="row buttons">
-            <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-        </div>
     </fieldset>
+
+    <div class="tombol">
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn-orange')); ?>
+    </div>
     <?php $this->endWidget(); ?>
 
 </div><!-- form -->

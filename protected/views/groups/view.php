@@ -15,7 +15,7 @@ $this->menu=array(
 
 <h1>View Groups #<?php echo $model->id_groups; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
+<?php $this->widget('MCDetailView', array(
 	'data'=>$model,
 	'attributes'=>array(
 		'id_groups',

@@ -246,3 +246,5 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
+.tombol {text-align: left; border-top: 2px orange solid; padding-left: 10px; padding-top: 5px; background: url("../images/el_bg.png") repeat-x scroll left top white; background-color: grey;}
+.formulir{border: 1px grey solid; padding: 10px; background-color: whitesmoke;}
