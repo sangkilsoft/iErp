@@ -60,6 +60,8 @@ class GoodReceiptController extends Controller {
         $model = new GoodReceipt;
         $modelDtl = new GrLine;
 
+        $model->receipt_date = date('d-m-Y', time());
+
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
@@ -74,20 +76,15 @@ class GoodReceiptController extends Controller {
                 $modelDtl->id_uoms = $_POST['id_uoms'];
                 $modelDtl->id_locator = $_POST['id_locator'];
 
-                $i = 1;
-                foreach ($modelDtl->id_product as $value) {
-                    $line[] = $i * 10;
+                foreach ($modelDtl->id_product as $value)
                     $val[] = 0;
-                    $i++;
-                }
 
-                $modelDtl->item_line = $line;
                 $modelDtl->value_trans = $val;
 
                 //print_r($modelDtl->attributes);
 
                 $inv = new inventory;
-                $retval = $inv->setReceipt($model->attributes, $modelDtl->attributes);
+                $retval = $inv->createReceipt($model->attributes, $modelDtl->attributes);
 
                 if ($retval['type'] == 'S') {
                     Yii::app()->user->setFlash('success', $retval['message']);
@@ -119,30 +116,62 @@ class GoodReceiptController extends Controller {
      */
     public function actionUpdate($id) {
         $model = $this->loadModel($id);
-        $modelDtl = GrLine::model()->findAll('id_receipt=:id_receipt', array(':id_receipt' => $model->id_receipt));
+        $modelDtl = new GrLine;
+        
+        if (isset($_POST['id_product'])):
+            $conn = Yii::app()->db->beginTransaction();
+            try {
+                $model->attributes = $_POST['GoodReceipt'];
 
-        foreach ($modelDtl as $row) {
-            $id_product[] = $row->getAttribute('id_product');
-            $nm_product[] = $row->nm_product->nm_product;
-            $qty_trans[] = $row->getAttribute('qty_trans');
-            $id_uoms[] = $row->getAttribute('id_uoms');
-            $id_locator[] = $row->getAttribute('id_locator');
-        }
-        $modeldtl = new GrLine;
-        $modeldtl->id_product = $id_product;
-        $modeldtl->nm_product = $nm_product;
-        $modeldtl->qty_trans = $qty_trans;
-        $modeldtl->id_uoms = $id_uoms;
-        $modeldtl->id_locator = $id_locator;
+                $modelDtl->id_product = $_POST['id_product'];
+                $modelDtl->nm_product = $_POST['nm_product'];
+                $modelDtl->qty_trans = $_POST['qty_trans'];
+                $modelDtl->id_uoms = $_POST['id_uoms'];
+                $modelDtl->id_locator = $_POST['id_locator'];
 
-        // print_r($modeldtl);
-        // Uncomment the following line if AJAX validation is needed
-        // $this->performAjaxValidation($model);
+                foreach ($modelDtl->id_product as $value) 
+                    $val[] = 0;
 
-        if (isset($_POST['id_product'])) {
-            $model->attributes = $_POST['GoodReceipt'];
-            print_r($modeldtl->attributes);
-        }
+                $modelDtl->value_trans = $val;
+
+                $inv = new inventory;
+                $retval = $inv->updateReceipt($model->attributes, $modelDtl->attributes);
+
+                if ($retval['type'] == 'S') {
+                    Yii::app()->user->setFlash('success', $retval['message']);
+                    $model = $retval['val'];
+                    $conn->commit();
+                } else if ($retval['type'] == 'E') {
+                    Yii::app()->user->setFlash('error', $retval['message']);
+                    if (isset($retval['val']))
+                        foreach ($retval['val'] as $key => $value) {
+                            Yii::app()->user->setFlash('error', $value[0]);
+                        }
+                    $conn->rollback();
+                }
+            } catch (ErrorException $e) {
+                $conn->rollback();
+                return false;
+            }
+        else:
+            $modelDtl = $modelDtl->model()->findAll('id_receipt=:id_receipt', array(':id_receipt' => $model->id_receipt));
+            foreach ($modelDtl as $row) {
+                $id_line[] = $row->getAttribute('id_line');
+                $id_product[] = $row->getAttribute('id_product');
+                $nm_product[] = $row['nm_product']['nm_product'];
+                $qty_trans[] = $row->getAttribute('qty_trans');
+                $id_uoms[] = $row->getAttribute('id_uoms');
+                $id_locator[] = $row->getAttribute('id_locator');
+            }
+
+            $modeldtl = new GrLine;
+            $modeldtl->id_line = $id_line;
+            $modeldtl->id_product = $id_product;
+            $modeldtl->nm_product = $nm_product;
+            $modeldtl->qty_trans = $qty_trans;
+            $modeldtl->id_uoms = $id_uoms;
+            $modeldtl->id_locator = $id_locator;
+        endif;
 
         $this->render('update', array(
             'model' => $model, 'modeldtl' => $modeldtl
