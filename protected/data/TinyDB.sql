@@ -133,7 +133,9 @@ CREATE SEQUENCE public.good_issue_id_issue_seq;
 
 CREATE TABLE public.good_issue (
                 id_issue INTEGER NOT NULL DEFAULT nextval('public.good_issue_id_issue_seq'),
-                cd_issue VARCHAR(13) NOT NULL,
+                gi_number VARCHAR(13) NOT NULL,
+                cd_orgn VARCHAR(4) NOT NULL,
+                cd_branch VARCHAR(4) NOT NULL,
                 description VARCHAR(64) NOT NULL,
                 status SMALLINT NOT NULL,
                 issue_date DATE NOT NULL,
@@ -149,27 +151,6 @@ COMMENT ON COLUMN public.good_issue.update_by IS 'id of user creator';
 
 
 ALTER SEQUENCE public.good_issue_id_issue_seq OWNED BY public.good_issue.id_issue;
-
-CREATE SEQUENCE public.good_receipt_id_receipt_seq;
-
-CREATE TABLE public.good_receipt (
-                id_receipt INTEGER NOT NULL DEFAULT nextval('public.good_receipt_id_receipt_seq'),
-                cd_gr VARCHAR(13) NOT NULL,
-                description VARCHAR(64) NOT NULL,
-                status SMALLINT NOT NULL,
-                receipt_date DATE NOT NULL,
-                update_date TIMESTAMP NOT NULL,
-                create_by INTEGER NOT NULL,
-                update_by INTEGER NOT NULL,
-                create_date TIMESTAMP NOT NULL,
-                CONSTRAINT good_receipt_pk PRIMARY KEY (id_receipt)
-);
-COMMENT ON COLUMN public.good_receipt.status IS 'delete (-1), inactive (0), active(1).';
-COMMENT ON COLUMN public.good_receipt.create_by IS 'id of user creator';
-COMMENT ON COLUMN public.good_receipt.update_by IS 'id of user creator';
-
-
-ALTER SEQUENCE public.good_receipt_id_receipt_seq OWNED BY public.good_receipt.id_receipt;
 
 CREATE SEQUENCE public.warehouse_id_warehouse_seq;
 
@@ -189,6 +170,30 @@ COMMENT ON COLUMN public.warehouse.update_by IS 'id of user creator';
 
 
 ALTER SEQUENCE public.warehouse_id_warehouse_seq OWNED BY public.warehouse.id_warehouse;
+
+CREATE SEQUENCE public.good_receipt_id_receipt_seq;
+
+CREATE TABLE public.good_receipt (
+                id_receipt INTEGER NOT NULL DEFAULT nextval('public.good_receipt_id_receipt_seq'),
+                gr_num VARCHAR(13) NOT NULL,
+                cd_orgn VARCHAR(4) NOT NULL,
+                cd_branch VARCHAR(4) NOT NULL,
+                id_warehouse INTEGER NOT NULL,
+                description VARCHAR(64) NOT NULL,
+                status SMALLINT NOT NULL,
+                receipt_date DATE NOT NULL,
+                update_date TIMESTAMP NOT NULL,
+                create_by INTEGER NOT NULL,
+                update_by INTEGER NOT NULL,
+                create_date TIMESTAMP NOT NULL,
+                CONSTRAINT good_receipt_pk PRIMARY KEY (id_receipt)
+);
+COMMENT ON COLUMN public.good_receipt.status IS 'delete (-1), inactive (0), active(1).';
+COMMENT ON COLUMN public.good_receipt.create_by IS 'id of user creator';
+COMMENT ON COLUMN public.good_receipt.update_by IS 'id of user creator';
+
+
+ALTER SEQUENCE public.good_receipt_id_receipt_seq OWNED BY public.good_receipt.id_receipt;
 
 CREATE SEQUENCE public.locator_id_locator_seq;
 
@@ -249,6 +254,7 @@ CREATE TABLE public.gr_line (
                 id_product INTEGER NOT NULL,
                 id_locator INTEGER NOT NULL,
                 qty_trans DOUBLE PRECISION NOT NULL,
+                id_uoms INTEGER NOT NULL,
                 value_trans DOUBLE PRECISION NOT NULL,
                 create_date TIMESTAMP NOT NULL,
                 create_by INTEGER NOT NULL,
@@ -267,6 +273,8 @@ CREATE SEQUENCE public.mv_history_id_movement_seq;
 CREATE TABLE public.mv_history (
                 id_movement INTEGER NOT NULL DEFAULT nextval('public.mv_history_id_movement_seq'),
                 id_locator INTEGER NOT NULL,
+                cd_orgn VARCHAR(4) NOT NULL,
+                cd_branch VARCHAR(4) NOT NULL,
                 qty_mvnt DOUBLE PRECISION NOT NULL,
                 val_mvnt DOUBLE PRECISION NOT NULL,
                 qty_current DOUBLE PRECISION NOT NULL,
@@ -734,16 +742,23 @@ ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.gr_line ADD CONSTRAINT good_receipt_gr_line_fk
-FOREIGN KEY (id_receipt)
-REFERENCES public.good_receipt (id_receipt)
+ALTER TABLE public.locator ADD CONSTRAINT warehouse_locator_fk
+FOREIGN KEY (id_warehouse)
+REFERENCES public.warehouse (id_warehouse)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
 
-ALTER TABLE public.locator ADD CONSTRAINT warehouse_locator_fk
+ALTER TABLE public.good_receipt ADD CONSTRAINT warehouse_good_receipt_fk
 FOREIGN KEY (id_warehouse)
 REFERENCES public.warehouse (id_warehouse)
+ON DELETE NO ACTION
+ON UPDATE NO ACTION
+NOT DEFERRABLE;
+
+ALTER TABLE public.gr_line ADD CONSTRAINT good_receipt_gr_line_fk
+FOREIGN KEY (id_receipt)
+REFERENCES public.good_receipt (id_receipt)
 ON DELETE NO ACTION
 ON UPDATE NO ACTION
 NOT DEFERRABLE;
