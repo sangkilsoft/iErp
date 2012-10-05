@@ -1,26 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "gr_line".
+ * This is the model class for table "good_receipt".
  *
- * The followings are the available columns in table 'gr_line':
- * @property integer $id_line
+ * The followings are the available columns in table 'good_receipt':
  * @property integer $id_receipt
- * @property integer $id_product
- * @property integer $id_locator
- * @property double $qty_trans
- * @property double $value_trans
- * @property string $create_date
- * @property integer $create_by
+ * @property string $gr_num
+ * @property string $description
+ * @property integer $status
+ * @property string $receipt_date
  * @property string $update_date
+ * @property integer $create_by
  * @property integer $update_by
- * @property integer $id_uoms
+ * @property string $create_date
  */
-class GrLine extends CActiveRecord {
+class GoodReceipt extends CActiveRecord {
 
     /**
      * Returns the static model of the specified AR class.
-     * @return GrLine the static model class
+     * @return GoodReceipt the static model class
      */
     public static function model($className = __CLASS__) {
         return parent::model($className);
@@ -30,7 +28,7 @@ class GrLine extends CActiveRecord {
      * @return string the associated database table name
      */
     public function tableName() {
-        return 'gr_line';
+        return 'good_receipt';
     }
 
     /**
@@ -40,15 +38,14 @@ class GrLine extends CActiveRecord {
         // NOTE: you should only define rules for those attributes that
         // will receive user inputs.
         return array(
-            array('id_receipt, id_product, id_locator, qty_trans, value_trans, id_uoms', 'required'),
-            array('id_receipt, id_product, id_locator, create_by, update_by, id_uoms', 'numerical', 'integerOnly' => true),
-            array('qty_trans, value_trans', 'numerical'),            
-            array('id_receipt','exist','allowEmpty' => true, 'attributeName' => 'id_receipt', 'className' => 'GoodReceipt','message'=>'Id Receipt Must be in GoodReceipt list'),
-            array('id_locator','exist','allowEmpty' => true, 'attributeName' => 'id_locator', 'className' => 'Locator','message'=>'Locator Must be in Locators list'),
-            
+            array('description, status, receipt_date', 'required'),
+            array('status, create_by, update_by', 'numerical', 'integerOnly' => true),
+            array('gr_num', 'length', 'max' => 13),
+            array('description', 'length', 'max' => 64),
+            array('gr_num', 'unique', 'message' => 'GR Number must be unique..!'),
             // The following rule is used by search().
             // Please remove those attributes that should not be searched.
-            array('id_line, id_receipt, id_product, id_locator, qty_trans, value_trans, create_date, create_by, update_date, update_by, id_uoms', 'safe', 'on' => 'search'),
+            array('id_receipt, gr_num, description, status, receipt_date, update_date, create_by, update_by, create_date', 'safe', 'on' => 'search'),
         );
     }
 
@@ -59,7 +56,6 @@ class GrLine extends CActiveRecord {
         // NOTE: you may need to adjust the relation name and the related
         // class name for the relations automatically generated below.
         return array(
-            'nm_product' => array(self::BELONGS_TO, 'Product', 'id_product'),
         );
     }
 
@@ -68,17 +64,15 @@ class GrLine extends CActiveRecord {
      */
     public function attributeLabels() {
         return array(
-            'id_line' => 'Id Line',
             'id_receipt' => 'Id Receipt',
-            'id_product' => 'Id Product',
-            'id_locator' => 'Id Locator',
-            'qty_trans' => 'Qty Trans',
-            'value_trans' => 'Value Trans',
-            'create_date' => 'Create Date',
-            'create_by' => 'Create By',
+            'gr_num' => 'Gr Num',
+            'description' => 'Description',
+            'status' => 'Status',
+            'receipt_date' => 'Receipt Date',
             'update_date' => 'Update Date',
+            'create_by' => 'Create By',
             'update_by' => 'Update By',
-            'id_uoms' => 'Id Uoms',
+            'create_date' => 'Create Date',
         );
     }
 
@@ -92,17 +86,15 @@ class GrLine extends CActiveRecord {
 
         $criteria = new CDbCriteria;
 
-        $criteria->compare('id_line', $this->id_line);
         $criteria->compare('id_receipt', $this->id_receipt);
-        $criteria->compare('id_product', $this->id_product);
-        $criteria->compare('id_locator', $this->id_locator);
-        $criteria->compare('qty_trans', $this->qty_trans);
-        $criteria->compare('value_trans', $this->value_trans);
-        $criteria->compare('create_date', $this->create_date, true);
-        $criteria->compare('create_by', $this->create_by);
+        $criteria->compare('gr_num', $this->gr_num, true);
+        $criteria->compare('description', $this->description, true);
+        $criteria->compare('status', $this->status);
+        $criteria->compare('receipt_date', $this->receipt_date, true);
         $criteria->compare('update_date', $this->update_date, true);
+        $criteria->compare('create_by', $this->create_by);
         $criteria->compare('update_by', $this->update_by);
-        $criteria->compare('id_uoms', $this->id_uoms);
+        $criteria->compare('create_date', $this->create_date, true);
 
         return new CActiveDataProvider($this, array(
                     'criteria' => $criteria,
@@ -111,6 +103,9 @@ class GrLine extends CActiveRecord {
 
     public function beforeSave() {
         if ($this->isNewRecord) {
+            echo $rdate = CDateTimeParser::parse($this->receipt_date,'d-m-Y');                    
+            $this->receipt_date = date('Y-m-d',$rdate);
+
             $this->create_by = Yii::app()->user->Id;
             $this->create_date = new CDbExpression('NOW()');
             $this->update_by = Yii::app()->user->Id;
@@ -123,14 +118,9 @@ class GrLine extends CActiveRecord {
     }
 
     public function beforeValidate() {
-        if ($this->isNewRecord) {
-            $this->id_receipt = (int) $this->id_receipt;
-            $this->id_product = (int) $this->id_product;
-            $this->id_locator = (int) $this->id_locator;
-            $this->qty_trans = (int) $this->qty_trans;
-            $this->value_trans = (int) $this->value_trans;
-            $this->id_uoms = (int) $this->id_uoms;
-        }
+        if ($this->isNewRecord)
+            $this->gr_num = 'GR02'; //call number generator         
+
         return parent::beforeValidate();
     }
 
