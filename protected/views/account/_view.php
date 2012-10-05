@@ -37,6 +37,10 @@
 	<?php echo CHtml::encode($data->update_date); ?>
 	<br />
 
+	<b><?php echo CHtml::encode($data->getAttributeLabel('level')); ?>:</b>
+	<?php echo CHtml::encode($data->level); ?>
+	<br />
+
 	*/ ?>
 
 </div>

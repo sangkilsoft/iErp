@@ -27,5 +27,6 @@ $this->menu=array(
 		'update_by',
 		'create_by',
 		'update_date',
+		'level',
 	),
 )); ?>

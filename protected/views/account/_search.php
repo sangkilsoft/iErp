@@ -12,7 +12,7 @@
 
 	<div class="row">
 		<?php echo $form->label($model,'cd_acc'); ?>
-		<?php echo $form->textField($model,'cd_acc',array('size'=>10,'maxlength'=>10)); ?>
+		<?php echo $form->textField($model,'cd_acc'); ?>
 	</div>
 
 	<div class="row">
@@ -48,6 +48,11 @@
 	<div class="row">
 		<?php echo $form->label($model,'update_date'); ?>
 		<?php echo $form->textField($model,'update_date'); ?>
+	</div>
+
+	<div class="row">
+		<?php echo $form->label($model,'level'); ?>
+		<?php echo $form->textField($model,'level'); ?>
 	</div>
 
 	<div class="row buttons">
