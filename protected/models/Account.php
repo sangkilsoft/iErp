@@ -5,7 +5,7 @@
  *
  * The followings are the available columns in table 'account':
  * @property integer $id_acc
- * @property string $cd_acc
+ * @property integer $cd_acc
  * @property string $nm_acc
  * @property string $acc_normal
  * @property integer $parent
@@ -13,10 +13,11 @@
  * @property string $update_by
  * @property string $create_by
  * @property string $update_date
+ * @property integer $level
  *
  * The followings are the available model relations:
- * @property SaldoPeriode[] $saldoPeriodes
- * @property JurnalDetail[] $jurnalDetails
+ * @property GlPeriode[] $glPeriodes
+ * @property GlDetail[] $glDetails
  */
 class Account extends CActiveRecord
 {
@@ -47,13 +48,13 @@ class Account extends CActiveRecord
 		// will receive user inputs.
 		return array(
 			array('cd_acc, nm_acc, acc_normal', 'required'),
-			array('parent', 'numerical', 'integerOnly'=>true),
-			array('cd_acc, update_by, create_by', 'length', 'max'=>10),
+			array('cd_acc, parent, level', 'numerical', 'integerOnly'=>true),
 			array('nm_acc', 'length', 'max'=>30),
 			array('acc_normal', 'length', 'max'=>1),
+			array('update_by, create_by', 'length', 'max'=>10),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_acc, cd_acc, nm_acc, acc_normal, parent, create_date, update_by, create_by, update_date', 'safe', 'on'=>'search'),
+			array('id_acc, cd_acc, nm_acc, acc_normal, parent, create_date, update_by, create_by, update_date, level', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,8 +66,8 @@ class Account extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'saldoPeriodes' => array(self::HAS_MANY, 'SaldoPeriode', 'id_acc'),
-			'jurnalDetails' => array(self::HAS_MANY, 'JurnalDetail', 'id_acc'),
+			'glPeriodes' => array(self::HAS_MANY, 'GlPeriode', 'id_acc'),
+			'glDetails' => array(self::HAS_MANY, 'GlDetail', 'id_acc'),
 		);
 	}
 
@@ -85,6 +86,7 @@ class Account extends CActiveRecord
 			'update_by' => 'Update By',
 			'create_by' => 'Create By',
 			'update_date' => 'Update Date',
+			'level' => 'Level',
 		);
 	}
 
@@ -100,7 +102,7 @@ class Account extends CActiveRecord
 		$criteria=new CDbCriteria;
 
 		$criteria->compare('id_acc',$this->id_acc);
-		$criteria->compare('cd_acc',$this->cd_acc,true);
+		$criteria->compare('cd_acc',$this->cd_acc);
 		$criteria->compare('nm_acc',$this->nm_acc,true);
 		$criteria->compare('acc_normal',$this->acc_normal,true);
 		$criteria->compare('parent',$this->parent);
@@ -108,6 +110,7 @@ class Account extends CActiveRecord
 		$criteria->compare('update_by',$this->update_by,true);
 		$criteria->compare('create_by',$this->create_by,true);
 		$criteria->compare('update_date',$this->update_date,true);
+		$criteria->compare('level',$this->level);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
