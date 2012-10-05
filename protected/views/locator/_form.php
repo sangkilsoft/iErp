@@ -1,42 +1,63 @@
 <div class="form">
 
-<?php $form=$this->beginWidget('CActiveForm', array(
-	'id'=>'locator-form',
-	'enableAjaxValidation'=>false,
-)); ?>
+    <?php
+    $form = $this->beginWidget('CActiveForm', array(
+        'id' => 'locator-form',
+        'enableAjaxValidation' => false,
+            ));
+    ?>
 
-	<p class="note">Fields with <span class="required">*</span> are required.</p>
+    <p class="note">Fields with <span class="required">*</span> are required.</p>
 
-	<?php echo $form->errorSummary($model); ?>
-        <fieldset>
-	<div class="row">
-		<?php echo $form->labelEx($model,'cd_locator'); ?>
-		<?php echo $form->textField($model,'cd_locator',array('size'=>4,'maxlength'=>4)); ?>
-		<?php echo $form->error($model,'cd_locator'); ?>
-	</div>
-            
-	<div class="row">
-		<?php echo $form->labelEx($model,'id_warehouse'); ?>
-		<?php echo $form->textField($model,'id_warehouse'); ?>
-		<?php echo $form->error($model,'id_warehouse'); ?>
-	</div>
+    <?php echo $form->errorSummary($model); ?>
+    <fieldset class="formulir">
+        <table border="1">
+            <tbody>
+                <tr>
+                    <td>
+                        <div class="row">
+                            <?php echo $form->labelEx($model, 'cd_locator'); ?>
+                            <?php echo $form->textField($model, 'cd_locator', array('size' => 4, 'maxlength' => 4)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'nm_locator'); ?>
-		<?php echo $form->textField($model,'nm_locator',array('size'=>32,'maxlength'=>32)); ?>
-		<?php echo $form->error($model,'nm_locator'); ?>
-	</div>
+                        </div>
+                    </td>
+                    <td><div class="row">
+                            <?php echo $form->labelEx($model, 'id_warehouse'); ?>
+                            <?php
+                            $mwhse = Warehouse::model()->findAll();
+                            $mlist = CHtml::listData($mwhse, 'id_warehouse', 'nm_whse');
+                            echo $form->dropDownList($model, 'id_warehouse', $mlist, array('empty' => '-- Pilih Warehouse --'));
+                            ?>
+                        </div></td>
+                </tr>
+                <tr>
+                    <td style="vertical-align: top;">
+                        <div class="row">
+                            <?php echo $form->labelEx($model, 'nm_locator'); ?>
+                            <?php echo $form->textField($model, 'nm_locator', array('size' => 32, 'maxlength' => 32)); ?>
 
-	<div class="row">
-		<?php echo $form->labelEx($model,'description'); ?>
-		<?php echo $form->textField($model,'description',array('size'=>60,'maxlength'=>64)); ?>
-		<?php echo $form->error($model,'description'); ?>
-	</div>
-            
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
-	</div>
-        </fieldset>
-<?php $this->endWidget(); ?>
+                        </div>
+                    </td>
+                    <td style="vertical-align: top;">
+                        <div class="row">
+                            <?php echo $form->labelEx($model, 'description'); ?>
+                            <?php echo $form->textArea($model, 'description', array('style' =>'width:350px;', 'maxlength' => 64)); ?>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+    </fieldset>
+    <div class="tombol">
+        <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn-orange')); ?>
+    </div>
+    <?php $this->endWidget(); ?>
 
 </div><!-- form -->

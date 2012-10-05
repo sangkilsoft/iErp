@@ -2,7 +2,7 @@
 
     <?php
     $form = $this->beginWidget('CActiveForm', array(
-        'id' => 'groups-form',
+        'id' => 'organization-form',
         'enableAjaxValidation' => false,
             ));
     ?>
@@ -12,15 +12,15 @@
     <?php echo $form->errorSummary($model); ?>
     <fieldset class="formulir">
         <div class="row">
-            <?php echo $form->labelEx($model, 'cd_group'); ?>
-            <?php echo $form->textField($model, 'cd_group', array('size' => 4, 'maxlength' => 4)); ?>
-            <?php echo $form->error($model, 'cd_group'); ?>
+            <?php echo $form->labelEx($model, 'cd_orgn'); ?>
+            <?php echo $form->textField($model, 'cd_orgn', array('size' => 4, 'maxlength' => 4)); ?>
+            <?php echo $form->error($model, 'cd_orgn'); ?>
         </div>
 
         <div class="row">
-            <?php echo $form->labelEx($model, 'nm_group'); ?>
-            <?php echo $form->textField($model, 'nm_group', array('size' => 32, 'maxlength' => 32)); ?>
-            <?php echo $form->error($model, 'nm_group'); ?>
+            <?php echo $form->labelEx($model, 'nm_orgn'); ?>
+            <?php echo $form->textField($model, 'nm_orgn', array('size' => 32, 'maxlength' => 32)); ?>
+            <?php echo $form->error($model, 'nm_orgn'); ?>
         </div>
     </fieldset>
     <div class="tombol">

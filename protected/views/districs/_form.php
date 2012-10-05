@@ -8,7 +8,7 @@
 	<p class="note">Fields with <span class="required">*</span> are required.</p>
 
 	<?php echo $form->errorSummary($model); ?>
-
+        <fieldset class="formulir">
 	<div class="row">
 		<?php echo $form->labelEx($model,'cd_distric'); ?>
 		<?php echo $form->textField($model,'cd_distric',array('size'=>4,'maxlength'=>4)); ?>
@@ -50,9 +50,10 @@
 		<?php echo $form->textField($model,'update_by'); ?>
 		<?php echo $form->error($model,'update_by'); ?>
 	</div>
-
-	<div class="row buttons">
-		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save'); ?>
+</fieldset>
+        
+	<div class="tombol">
+		<?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn-orange')); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
