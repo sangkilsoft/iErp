@@ -29,7 +29,7 @@ class BranchController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update','optionBranch'),
+                'actions' => array('create', 'update', 'optionBranch','poDBranch'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -165,7 +165,16 @@ class BranchController extends Controller {
         $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $data['id_orgn']));
         //$data = CHtml::listData($data, 'id_branch', 'nm_branch');
         foreach ($data as $rows) {
-            echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch." (".$rows->cd_branch.")"), true);
+            echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch . " (" . $rows->cd_branch . ")"), true);
+        }
+    }
+
+    public function actionPoDBranch() {
+        $dataorg = $_POST['PoDelivery'];
+        $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $dataorg['id_orgn']));
+        //$data = CHtml::listData($data, 'id_branch', 'nm_branch');
+        foreach ($data as $rows) {
+            echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch . " (" . $rows->cd_branch . ")"), true);
         }
     }
 
