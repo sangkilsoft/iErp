@@ -118,8 +118,19 @@ $results = $command->queryAll();
             <tbody>
                 <tr>
                     <td>
-                        <?php echo $form->labelEx($model, 'id_branch'); ?>
-                        <?php echo $form->textField($model, 'id_branch'); ?>
+                        <?php echo $form->labelEx($model, 'id_orgn'); ?>
+                        <?php echo $form->textField($model, 'id_orgn'); ?>
+                        <?php
+                        echo $form->dropDownList($model, 'id_branch',Array(), array(
+                            'prompt' => 'Select Branch',
+                            'ajax' => array(
+                                'type' => 'POST',
+                                'url' => CController::createUrl('branch/OptionBranch'),
+                                'dataType' => 'json',
+                                'update' => '#GlHeader_id_branch',
+                                )));
+                        ?>         
+                                              
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'description'); ?>
@@ -128,8 +139,8 @@ $results = $command->queryAll();
                 </tr>
                 <tr>
                     <td>
-                        <?php echo $form->labelEx($model, 'id_orgn'); ?>
-                        <?php echo $form->textField($model, 'id_orgn'); ?>
+                         <?php echo $form->labelEx($model, 'id_branch'); ?>
+                        <?php echo $form->textField($model, 'id_branch'); ?> 
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'tgl_trans'); ?>
