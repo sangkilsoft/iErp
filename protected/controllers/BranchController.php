@@ -29,7 +29,7 @@ class BranchController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'optionBranch','poDBranch'),
+                'actions' => array('create', 'update', 'optionBranch', 'poDBranch'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -161,17 +161,8 @@ class BranchController extends Controller {
     }
 
     public function actionOptionBranch() {
-        $data = $_POST['GoodReceipt'];
-        $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $data['id_orgn']));
-        //$data = CHtml::listData($data, 'id_branch', 'nm_branch');
-        foreach ($data as $rows) {
-            echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch . " (" . $rows->cd_branch . ")"), true);
-        }
-    }
-
-    public function actionPoDBranch() {
-        $dataorg = $_POST['PoDelivery'];
-        $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $dataorg['id_orgn']));
+        $dataorg = (strlen(trim($_POST['idorg'])) > 0) ? $_POST['idorg'] : -1;
+        $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $dataorg));
         //$data = CHtml::listData($data, 'id_branch', 'nm_branch');
         foreach ($data as $rows) {
             echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch . " (" . $rows->cd_branch . ")"), true);
