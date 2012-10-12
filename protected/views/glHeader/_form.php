@@ -119,18 +119,19 @@ $results = $command->queryAll();
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model, 'id_orgn'); ?>
-                        <?php echo $form->textField($model, 'id_orgn'); ?>
+                        <?php //echo $form->textField($model, 'id_orgn'); ?>
                         <?php
-                        echo $form->dropDownList($model, 'id_branch',Array(), array(
-                            'prompt' => 'Select Branch',
+                        $mdata = new data_master;
+                        echo $form->dropDownList($model, 'id_orgn', $mdata->org_list(), array(
+                            'prompt' => 'Select Organization',
                             'ajax' => array(
                                 'type' => 'POST',
                                 'url' => CController::createUrl('branch/OptionBranch'),
-                                'dataType' => 'json',
+                                'data' => Array('idorg' => 'js:this.value'),
                                 'update' => '#GlHeader_id_branch',
                                 )));
                         ?>         
-                                              
+
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'description'); ?>
@@ -139,8 +140,13 @@ $results = $command->queryAll();
                 </tr>
                 <tr>
                     <td>
-                         <?php echo $form->labelEx($model, 'id_branch'); ?>
-                        <?php echo $form->textField($model, 'id_branch'); ?> 
+                        <?php echo $form->labelEx($model, 'id_branch'); ?>
+                        <?php //echo $form->textField($model, 'id_branch'); ?>
+                        <?php
+                        echo $form->dropDownList($model, 'id_branch', $mdata->branch_list(), array(
+                            'prompt' => 'Select Branch',
+                        ));
+                        ?> 
                     </td>
                     <td>
                         <?php echo $form->labelEx($model, 'tgl_trans'); ?>
