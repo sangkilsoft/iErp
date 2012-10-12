@@ -15,14 +15,13 @@ $command = $connection->createCommand($sql);
 $results = $command->queryAll();
 ?>
 <script type="text/javascript">
-    $(function(){
-        $("#Account_parent").change(function(){
-            var isilagi = $("#Account_parent").val();
-            $("#Account_cd_acc").val(isilagi);   
-        }); 
-    }
-);
-        
+//    $(function(){
+//        $("#Account_parent").change(function(){
+//            var isilagi = $("#Account_parent").val();
+//            $("#Account_cd_acc").val(isilagi);   
+//        }); 
+//    }
+//);       
 </script>
 <div class="form">
 
@@ -41,7 +40,17 @@ $results = $command->queryAll();
                 <tr>
                     <td>
                         <?php echo $form->labelEx($model, 'parent'); ?>                        
-                        <?php echo $form->dropDownList($model, 'parent', CHtml::listData($results, 'cd_acc', 'nm_acc'),array('empty' => '(Select a parent)')); ?>
+                        <?php echo $form->dropDownList($model, 'parent', CHtml::listData($results, 'cd_acc', 'nm_acc'),array(
+                                    'empty' => 'Select a parent',
+                                    'ajax' => Array(
+                                        'type' => 'POST',
+                                        'url' => CController::createUrl('account/CodeAccount'),
+                                        'data' => Array('idparent'=>'js:this.value'),
+                                        'success'=>'function(data){
+                                                        $(\'#Account_cd_acc\').val(data)
+                                                    }',
+                                    )
+                                     )); ?>
                         <?php echo $form->error($model, 'parent'); ?>
                     </td>
                     <td>
