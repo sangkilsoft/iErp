@@ -109,6 +109,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                             'ajax' => array(
                                 'type' => 'POST',
                                 'url' => CController::createUrl('branch/poDBranch'),
+                                'data' => Array('idorg'=>'js:this.value'),
                                 'update' => '#PoDelivery_id_branch',
                             ),
                         ));
