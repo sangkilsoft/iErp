@@ -29,7 +29,7 @@ class AccountController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update','CodeAccount'),
+                'actions' => array('create', 'update', 'CodeAccount','AjaxFillTree'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -138,27 +138,32 @@ class AccountController extends Controller {
     }
 
     public function actionCodeAccount() {
-        $hasil=0;
+        $hasil = 0;
         $datapost = (strlen(trim($_POST['idparent']) > 0)) ? $_POST['idparent'] : -1;
         $pjg = 0;
+        $connection = Yii::app()->db;
+        $sql1 = "select cd_acc from account b where b.id_acc=$datapost";
+        $command1 = $connection->createCommand($sql1);
+        $results1 = $command1->queryAll();
+        $cd_acc = $results1[0]['cd_acc'];
         if ($datapost <> -1) {
-            $pjg = strlen($datapost)+1;
+            $pjg = strlen($cd_acc) + 1;
         }
         $sql = "SELECT 
                   max(account.cd_acc) as jum
                 FROM 
                   public.account
-                where left(cd_acc,$pjg-1)='$datapost' and length(cd_acc)=$pjg;
+                where left(cd_acc,$pjg-1)='$cd_acc' and length(cd_acc)=$pjg;
                 ";
-        $connection = Yii::app()->db;
+
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
-        if(($results[0]['jum'])!=''){
-            $hasil= intval($results[0]['jum'])+1;
-        }else{
-            $hasil= strval($datapost).'1';
+        if (($results[0]['jum']) != '') {
+            $hasil = intval($results[0]['jum']) + 1;
+        } else {
+            $hasil = strval($cd_acc) . '1';
         }
-        echo $hasil; 
+        echo $hasil;
     }
 
     /**
@@ -182,6 +187,67 @@ class AccountController extends Controller {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+    public function actionAjaxFillTree() {
+        if (!Yii::app()->request->isAjaxRequest) {
+            exit();
+        }
+//        $parentId = "NULL";
+//        if (isset($_GET['root']) && $_GET['root'] !== 'source') {
+//            $parentId = (int) $_GET['root'];
+//        }
+        $sql = "SELECT 
+  a1.cd_acc as id, 
+  a1.nm_acc as text,
+  a2.cd_acc IS NOT NULL AS hasChildren
+FROM 
+ account a1 left join account a2 on a1.id_acc = a2.parent
+ order by 1";
+        $req = Yii::app()->db->createCommand($sql);
+        $children = $req->queryAll();
+
+        //$children = $this->createLinks($children);
+        $treedata=array();
+foreach($children as $child){
+     $options=array('href'=>'#','id'=>$child['id'],'class'=>'treenode');
+     $nodeText = CHtml::openTag('a', $options);
+      $nodeText.= $child['text'];
+      $nodeText.= CHtml::closeTag('a')."\n";
+      $child['text'] = $nodeText;
+      $treedata[]=$child;
+}
+        echo str_replace(
+                '"hasChildren":"0"', '"hasChildren":false', CTreeView::saveDataAsJson($treedata)
+        );
+        exit();
+    }
+
+    private function createLinks($children) {
+        $child = array();
+        $return = array();
+        foreach ($children AS $key => $value) {
+            $child['id'] = $value['id'];
+            $child['text'] = $value['text'];
+            $child['hasChildren'] = $value['hasChildren'];
+
+            if (strlen($value['url']) > 0) {
+                $child['text'] = $this->format($value['text'], $value['url'], Yii::app()->request->url);
+            }
+
+            $return[] = $child;
+            $child = array();
+        }
+
+        return $return;
+    }
+
+    private function format($text, $url, $icon = NULL) {
+        $img = '';
+        if (isset($icon))
+            $img = '<img src="' . app()->theme->baseUrl . '/images/icons/' . $icon . '">';
+
+        return sprintf('<span>%s</span>', CHtml::link(($img . ' ' . $text), app()->createUrl($url)));
     }
 
 }
