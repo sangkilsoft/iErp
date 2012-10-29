@@ -66,14 +66,22 @@ class GlHeaderController extends Controller {
             $conn = Yii::app()->db->beginTransaction();
             try {
                 $model->attributes = $_POST['GlHeader'];
-                $modelDtl->id_glheader = $model->id_glheader;                
-                $modelDtl->id_acc = $_POST['id_acc'];
-                $modelDtl->nm_acc=$_POST['nm_acc'];
-                $modelDtl->debet = $_POST['debet'];
-                $modelDtl->kredit = $_POST['kredit'];
-
+//                $modelDtl->id_glheader = $model->id_glheader;                
+//                $modelDtl->id_acc = $_POST['id_acc'];
+//                $modelDtl->nm_acc=$_POST['nm_acc'];
+//                $modelDtl->debet = $_POST['debet'];
+//                $modelDtl->kredit = $_POST['kredit'];
+//                $gl = new fico();
+//                $retval = $gl->setGL($model->attributes, $modelDtl->attributes);
+                $isidata1=array(
+                    array('KAS',30000000),
+                    array('PIUTANG',20000000),
+                    array('PENJUALAN',50000000),
+                    array('HPP',30000000),
+                    array('PERSEDIAAN',30000000)
+                );                
                 $gl = new fico();
-                $retval = $gl->setGL($model->attributes, $modelDtl->attributes);
+                $retval = $gl->createGL($model->attributes, $isidata1);               
                 if ($retval['type'] == 'S') {
                     Yii::app()->user->setFlash('success', $retval['message']);
                     $model = $retval['val'];
@@ -122,14 +130,14 @@ class GlHeaderController extends Controller {
         if (isset($_POST['GlHeader'])) {
             $conn = Yii::app()->db->beginTransaction();
             try {
-                $model->attributes = $_POST['GlHeader'];  
-                GlDetail::model()->deleteAll('id_glheader=:id_glheader', Array('id_glheader'=>$model->id_glheader));
+                $model->attributes = $_POST['GlHeader'];
+                GlDetail::model()->deleteAll('id_glheader=:id_glheader', Array('id_glheader' => $model->id_glheader));
                 $modelDtl1 = new GlDetail;
                 $modelDtl1->id_glheader = $model->id_glheader;
                 $modelDtl1->id_acc = $_POST['id_acc'];
                 //$modelDtl1->nm_acc = $_POST['nm_acc'];
                 $modelDtl1->debet = $_POST['debet'];
-                $modelDtl1->kredit = $_POST['kredit'];                
+                $modelDtl1->kredit = $_POST['kredit'];
                 $gl = new fico();
                 $retval = $gl->updateGL($model->attributes, $modelDtl1->attributes);
                 if ($retval['type'] == 'S') {
@@ -163,8 +171,8 @@ class GlHeaderController extends Controller {
     public function actionDelete($id) {
         if (Yii::app()->request->isPostRequest) {
             // we only allow deletion via POST request
-                GlDetail::model()->deleteAll('id_glheader=:id_glheader', Array(':id_glheader' => $id));
-                $this->loadModel($id)->delete();
+            GlDetail::model()->deleteAll('id_glheader=:id_glheader', Array(':id_glheader' => $id));
+            $this->loadModel($id)->delete();
 
             // if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
             if (!isset($_GET['ajax']))
