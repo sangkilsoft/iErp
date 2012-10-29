@@ -3,19 +3,6 @@ Yii::app()->clientScript->registerCssFile(
         Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
 Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/jquery.table.addrow.js');
-$sql = "SELECT 
-  coa.id_acc,
-  concat(coa.cd_acc,'-',coa.nm_acc,'-',coa.acc_normal) as nm_acc,
-  (select a.nm_acc from account a where a.id_acc=coa.parent) as parent,
-  coa.acc_normal
-FROM 
-  public.account coa
-WHERE coa.level=3
-ORDER BY 2
-";
-$connection = Yii::app()->db;
-$command = $connection->createCommand($sql);
-$results = $command->queryAll();
 ?>
 <script type="text/javascript">
     var idBefore=0;
@@ -156,7 +143,7 @@ $results = $command->queryAll();
                             'attribute' => 'tgl_trans',
                             'options' => array(
                                 'showAnim' => 'fold',
-                                'dateFormat' => 'dd-mm-yy',
+                                'dateFormat' => 'yy-mm-dd',
                             ),
                             'htmlOptions' => array(
                                 'style' => 'height:20px;',
@@ -198,11 +185,7 @@ $results = $command->queryAll();
                         </td>
                         <td>
                             <?php
-                            //echo CHtml::hiddenField('acc_normal[]', $modeldtl->id_acc, array('class' => 'id_acc', 'id' => 'id_acc0', 'style' => 'width:25px;'));
-                            //echo '&nbsp;';
-                            //echo CHtml::textField('nm_acc[]', $modeldtl->nm_acc, array('class' => 'nm_acc', 'nm' => 'id_acc0', 'style' => 'width:328px;'));   
-                            $data = CHtml::listData($results, 'id_acc', 'nm_acc', 'parent');
-                            echo CHtml::dropDownList('id_acc[]', '', $data, array('empty' => '(Select a parent)', 'class' => 'id_acc', 'id' => 'id_acc0', 'style' => 'width:auto;'));
+                             echo CHtml::dropDownList('id_acc[]', '',  fico::acc_list(), array('empty' => '(Select a parent)', 'class' => 'id_acc', 'id' => 'id_acc0', 'style' => 'width:auto;'));
                             ?>
                         </td>
                         <td><?php echo CHtml::textField('debet[]', $modeldtl->debet, array('class' => 'debet', 'id' => 'debet0', 'style' => 'width:100px;')); ?></td>
@@ -217,11 +200,7 @@ $results = $command->queryAll();
                             </td>
                             <td>
                                 <?php
-                                //echo CHtml::hiddenField('id_acc[]', $modeldtl->id_acc[$i], array('class' => 'id_acc', 'id' => 'id_acc0', 'style' => 'width:25px;'));
-                                //echo '&nbsp;';
-                                //echo CHtml::textField('nm_acc[]', $modeldtl->nm_acc[$i], array('class' => 'nm_acc', 'nm' => 'id_acc0', 'style' => 'width:328px;'));
-                                $data = CHtml::listData($results, 'id_acc', 'nm_acc', 'parent');
-                                echo CHtml::dropDownList('id_acc[]', $modeldtl->id_acc[$i], $data);
+                                 echo CHtml::dropDownList('id_acc[]', $modeldtl->id_acc[$i], fico::acc_list());
                                 ?>
                             </td>
                             <td><?php echo CHtml::textField('debet[]', $modeldtl->debet[$i], array('class' => 'debet', 'id' => 'debet0', 'style' => 'width:100px;')); ?></td>
