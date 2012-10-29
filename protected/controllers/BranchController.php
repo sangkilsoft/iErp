@@ -161,12 +161,13 @@ class BranchController extends Controller {
     }
 
     public function actionOptionBranch() {
-        $dataorg = (strlen(trim($_POST['idorg'])) > 0) ? $_POST['idorg'] : -1;
+        $dataorg = (strlen(trim($_POST['idorg'])>0))?$_POST['idorg']:-1;
         $data = Branch::model()->findAll('id_orgn=:id_orgn', array(':id_orgn' => $dataorg));
         //$data = CHtml::listData($data, 'id_branch', 'nm_branch');
         foreach ($data as $rows) {
             echo CHtml::tag('option', array('value' => $rows->id_branch), CHtml::encode($rows->nm_branch . " (" . $rows->cd_branch . ")"), true);
         }
     }
+
 
 }
