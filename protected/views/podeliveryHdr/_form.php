@@ -9,7 +9,6 @@
     });
 </script>
 <div class="form">
-
     <?php
     $form = $this->beginWidget('CActiveForm', array(
         'id' => 'podelivery-hdr-form',
@@ -72,7 +71,7 @@
             <li><a href="#receiptInfo">Receipt Info</a></li>
             <li><a href="#invoiceInfo">Invoice</a></li>
         </ul>
-        <div id="itemsDelivery" style="padding-left: 5px; padding-right: 5px; padding-top: 0px; padding-bottom: 0px; overflow-x:scroll;overflow-y:hidden;">
+        <div id="itemsDelivery" style="padding-left: 5px; padding-right: 5px; padding-top: 0px; padding-bottom: 0px;">
             <?php
             echo $this->renderPartial('_items', array('model' => $model, 'modeldtl' => $modeldtl));
             ?>

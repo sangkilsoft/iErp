@@ -88,8 +88,8 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                 <th>Product</th>
                 <th>Qty</th>
                 <th>Uom</th>
-                <th>UnitPrice (Rp)</th>
-                <th>Diskon (Rp)</th>
+                <th>Price (@Rp)</th>
+                <th>Diskon (@Rp)</th>
                 <th>PPN (%)</th>
                 <th>Sub Total</th>
                 <th style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/plus.png" border="0" class="addRow"></th>
@@ -103,17 +103,17 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                     </td>
                     <td>
                         <?php
-                        echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0', 'style' => 'width:25px;'));
-                        echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product, array('class' => 'id_product', 'id' => 'id_product0', 'style' => 'width:25px;'));
+                        echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0'));
+                        echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product, array('class' => 'id_product', 'id' => 'id_product0'));
                         //echo '&nbsp;';
-                        echo CHtml::textField('items[product][]', $modeldtl->product, array('class' => 'product', 'id' => 'product0', 'style' => 'width:200px;'));
+                        echo CHtml::textField('items[product][]', $modeldtl->product, array('class' => 'product', 'id' => 'product0', 'size'=>'24'));
                         ?>
                     </td>
-                    <td><?php echo CHtml::textField('items[qty_trans][]', $modeldtl->qty_trans, array('class' => 'qty_trans', 'id' => 'qty_trans0', 'style' => 'width:32px;')); ?></td>
-                    <td><?php echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms, array('class' => 'id_uoms', 'id' => 'id_uoms0', 'style' => 'width:32px;')); ?></td>
-                    <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans, array('class' => 'value_trans', 'id' => 'value_trans0', 'style' => 'width:46px;')); ?></td>
-                    <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'style' => 'width:46px;')); ?></td>
-                    <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'style' => 'width:46px;')); ?></td>
+                    <td><?php echo CHtml::textField('items[qty_trans][]', $modeldtl->qty_trans, array('class' => 'qty_trans', 'id' => 'qty_trans0', 'size'=>'4')); ?></td>
+                    <td><?php echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms, array('class' => 'id_uoms', 'id' => 'id_uoms0', 'size'=>'3')); ?></td>
+                    <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans, array('class' => 'value_trans', 'id' => 'value_trans0', 'size'=>'6')); ?></td>
+                    <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size'=>'4')); ?></td>
+                    <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size'=>'4')); ?></td>
                     <td><?php echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
                     <td style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/minus.png" border="0" class="delRow"></td>
                 </tr>                
@@ -124,17 +124,17 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                         </td>
                         <td>
                             <?php
-                            echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0', 'style' => 'width:25px;'));
-                            echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product[$i], array('class' => 'id_product', 'id' => 'id_product0', 'style' => 'width:25px;'));
+                            echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0'));
+                            echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product[$i], array('class' => 'id_product', 'id' => 'id_product0'));
                             //echo '&nbsp;';
-                            echo CHtml::textField('items[product][]', $modeldtl->product[$i], array('class' => 'product', 'id' => 'product0', 'style' => 'width:200px;'));
+                            echo CHtml::textField('items[product][]', $modeldtl->product[$i], array('class' => 'product', 'id' => 'product0', 'size'=>'24'));
                             ?>
                         </td>
-                        <td><?php echo CHtml::textField('items[qty_trans][]', $modeldtl->qty_trans[$i], array('class' => 'qty_trans', 'id' => 'qty_trans0', 'style' => 'width:32px;')); ?></td>
-                        <td><?php echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms[$i], array('class' => 'id_uoms', 'id' => 'id_uoms0', 'style' => 'width:32px;')); ?></td>
-                        <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans[$i], array('class' => 'value_trans', 'id' => 'value_trans0', 'style' => 'width:46px;')); ?></td>
-                        <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'style' => 'width:46px;')); ?></td>
-                        <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'style' => 'width:46px;')); ?></td>
+                        <td><?php echo CHtml::textField('items[qty_trans][]', $modeldtl->qty_trans[$i], array('class' => 'qty_trans', 'id' => 'qty_trans0', 'size'=>'4')); ?></td>
+                        <td><?php echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms[$i], array('class' => 'id_uoms', 'id' => 'id_uoms0', 'size'=>'3')); ?></td>
+                        <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans[$i], array('class' => 'value_trans', 'id' => 'value_trans0', 'size'=>'6')); ?></td>
+                        <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size'=>'5')); ?></td>
+                        <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size'=>'2')); ?></td>
                         <td><?php echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
                         <td style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/minus.png" border="0" class="delRow" ></td>
                     </tr> 
