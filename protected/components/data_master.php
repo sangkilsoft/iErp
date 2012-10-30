@@ -27,14 +27,16 @@ class data_master extends CComponent {
         return CHtml::listData($whase, 'id_warehouse', 'nm_whse');
     }
 
-    public function status_list() {
+    public function deliveryStatus_list() {
         $status_list = array(
             array('id_status' => 0, 'desc' => 'Draft'),
-            array('id_status' => 1, 'desc' => 'Delivered'),
-            array('id_status' => 2, 'desc' => 'Receipt'),
-            array('id_status' => 3, 'desc' => 'Invoiced')
-            );
+            array('id_status' => 1, 'desc' => 'Release'));
         return CHtml::listData($status_list, 'id_status', 'desc');
+    }
+
+    public function supplier_list() {
+        $supply = Suppliers::model()->findAll();
+        return CHtml::listData($supply, 'id_supplier', 'nm_supplier');
     }
 
 }
