@@ -7,20 +7,23 @@
  */
 class inventory extends CComponent {
 
-    //put your code here
-    public function createReceipt($hdr = array(), $dtl = array()) {
-        $mdl = new GoodReceipt;
+    public function newReceipt($hdr = array(), $dtl = array()) {
+        $mdl = new GreceiptHdr;
         $mdl->attributes = $hdr;
         if ($mdl->save()) {
             $i = 0;
             foreach ($dtl['id_product'] as $value) {
-                $mdldtl = new GrLine;
+                $mdldtl = new GreceiptLine;
                 $mdldtl->id_receipt = $mdl->id_receipt;
                 $mdldtl->id_product = $dtl['id_product'][$i];
                 $mdldtl->qty_trans = $dtl['qty_trans'][$i];
                 $mdldtl->id_uoms = $dtl['id_uoms'][$i];
-                $mdldtl->id_locator = $dtl['id_locator'][$i];
-                $mdldtl->value_trans = $dtl['value_trans'][$i];
+
+//                $mdldtl->create_by = 0; //Yii::app()->user->Id;
+//                $mdldtl->create_date = new CDbExpression('NOW()');
+//                $mdldtl->update_by = 0; //Yii::app()->user->Id;
+//                $mdldtl->update_date = new CDbExpression('NOW()');
+
                 if (!$mdldtl->save())
                     return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdldtl->getErrors());
                 $i++;
