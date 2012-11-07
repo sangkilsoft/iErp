@@ -53,9 +53,10 @@ class GlHeader extends CActiveRecord
 			array('trans_type', 'length', 'max'=>32),
 			array('description', 'length', 'max'=>128),
 			array('create_by, update_by', 'length', 'max'=>10),
+                        array('cd_gl_header', 'length', 'max'=>13),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by', 'safe', 'on'=>'search'),
+			array('id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -88,6 +89,7 @@ class GlHeader extends CActiveRecord
 			'create_date' => 'Create Date',
 			'create_by' => 'Create By',
 			'update_by' => 'Update By',
+                        'cd_gl_header' => 'Code GL',
 		);
 	}
 
@@ -113,7 +115,7 @@ class GlHeader extends CActiveRecord
 		$criteria->compare('create_date',$this->create_date,true);
 		$criteria->compare('create_by',$this->create_by,true);
 		$criteria->compare('update_by',$this->update_by,true);
-
+                $criteria->compare('cd_gl_header',$this->cd_gl_header,true);
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
 		));
@@ -129,5 +131,11 @@ class GlHeader extends CActiveRecord
             $this->update_date = new CDbExpression('NOW()');
         }
         return parent::beforeSave();
+    }
+    public function beforeValidate() {
+        if(empty ($this->cd_gl_header)){
+            $this->cd_gl_header="GL".date('myhis');
+        }
+        return parent::beforeValidate();
     }
 }
