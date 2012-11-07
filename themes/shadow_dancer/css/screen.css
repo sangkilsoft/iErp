@@ -29,14 +29,14 @@ html {font-size:100.01%;}
 body {font-size:75%;color:#222;background:#fff;font-family:"Helvetica Neue", Arial, Helvetica, sans-serif;}
 h1, h2, h3, h4, h5, h6 {font-weight:normal;color:#111;}
 h1 {
-  border-bottom-color:#CCCCCC;
-  border-bottom-style:dotted;
-  border-bottom-width:1px;
-  color:#222222;
-  font-size:18px;
-  font-weight:bold;
-  margin-bottom:1em;
-  padding-bottom:0.25em;
+    border-bottom-color:#CCCCCC;
+    border-bottom-style:dotted;
+    border-bottom-width:1px;
+    color:#222222;
+    font-size:18px;
+    font-weight:bold;
+    margin-bottom:1em;
+    padding-bottom:0.25em;
 }
 h2 {font-size:1.6em;margin-bottom:0.75em;}
 h3 {font-size:1.4em;line-height:1;margin-bottom:1em;}
@@ -246,5 +246,5 @@ hr.space {background:#fff;color:#fff;visibility:hidden;}
 .clearfix:after, .container:after {content:"\0020";display:block;height:0;clear:both;visibility:hidden;overflow:hidden;}
 .clearfix, .container {display:block;}
 .clear {clear:both;}
-.tombol {text-align: left; border-top: 2px orange solid; padding-left: 10px; padding-top: 5px; background: url("../images/el_bg.png") repeat-x scroll left top white; background-color: grey;}
-.formulir{border: 1px grey solid; padding: 10px; background-color: whitesmoke;}
+.tombol {text-align: left; border-top: 2px orange solid; padding-left: 10px; padding-top: 5px; background: url("../images/el_bg.png") repeat-x scroll left top white; background-color: grey; -moz-border-radius:4px;-khtml-border-radius:4px;-webkit-border-radius:4px;border-radius:4px; margin-top: 10px;}
+.formulir{border: 1px grey solid; padding: 0px; background-color: whitesmoke; -moz-border-radius:4px;-khtml-border-radius:4px;-webkit-border-radius:4px;border-radius:4px;}
