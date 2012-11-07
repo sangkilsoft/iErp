@@ -41,19 +41,12 @@
                     <td style="vertical-align: top;">
                         <div class="row">
                             <?php echo $form->labelEx($model, 'description'); ?>
-                            <?php echo $form->textArea($model, 'description', array('style' =>'width:350px;', 'maxlength' => 64)); ?>
-
+                            <?php echo $form->textArea($model, 'description', array('style' => 'width:350px;', 'maxlength' => 64)); ?>
                         </div>
                     </td>
                 </tr>
             </tbody>
         </table>
-
-
-
-
-
-
     </fieldset>
     <div class="tombol">
         <?php echo CHtml::submitButton($model->isNewRecord ? 'Create' : 'Save', array('class' => 'btn-orange')); ?>

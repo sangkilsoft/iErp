@@ -80,10 +80,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
         //        });
     });
 </script>
-<?php
-$muom = Uoms::model()->findAll();
-$luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
-?>
 <div class="grid-view" cellpadding="0" cellspacing="0">
     <table class="item-class">
         <thead>
@@ -100,7 +96,11 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
             </tr>
         </thead>
         <tbody>
-            <?php if ($modeldtl->id_product == null): ?>
+            <?php
+            $muom = Uoms::model()->findAll();
+            $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
+            if ($modeldtl->id_product == null):
+                ?>
                 <tr>
                     <td>
                         <span class="rowNumber">1</span>
@@ -117,8 +117,9 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                     <td>
                         <?php
                         echo CHtml::activeDropDownList($modeldtl, 'id_uoms', $luom, array('name' => 'items[id_uoms][]', 'class' => 'id_uoms', 'id' => 'id_uoms0'));
-                        ?>
-                        <?php //echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms, array('class' => 'id_uoms', 'id' => 'id_uoms0', 'size'=>'3')); ?></td>
+                        ?>  
+                        <?php //echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms, array('class' => 'id_uoms', 'id' => 'id_uoms0', 'size'=>'3'));  ?></td>
+                    <?php //echo CHtml::dropDownList('items[id_uoms][]', $modeldtl->id_uoms, $luom, array('class' => 'id_uoms', 'id' => 'id_uoms0'));     ?>
                     <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans, array('class' => 'value_trans', 'id' => 'value_trans0', 'size' => '6')); ?></td>
                     <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size' => '4')); ?></td>
                     <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size' => '4')); ?></td>
@@ -139,11 +140,7 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                             ?>
                         </td>
                         <td><?php echo CHtml::textField('items[qty_trans][]', $modeldtl->qty_trans[$i], array('class' => 'qty_trans', 'id' => 'qty_trans0', 'size' => '4')); ?></td>
-                        <td>
-                            <?php
-                            echo CHtml::activeDropDownList($modeldtl, 'id_uoms', $luom, array('name' => 'items[id_uoms][]', 'class' => 'id_uoms', 'id' => 'id_uoms0'));
-                            ?>  
-                            <?php //echo CHtml::textField('items[id_uoms][]', $modeldtl->id_uoms[$i], array('class' => 'id_uoms', 'id' => 'id_uoms0', 'size'=>'3')); ?></td>
+                        <td><?php echo CHtml::dropDownList('items[id_uoms][]', $modeldtl->id_uoms[$i], $luom, array('name' => 'items[id_uoms][]', 'class' => 'id_uoms', 'id' => 'id_uoms0')); ?>
                         <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans[$i], array('class' => 'value_trans', 'id' => 'value_trans0', 'size' => '6')); ?></td>
                         <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size' => '5')); ?></td>
                         <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size' => '2')); ?></td>

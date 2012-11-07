@@ -34,18 +34,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                     $(this).parent().parent().find(".id_product").val(ui.item.id);
                 }
             });
-            
-            //            row.find(".qty_trans").attr('id', 'qty_trans' + idNumber).keydown(function(e){
-            //                if(e.which == 13){
-            //                    $(this).parent().parent().find(".value_trans").focus();
-            //                    return false;
-            //                }
-            //            });
-            //            
-            //            row.find(".value_trans").attr('id', 'value_trans' + idNumber).keyup(function(e){
-            //                $(this).parent().parent().find(".sub_total").html(row.find(".qty_trans").val()*row.find(".value_trans").val())
-            //                return false;
-            //            });
         });
         
         $(".delRow").btnDelRow();  
@@ -64,20 +52,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
                 $(".qty_trans").focus();
             }
         });
-        
-        //        $(".qty_trans").keydown(function(e){
-        //            if(e.which == 13){
-        //                $(this).parent().parent().find(".value_trans").focus();
-        //                return false;
-        //            }
-        //        });
-            
-        //        $(".value_trans").keydown(function(e){
-        //            if(e.which == 13){
-        //                $(this).parent().parent().find(".value_trans").focus();
-        //                return false;
-        //            }
-        //        });
     });
 </script>
 <?php

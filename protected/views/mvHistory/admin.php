@@ -1,12 +1,15 @@
 <?php
+/* @var $this MvHistoryController */
+/* @var $model MvHistory */
+
 $this->breadcrumbs=array(
-	'Role Menus'=>array('index'),
+	'Mv Histories'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List RoleMenu', 'url'=>array('index')),
-	array('label'=>'Create RoleMenu', 'url'=>array('create')),
+	array('label'=>'List MvHistory', 'url'=>array('index')),
+	array('label'=>'Create MvHistory', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +18,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('role-menu-grid', {
+	$.fn.yiiGridView.update('mv-history-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +26,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Role Menus</h1>
+<h1>Manage Mv Histories</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,13 +41,29 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'role-menu-grid',
+	'id'=>'mv-history-grid',
 	'dataProvider'=>$model->search(),
 	//'filter'=>$model,
 	'columns'=>array(
-		'id_rolemn',
-		'role.deskripsi',
-		'menu.label',
+		'idProduct.cd_product',
+		'idProduct.nm_product',
+		'qty_mvnt',
+		'qty_current',
+		'trans_type',
+		'idLocator.nm_locator',
+		'create_date',
+		/*
+		'ref_number',
+		'id_movement',
+		'id_branch',
+		'trans_source',
+		'id_orgn',
+		'val_mvnt',
+		'val_current',
+		'update_date',
+		'create_by',
+		'update_by',
+		*/
 		array(
 			'class'=>'CButtonColumn',
 		),
