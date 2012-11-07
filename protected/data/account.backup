@@ -4,7 +4,7 @@
 
 -- Dumped from database version 9.1.4
 -- Dumped by pg_dump version 9.1.4
--- Started on 2012-10-29 20:36:58
+-- Started on 2012-11-07 22:04:32
 
 SET statement_timeout = 0;
 SET client_encoding = 'UTF8';
@@ -20,7 +20,7 @@ SET search_path = public, pg_catalog;
 -- Name: account_id_acc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
 --
 
-SELECT pg_catalog.setval('account_id_acc_seq', 25, true);
+SELECT pg_catalog.setval('account_id_acc_seq', 39, true);
 
 
 --
@@ -29,32 +29,47 @@ SELECT pg_catalog.setval('account_id_acc_seq', 25, true);
 -- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
 --
 
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (1, '1', 'HARTA', 'D', NULL, 1, '2012-10-03 08:39:39.32', 'admin', 'admin', '2012-10-03 08:39:39.32');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (2, '2', 'HUTANG', 'K', NULL, 1, '2012-10-03 08:40:11.652', 'admin', 'admin', '2012-10-03 08:40:11.652');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (3, '3', 'MODAL', 'K', NULL, 1, '2012-10-03 08:42:09.626', 'admin', 'admin', '2012-10-03 08:42:09.626');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (4, '4', 'PENDAPATAN', 'K', NULL, 1, '2012-10-03 08:42:46.273', 'admin', 'admin', '2012-10-03 08:42:46.273');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (5, '5', 'HARGA POKOK PENJUALAN', 'D', NULL, 1, '2012-10-03 08:43:40.873', 'admin', 'admin', '2012-10-03 08:43:40.873');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (6, '6', 'BIAYA', 'D', NULL, 1, '2012-10-03 08:44:08.872', 'admin', 'admin', '2012-10-03 08:44:08.872');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (7, '11', 'AKTIVA LANCAR', 'D', 1, 2, '2012-10-03 08:47:53.846', 'admin', 'admin', '2012-10-03 08:47:53.846');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (8, '12', 'AKTIVA TETAP', 'D', 1, 2, '2012-10-03 08:49:48.537', 'admin', 'admin', '2012-10-03 08:49:48.537');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (9, '111', 'KAS', 'D', 7, 3, '2012-10-03 08:54:38.74', 'admin', 'admin', '2012-10-03 15:21:14.007');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (10, '112', 'BANK BCA', 'D', 7, 3, '2012-10-03 15:26:38.881', 'admin', 'admin', '2012-10-03 15:32:26.084');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (11, '121', 'TANAH', 'D', 8, 3, '2012-10-03 15:31:22.214', 'admin', 'admin', '2012-10-03 15:33:19.179');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (12, '21', 'HUTANG LANCAR', 'K', 2, 2, '2012-10-03 15:35:33.233', 'admin', 'admin', '2012-10-03 15:35:33.233');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (13, '211', 'HUTANG USAHA', 'K', 12, 3, '2012-10-03 15:36:37.204', 'admin', 'admin', '2012-10-03 15:36:37.204');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (16, '113', 'PERSEDIAAN BARANG DAGANGAN', 'D', 7, 3, '2012-10-15 15:16:26.746', 'admin', 'admin', '2012-10-15 15:16:26.746');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (17, '114', 'PIUTANG DAGANG', 'D', 7, 3, '2012-10-16 16:59:56.919', 'admin', 'admin', '2012-10-16 16:59:56.919');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (18, '41', 'PENDAPATAN USAHA', 'D', 4, 2, '2012-10-18 09:00:15.288', 'admin', 'admin', '2012-10-18 09:00:15.288');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (19, '411', 'PENJUALAN', 'D', 18, 3, '2012-10-18 09:01:04.936', 'admin', 'admin', '2012-10-18 09:01:04.936');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (20, '412', 'DISC PENJUALAN', 'D', 18, 3, '2012-10-18 09:01:29.282', 'admin', 'admin', '2012-10-18 09:01:29.282');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (21, '413', 'RETUR PENJUALAN', 'D', 18, 3, '2012-10-18 09:01:49.016', 'admin', 'admin', '2012-10-18 09:01:49.016');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (22, '42', 'PENDAPATAN LAIN-LAIN', 'D', 4, 2, '2012-10-18 09:08:20.716', 'admin', 'admin', '2012-10-18 09:08:20.716');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (23, '51', 'HARGA POKOK PENJUALAN', 'K', 5, 2, '2012-10-18 09:14:39.717', 'admin', 'admin', '2012-10-18 09:14:39.717');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (24, '511', 'HARGA POKOK PENJUALAN', 'K', 23, 3, '2012-10-18 09:15:02.509', 'admin', 'admin', '2012-10-18 09:15:02.509');
-INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) VALUES (25, '212', 'PPN KELUARAN', 'K', 12, 3, '2012-10-29 08:23:32.851', 'admin', 'admin', '2012-10-29 08:23:32.851');
+COPY account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date) FROM stdin;
+26	6100	BIAYA USAHA	K	6	2	2012-10-30 15:07:56.009	admin	admin	2012-10-30 15:07:56.009
+27	6110	BIAYA LISTRIK	K	26	3	2012-10-30 15:08:23.109	admin	admin	2012-10-30 15:08:23.109
+28	6120	BIAYA GAJI	K	26	3	2012-10-30 15:09:06.094	admin	admin	2012-10-30 15:09:06.094
+29	6130	BIAYA JALAN	K	26	3	2012-10-30 15:09:26.948	admin	admin	2012-10-30 15:09:26.948
+30	6140	BIAYA MAKAN	K	26	3	2012-10-30 15:10:50.617	admin	admin	2012-10-30 15:10:50.617
+31	6150	BIAYA SERVICE	K	26	3	2012-10-30 15:11:44.876	admin	admin	2012-10-30 15:11:44.876
+32	6160	BIAYA DISKON	K	26	3	2012-10-30 15:12:02.778	admin	admin	2012-10-30 15:12:02.778
+33	6170	BIAYA BENGKEL	K	26	3	2012-10-30 15:12:21.854	admin	admin	2012-10-30 15:12:21.854
+34	6180	BIAYA KUE	K	26	3	2012-10-30 15:12:44.169	admin	admin	2012-10-30 15:12:44.169
+35	6190	BIAYA CALO	K	26	3	2012-10-30 15:13:02.217	admin	admin	2012-10-30 15:13:02.217
+37	3100	MODAL	K	3	2	2012-11-03 13:15:33.891	admin	admin	2012-11-03 13:15:33.891
+38	3110	MODAL SAHAM	K	37	3	2012-11-03 13:15:56.664	admin	admin	2012-11-03 13:15:56.664
+2	2000	HUTANG	K	\N	1	2012-10-03 08:40:11.652	admin	admin	2012-10-03 08:40:11.652
+3	3000	MODAL	K	\N	1	2012-10-03 08:42:09.626	admin	admin	2012-10-03 08:42:09.626
+4	4000	PENDAPATAN	K	\N	1	2012-10-03 08:42:46.273	admin	admin	2012-10-03 08:42:46.273
+5	5000	HARGA POKOK PENJUALAN	D	\N	1	2012-10-03 08:43:40.873	admin	admin	2012-10-03 08:43:40.873
+6	6000	BIAYA	D	\N	1	2012-10-03 08:44:08.872	admin	admin	2012-10-03 08:44:08.872
+7	1100	AKTIVA LANCAR	D	1	2	2012-10-03 08:47:53.846	admin	admin	2012-10-03 08:47:53.846
+8	1200	AKTIVA TETAP	D	1	2	2012-10-03 08:49:48.537	admin	admin	2012-10-03 08:49:48.537
+9	1110	KAS	D	7	3	2012-10-03 08:54:38.74	admin	admin	2012-10-03 15:21:14.007
+10	1120	BANK BCA	D	7	3	2012-10-03 15:26:38.881	admin	admin	2012-10-03 15:32:26.084
+11	1210	TANAH	D	8	3	2012-10-03 15:31:22.214	admin	admin	2012-10-03 15:33:19.179
+12	2100	HUTANG LANCAR	K	2	2	2012-10-03 15:35:33.233	admin	admin	2012-10-03 15:35:33.233
+13	2110	HUTANG USAHA	K	12	3	2012-10-03 15:36:37.204	admin	admin	2012-10-03 15:36:37.204
+16	1130	PERSEDIAAN BARANG DAGANGAN	D	7	3	2012-10-15 15:16:26.746	admin	admin	2012-10-15 15:16:26.746
+17	1140	PIUTANG DAGANG	D	7	3	2012-10-16 16:59:56.919	admin	admin	2012-10-16 16:59:56.919
+18	4100	PENDAPATAN USAHA	D	4	2	2012-10-18 09:00:15.288	admin	admin	2012-10-18 09:00:15.288
+19	4110	PENJUALAN	D	18	3	2012-10-18 09:01:04.936	admin	admin	2012-10-18 09:01:04.936
+20	4120	DISC PENJUALAN	D	18	3	2012-10-18 09:01:29.282	admin	admin	2012-10-18 09:01:29.282
+21	4130	RETUR PENJUALAN	D	18	3	2012-10-18 09:01:49.016	admin	admin	2012-10-18 09:01:49.016
+22	4200	PENDAPATAN LAIN-LAIN	D	4	2	2012-10-18 09:08:20.716	admin	admin	2012-10-18 09:08:20.716
+23	5100	HARGA POKOK PENJUALAN	K	5	2	2012-10-18 09:14:39.717	admin	admin	2012-10-18 09:14:39.717
+24	5110	HARGA POKOK PENJUALAN	K	23	3	2012-10-18 09:15:02.509	admin	admin	2012-10-18 09:15:02.509
+25	2120	PPN KELUARAN	K	12	3	2012-10-29 08:23:32.851	admin	admin	2012-10-29 08:23:32.851
+39	3111	LABA DITAHAN	K	37	3	2012-11-03 13:16:15.722	admin	admin	2012-11-03 13:16:15.722
+1	1000	HARTA	D	\N	1	2012-10-03 08:39:39.32	admin	admin	2012-11-06 10:30:59.272
+\.
 
 
--- Completed on 2012-10-29 20:36:59
+-- Completed on 2012-11-07 22:04:32
 
 --
 -- PostgreSQL database dump complete
