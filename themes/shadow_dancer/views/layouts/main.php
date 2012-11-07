@@ -17,9 +17,11 @@
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/icons.css" />
         <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/tables.css" />
 
-<!--        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/mbmenu.css" />
-        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/mbmenu_iestyles.css" />-->
 
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/jquery.css" />
+        <!--  
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/mbmenu.css" />
+        <link rel="stylesheet" type="text/css" href="<?php echo Yii::app()->theme->baseUrl; ?>/css/mbmenu_iestyles.css" />-->
 
         <title><?php echo CHtml::encode($this->pageTitle); ?></title>
     </head>
@@ -31,7 +33,7 @@
                 <div class="topnav_text"><a href='#'>Home</a> | <a href='#'>My Account</a> | <a href='#'>Settings</a> | <a href='#'>Logout</a> </div>
             </div>
             <div id="header">
-                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);    ?></div>
+                <div id="logo"><img src="<?php echo Yii::app()->theme->baseUrl; ?>/images/logo.png"></img><?php //echo CHtml::encode(Yii::app()->name);     ?></div>
             </div><!-- header -->
             <?php
             //$this->widget('application.extensions.mbmenu.MbMenu', $this->mmenu);
@@ -52,6 +54,22 @@
                 <?php echo Yii::powered(); //echo " theme by webapplicationthemes.com";  ?>
             </div><!-- footer -->
         </div><!-- page -->
-
+        <?php
+        $this->widget('zii.widgets.jui.CJuiDialog', array(
+            'id' => 'mydialog',
+            // additional javascript options for the dialog plugin
+            'options' => array(
+                'title' => '<b>'.$this->id.'</b>',
+                'width' => '400px',
+                'height' => '300',
+                #'position' => 'top',
+                'top' => '50px',
+                'modal' => true,
+//            'buttons' => array(
+//                'Ok' => 'js:function(){alert("ok")}',
+//                'Cancel' => 'js:function(){alert("cancel")}',),
+                'autoOpen' => false,
+                )));
+        ?>
     </body>
 </html>
