@@ -4,7 +4,7 @@ Yii::app()->clientScript->registerCssFile(
 
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
 $sql = "SELECT 
-  acc.id_acc, 
+  acc.id_acc as parent, 
   concat(acc.cd_acc,'-',acc.nm_acc) as nm_acc,
   acc.cd_acc
 FROM 
@@ -39,10 +39,14 @@ $results = $command->queryAll();
         <table border="0">
             <tbody>
                 <tr>
+                    
                     <td>
-                        <?php echo $form->labelEx($model, 'parent'); ?>                        
+                        
+                        <?php 
+                        echo $form->labelEx($model, 'parent'); 
+                        ?>                        
                         <?php
-                        echo $form->dropDownList($model, 'parent', CHtml::listData($results, 'id_acc', 'nm_acc'), array(
+                        echo $form->dropDownList($model, 'parent', CHtml::listData($results, 'parent', 'nm_acc'), array(
                             'empty' => 'Select a parent',
                             'ajax' => Array(
                                 'type' => 'POST',
@@ -132,17 +136,20 @@ $results = $command->queryAll();
 //        ),
 //    ));
     ?>
-<?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'account-grid',
-	'dataProvider'=>$model->search(),
-	'columns'=>array(
-		'id_acc',
-		'cd_acc',
-		'nm_acc',
-		'acc_normal',
-		'parent',
-	),
-)); ?>
+    
+<?php 
+//$this->widget('zii.widgets.grid.CGridView', array(
+//	'id'=>'account-grid',
+//	'dataProvider'=>$model->search(),
+//	'columns'=>array(
+//		'id_acc',
+//		'cd_acc',
+//		'nm_acc',
+//		'acc_normal',
+//		'parent',
+//	),
+//)); 
+?>
     
 </div><!-- form -->
 

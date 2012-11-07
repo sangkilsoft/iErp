@@ -42,13 +42,15 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
+                array('header'=>'No',
+                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
+                    'htmlOptions'=>array('align'=>'center')),
 		'id_acc',
 		'cd_acc',
 		'nm_acc',
 		'acc_normal',
 		'parent',
-		'create_date',
-		/*
+		/*'create_date',		
 		'update_by',
 		'create_by',
 		'update_date',
