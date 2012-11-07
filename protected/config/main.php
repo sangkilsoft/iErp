@@ -75,7 +75,7 @@ return array(
             'widgets' => array(
                 'MCDetailView' => array(
                     'htmlOptions' => array('class' => 'item-class', 'cellspacing' => '0', 'cellpadding' => '0'),
-                    //'itemsCssClass' => 'item-class' 
+                //'itemsCssClass' => 'item-class' 
                 ),
                 'GroupGridView' => array(
                     'htmlOptions' => array('cellspacing' => '0', 'cellpadding' => '0'),
@@ -112,6 +112,9 @@ return array(
                 ),
                 'CJuiButton' => array(
                     'htmlOptions' => array('class' => 'button green'),
+                ),
+                'CJuiDialog' => array(
+                    'htmlOptions' => array('class' => 'shadowtabs'),
                 ),
             ),
         ),
