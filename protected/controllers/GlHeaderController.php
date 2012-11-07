@@ -29,7 +29,7 @@ class GlHeaderController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'rptBulan'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -66,22 +66,22 @@ class GlHeaderController extends Controller {
             $conn = Yii::app()->db->beginTransaction();
             try {
                 $model->attributes = $_POST['GlHeader'];
-//                $modelDtl->id_glheader = $model->id_glheader;                
-//                $modelDtl->id_acc = $_POST['id_acc'];
-//                $modelDtl->nm_acc=$_POST['nm_acc'];
-//                $modelDtl->debet = $_POST['debet'];
-//                $modelDtl->kredit = $_POST['kredit'];
-//                $gl = new fico();
-//                $retval = $gl->setGL($model->attributes, $modelDtl->attributes);
-                $isidata1=array(
-                    array('KAS',30000000),
-                    array('PIUTANG',20000000),
-                    array('PENJUALAN',50000000),
-                    array('HPP',30000000),
-                    array('PERSEDIAAN',30000000)
-                );                
+                $modelDtl->id_glheader = $model->id_glheader;
+                $modelDtl->id_acc = $_POST['id_acc'];
+                $modelDtl->nm_acc = $_POST['nm_acc'];
+                $modelDtl->debet = $_POST['debet'];
+                $modelDtl->kredit = $_POST['kredit'];
                 $gl = new fico();
-                $retval = $gl->createGL($model->attributes, $isidata1);               
+                $retval = $gl->setGL($model->attributes, $modelDtl->attributes);
+//                $isidata1=array(
+//                    array('KAS',30000000),
+//                    array('PIUTANG',20000000),
+//                    array('PENJUALAN',50000000),
+//                    array('HPP',30000000),
+//                    array('PERSEDIAAN',30000000)
+//                );                
+//                $gl = new fico();
+//                $retval = $gl->createGL($model->attributes, $isidata1);               
                 if ($retval['type'] == 'S') {
                     Yii::app()->user->setFlash('success', $retval['message']);
                     $model = $retval['val'];
@@ -189,6 +189,35 @@ class GlHeaderController extends Controller {
         $dataProvider = new CActiveDataProvider('GlHeader');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
+        ));
+    }
+
+    public function actionRptBulan() {
+        //if(isset ($_POST['']))
+        $sql = "Select
+  gl_header.id_branch,
+  gl_header.id_orgn,
+  gl_header.tgl_trans,
+  gl_header.cd_gl_header,
+  gl_header.refnum,
+  gl_header.description,
+  account.cd_acc,
+  account.nm_acc,
+  gl_detail.debet,
+  gl_detail.kredit
+From
+  gl_header Inner Join
+  gl_detail On gl_header.id_glheader = gl_detail.id_glheader Inner Join
+  account On account.id_acc = gl_detail.id_acc
+Where
+  Extract(Month From gl_header.tgl_trans) = 10 and
+  Extract(Year From gl_header.tgl_trans) = 2012
+  ";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($sql);
+        $results = $command->queryAll();
+        $this->render('rptBulan', array(
+            'model' => $results,
         ));
     }
 
