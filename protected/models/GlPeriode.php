@@ -47,7 +47,7 @@ class GlPeriode extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('bulan, tahun, id_branch, id_orgn, id_acc, saldo, create_date, update_by, create_by, update_date', 'required'),
+			array('bulan, tahun, id_branch, id_orgn, id_acc, saldo', 'required'),
 			array('bulan, tahun, id_branch, id_orgn, id_acc', 'numerical', 'integerOnly'=>true),
 			array('saldo', 'numerical'),
 			array('update_by, create_by', 'length', 'max'=>10),
@@ -116,4 +116,16 @@ class GlPeriode extends CActiveRecord
 			'criteria'=>$criteria,
 		));
 	}
+         public function beforeSave() {
+        if ($this->isNewRecord) {
+            $this->create_by = Yii::app()->user->Id;
+            $this->create_date = new CDbExpression('NOW()');
+            $this->update_by = Yii::app()->user->Id;
+            $this->update_date = new CDbExpression('NOW()');
+        } else {
+            $this->update_by = Yii::app()->user->Id;
+            $this->update_date = new CDbExpression('NOW()');
+        }
+        return parent::beforeSave();
+    }
 }
