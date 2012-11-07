@@ -41,62 +41,62 @@ class fico extends CComponent {
     public function createGL($hdr = array(), $dtl = array()) {
         $mdl = new GlHeader;
         $mdl->attributes = $hdr;
-        $jumlahdikirim=count($dtl);
+        $jumlahdikirim = count($dtl);
         if ($mdl->save()) {
             //$i = 0;
-                if ($mdl->trans_type == 'PENJUALAN') {
-                    $jumrecord=MappingCoa::model()->count('trans_type=\'PENJUALAN\'');
-                    if($jumrecord!=$jumlahdikirim){
-                        return array('type' => 'E', 'message' => 'Input Not Match', 'val' => $mdl->getErrors());
-                    }                    
-                    for ($i=0;$i<$jumrecord;$i++) {
-                        $mdldtl = new GlDetail;
-                        $mdldtl->id_glheader = $mdl->id_glheader;
-                        $hasil=  MappingCoa::model()->find('trans_type=:tp and mappingname=:mn',Array('tp'=>'PENJUALAN','mn'=>$dtl[$i][0]));
-                        if(count($hasil)<1){                            
-                            return array('type' => 'E', 'message' => 'Data Not Found [Mapping] ', 'val' => $mdl->getErrors());
-                        }
-                        $mdldtl->id_acc = $hasil->id_acc; 
-                        if($hasil->dk =='D'){
-                            $mdldtl->debet = $dtl[$i][1];
-                            $mdldtl->kredit = 0;
-                        }else{
-                            $mdldtl->debet = 0;
-                            $mdldtl->kredit = $dtl[$i][1];
-                        }                       
-                        if (!$mdldtl->save())
-                            return array('type' => 'E', 'message' => 'Error on Insert 3', 'val' => $mdldtl->getErrors());
-                        //$i++;
-                    }
-                }else if($mdl->trans_type == 'PEMBELIAN'){
-                    $jumrecord=MappingCoa::model()->count('trans_type=\'PEMBELIAN\'');
-                    if($jumrecord!=$jumlahdikirim){
-                        return array('type' => 'E', 'message' => 'Input Not Match', 'val' => $mdl->getErrors());
-                    }                    
-                    for ($i=0;$i<$jumrecord;$i++) {
-                        $mdldtl = new GlDetail;
-                        $mdldtl->id_glheader = $mdl->id_glheader;
-                        $hasil=  MappingCoa::model()->find('trans_type=:tp and mappingname=:mn',Array('tp'=>'PEMBELIAN','mn'=>$dtl[$i][0]));
-                        if(count($hasil)<1){                            
-                            return array('type' => 'E', 'message' => 'Data Not Found [Mapping] ', 'val' => $mdl->getErrors());
-                        }
-                        $mdldtl->id_acc = $hasil->id_acc; 
-                        if($hasil->dk =='D'){
-                            $mdldtl->debet = $dtl[$i][1];
-                            $mdldtl->kredit = 0;
-                        }else{
-                            $mdldtl->debet = 0;
-                            $mdldtl->kredit = $dtl[$i][1];
-                        }                       
-                        if (!$mdldtl->save())
-                            return array('type' => 'E', 'message' => 'Error on Insert 3', 'val' => $mdldtl->getErrors());
-                        //$i++;
-                    }
+            if ($mdl->trans_type == 'PENJUALAN') {
+                $jumrecord = MappingCoa::model()->count('trans_type=\'PENJUALAN\'');
+                if ($jumrecord != $jumlahdikirim) {
+                    return array('type' => 'E', 'message' => 'Input Not Match', 'val' => $mdl->getErrors());
                 }
-                    
+                for ($i = 0; $i < $jumrecord; $i++) {
+                    $mdldtl = new GlDetail;
+                    $mdldtl->id_glheader = $mdl->id_glheader;
+                    $hasil = MappingCoa::model()->find('trans_type=:tp and mappingname=:mn', Array('tp' => 'PENJUALAN', 'mn' => $dtl[$i][0]));
+                    if (count($hasil) < 1) {
+                        return array('type' => 'E', 'message' => 'Data Not Found [Mapping] ', 'val' => $mdl->getErrors());
+                    }
+                    $mdldtl->id_acc = $hasil->id_acc;
+                    if ($hasil->dk == 'D') {
+                        $mdldtl->debet = $dtl[$i][1];
+                        $mdldtl->kredit = 0;
+                    } else {
+                        $mdldtl->debet = 0;
+                        $mdldtl->kredit = $dtl[$i][1];
+                    }
+                    if (!$mdldtl->save())
+                        return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdldtl->getErrors());
+                    //$i++;
+                }
+            }else if ($mdl->trans_type == 'PEMBELIAN') {
+                $jumrecord = MappingCoa::model()->count('trans_type=\'PEMBELIAN\'');
+                if ($jumrecord != $jumlahdikirim) {
+                    return array('type' => 'E', 'message' => 'Input Not Match', 'val' => $mdl->getErrors());
+                }
+                for ($i = 0; $i < $jumrecord; $i++) {
+                    $mdldtl = new GlDetail;
+                    $mdldtl->id_glheader = $mdl->id_glheader;
+                    $hasil = MappingCoa::model()->find('trans_type=:tp and mappingname=:mn', Array('tp' => 'PEMBELIAN', 'mn' => $dtl[$i][0]));
+                    if (count($hasil) < 1) {
+                        return array('type' => 'E', 'message' => 'Data Not Found [Mapping] ', 'val' => $mdl->getErrors());
+                    }
+                    $mdldtl->id_acc = $hasil->id_acc;
+                    if ($hasil->dk == 'D') {
+                        $mdldtl->debet = $dtl[$i][1];
+                        $mdldtl->kredit = 0;
+                    } else {
+                        $mdldtl->debet = 0;
+                        $mdldtl->kredit = $dtl[$i][1];
+                    }
+                    if (!$mdldtl->save())
+                        return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdldtl->getErrors());
+                    //$i++;
+                }
+            }
+
             return array('type' => 'S', 'message' => 'Successfully create receipt, doc.number:' . $mdl->id_glheader, 'val' => $mdl);
         }else
-            return array('type' => 'E', 'message' => 'Error on Insert 4', 'val' => $mdl->getErrors());
+            return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdl->getErrors());
     }
 
     public function updateGL($hdr = array(), $dtl = array()) {
@@ -188,6 +188,77 @@ class fico extends CComponent {
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
         return CHtml::listData($results, 'id_acc', 'nm_acc', 'parent');
+    }
+
+    public function tutupBuku($param=array()) {
+        $sql = "Select
+  account.id_acc As id_acc,
+  account.cd_acc As cd_acc,
+  account.nm_acc As nm_acc,
+  Coalesce((Select
+    gl_periode.saldo As gl_periode_saldo
+  From
+    gl_periode gl_periode
+  Where
+    gl_periode.bulan = " . (($param['bulan'] - 1) == 0 ? 12 : ($param['bulan'] - 1)) . " And
+    gl_periode.tahun = " . (($param['bulan'] - 1) == 0 ? ($param['tahun']) - 1 : ($param['tahun'])) . " And
+    gl_periode.id_acc = account.id_acc And
+    gl_periode.id_branch = " . $param['id_branch'] . " And
+    gl_periode.id_orgn = " . $param['id_orgn'] . "), 0) As saldo,
+  Coalesce((Select
+    Sum(gl_detail.debet) As debet
+  From
+    gl_header gl_header Inner Join
+    gl_detail gl_detail On gl_header.id_glheader = gl_detail.id_glheader
+  Where
+    account.id_acc = gl_detail.id_acc And
+    Extract(Month From gl_header.tgl_trans) = " . $param['bulan'] . " And
+    Extract(Year From gl_header.tgl_trans) = " . $param['tahun'] . " And
+    gl_header.id_branch = " . $param['id_branch'] . " And
+    gl_header.id_orgn = " . $param['id_orgn'] . "), 0) As debet,
+  Coalesce((Select
+    Sum(gl_detail.kredit) As kredit
+  From
+    gl_header gl_header Inner Join
+    gl_detail gl_detail On gl_header.id_glheader = gl_detail.id_glheader
+  Where
+    account.id_acc = gl_detail.id_acc And
+    Extract(Month From gl_header.tgl_trans) = " . $param['bulan'] . " And
+    Extract(Year From gl_header.tgl_trans) = " . $param['tahun'] . " And
+    gl_header.id_branch = " . $param['id_branch'] . " And
+    gl_header.id_orgn = " . $param['id_orgn'] . "),0 ) As kredit,
+    Substr(account.cd_acc, 1, 1) as grup
+From
+  account account
+Where
+  account.level = 3 And
+  Substr(account.cd_acc, 1, 1) In ('1', '2', '3')
+Order By
+  account.cd_acc";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($sql);
+        $results = $command->queryAll();
+        $count = count($results);
+        $saldo = 0;
+        foreach ($results as $value) {
+            $mdldtl = new GlPeriode;
+            $mdldtl->bulan = $param['bulan'];
+            $mdldtl->tahun = $param['tahun'];
+            $mdldtl->id_branch = $param['id_branch'];
+            $mdldtl->id_orgn = $param['id_orgn'];
+            $mdldtl->id_acc = $value['id_acc'];
+            if ($value['grup'] == 1) {
+                $saldo = $value['saldo'] + $value['debet'] - $value['kredit'];
+            } elseif ($value['grup'] == 2) {
+                $saldo = $value['saldo'] - $value['debet'] + $value['kredit'];
+            } elseif ($value['grup'] == 3) {
+                $saldo = $value['saldo'] - $value['debet'] + $value['kredit'];
+            }
+            $mdldtl->saldo = $saldo;
+            if (!$mdldtl->save())
+                return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdldtl->getErrors());
+        }
+        return array('type' => 'S', 'message' => 'Successfully create receipt, doc.number:', 'val' => $mdldtl);
     }
 
 }
