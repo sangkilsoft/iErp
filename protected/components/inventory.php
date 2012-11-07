@@ -16,8 +16,15 @@ class inventory extends CComponent {
                 $mdldtl = new GreceiptLine;
                 $mdldtl->id_receipt = $mdl->id_receipt;
                 $mdldtl->id_product = $dtl['id_product'][$i];
-                $mdldtl->qty_trans = $dtl['qty_trans'][$i];
                 $mdldtl->id_uoms = $dtl['id_uoms'][$i];
+                
+                $mdldtl->qty_trans = $dtl['qty_trans'][$i];
+                $mdldtl->value_trans = $dtl['value_trans'][$i];
+                $mdldtl->percent_tax = $dtl['percent_tax'][$i];
+                $mdldtl->value_tax = ($dtl['percent_tax'][$i] / 100) * $dtl['value_trans'][$i];
+
+                $mdldtl->value_disc = $dtl['value_disc'][$i];
+                $mdldtl->percent_disc = $dtl['value_disc'][$i] / $dtl['value_trans'][$i] * 100;
 
 //                $mdldtl->create_by = 0; //Yii::app()->user->Id;
 //                $mdldtl->create_date = new CDbExpression('NOW()');
@@ -33,6 +40,7 @@ class inventory extends CComponent {
             return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdl->getErrors());
     }
 
+    /*
     public function updateReceipt($hdr = array(), $dtl = array()) {
         $mdl = new GoodReceipt;
         $mdl = $mdl->model()->findAllByPk($hdr['id_receipt']);
@@ -56,6 +64,8 @@ class inventory extends CComponent {
         }else
             return array('type' => 'E', 'message' => 'Error on Insert', 'val' => $mdl->getErrors());
     }
+     * 
+     */
 
     public function getReceipt($hdr = array(), $dtl = array()) {
         
