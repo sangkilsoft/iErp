@@ -1,0 +1,356 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.4
+-- Dumped by pg_dump version 9.1.4
+-- Started on 2012-11-07 21:52:06
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+SET default_tablespace = '';
+
+SET default_with_oids = false;
+
+--
+-- TOC entry 236 (class 1259 OID 18570)
+-- Dependencies: 5
+-- Name: gl_detail; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE gl_detail (
+    id_gldetail integer NOT NULL,
+    id_glheader integer NOT NULL,
+    id_acc integer NOT NULL,
+    debet double precision NOT NULL,
+    kredit double precision NOT NULL,
+    create_date timestamp without time zone NOT NULL,
+    update_by character varying(10) NOT NULL,
+    create_by character varying(10) NOT NULL,
+    update_date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.gl_detail OWNER TO postgres;
+
+--
+-- TOC entry 235 (class 1259 OID 18568)
+-- Dependencies: 5 236
+-- Name: gl_detail_id_gldetail_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE gl_detail_id_gldetail_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.gl_detail_id_gldetail_seq OWNER TO postgres;
+
+--
+-- TOC entry 2053 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: gl_detail_id_gldetail_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE gl_detail_id_gldetail_seq OWNED BY gl_detail.id_gldetail;
+
+
+--
+-- TOC entry 2054 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: gl_detail_id_gldetail_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_detail_id_gldetail_seq', 13, true);
+
+
+--
+-- TOC entry 226 (class 1259 OID 18473)
+-- Dependencies: 5
+-- Name: gl_header; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE gl_header (
+    id_glheader integer NOT NULL,
+    id_branch integer NOT NULL,
+    id_orgn integer NOT NULL,
+    refnum character varying(13) NOT NULL,
+    tgl_trans date NOT NULL,
+    trans_type character varying(32) NOT NULL,
+    description character varying(128) NOT NULL,
+    update_date timestamp without time zone NOT NULL,
+    create_date timestamp without time zone NOT NULL,
+    create_by character varying(10) NOT NULL,
+    update_by character varying(10) NOT NULL,
+    cd_gl_header character varying(13)
+);
+
+
+ALTER TABLE public.gl_header OWNER TO postgres;
+
+--
+-- TOC entry 225 (class 1259 OID 18471)
+-- Dependencies: 226 5
+-- Name: gl_header_id_glheader_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE gl_header_id_glheader_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.gl_header_id_glheader_seq OWNER TO postgres;
+
+--
+-- TOC entry 2055 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: gl_header_id_glheader_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE gl_header_id_glheader_seq OWNED BY gl_header.id_glheader;
+
+
+--
+-- TOC entry 2056 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: gl_header_id_glheader_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_header_id_glheader_seq', 46, true);
+
+
+--
+-- TOC entry 230 (class 1259 OID 18490)
+-- Dependencies: 5
+-- Name: gl_periode; Type: TABLE; Schema: public; Owner: postgres; Tablespace: 
+--
+
+CREATE TABLE gl_periode (
+    id_glperiode integer NOT NULL,
+    bulan integer NOT NULL,
+    tahun integer NOT NULL,
+    id_branch integer NOT NULL,
+    id_orgn integer NOT NULL,
+    id_acc integer NOT NULL,
+    saldo double precision NOT NULL,
+    create_date timestamp without time zone NOT NULL,
+    update_by character varying(10) NOT NULL,
+    create_by character varying(10) NOT NULL,
+    update_date timestamp without time zone NOT NULL
+);
+
+
+ALTER TABLE public.gl_periode OWNER TO postgres;
+
+--
+-- TOC entry 229 (class 1259 OID 18488)
+-- Dependencies: 5 230
+-- Name: gl_periode_id_glperiode_seq; Type: SEQUENCE; Schema: public; Owner: postgres
+--
+
+CREATE SEQUENCE gl_periode_id_glperiode_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE public.gl_periode_id_glperiode_seq OWNER TO postgres;
+
+--
+-- TOC entry 2057 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: gl_periode_id_glperiode_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: postgres
+--
+
+ALTER SEQUENCE gl_periode_id_glperiode_seq OWNED BY gl_periode.id_glperiode;
+
+
+--
+-- TOC entry 2058 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: gl_periode_id_glperiode_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_periode_id_glperiode_seq', 98, true);
+
+
+--
+-- TOC entry 2036 (class 2604 OID 18573)
+-- Dependencies: 235 236 236
+-- Name: id_gldetail; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_detail ALTER COLUMN id_gldetail SET DEFAULT nextval('gl_detail_id_gldetail_seq'::regclass);
+
+
+--
+-- TOC entry 2034 (class 2604 OID 18476)
+-- Dependencies: 225 226 226
+-- Name: id_glheader; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_header ALTER COLUMN id_glheader SET DEFAULT nextval('gl_header_id_glheader_seq'::regclass);
+
+
+--
+-- TOC entry 2035 (class 2604 OID 18493)
+-- Dependencies: 229 230 230
+-- Name: id_glperiode; Type: DEFAULT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_periode ALTER COLUMN id_glperiode SET DEFAULT nextval('gl_periode_id_glperiode_seq'::regclass);
+
+
+--
+-- TOC entry 2050 (class 0 OID 18570)
+-- Dependencies: 236
+-- Data for Name: gl_detail; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (17, 13, 16, 10000000, 0, '2012-10-15 15:19:43.617', 'admin', 'admin', '2012-10-15 15:19:43.617');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (18, 13, 13, 0, 10000000, '2012-10-15 15:19:43.617', 'admin', 'admin', '2012-10-15 15:19:43.617');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (19, 14, 16, 2000000, 0, '2012-10-15 15:21:20.598', 'admin', 'admin', '2012-10-15 15:21:20.598');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (20, 14, 13, 0, 2000000, '2012-10-15 15:21:20.598', 'admin', 'admin', '2012-10-15 15:21:20.598');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (21, 15, 16, 200000, 0, '2012-10-15 15:22:50.408', 'admin', 'admin', '2012-10-15 15:22:50.408');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (22, 15, 9, 0, 200000, '2012-10-15 15:22:50.408', 'admin', 'admin', '2012-10-15 15:22:50.408');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (23, 16, 13, 7500000, 0, '2012-10-15 15:24:58.394', 'admin', 'admin', '2012-10-15 15:24:58.394');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (24, 16, 16, 0, 150000, '2012-10-15 15:24:58.394', 'admin', 'admin', '2012-10-15 15:24:58.394');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (25, 16, 9, 0, 7350000, '2012-10-15 15:24:58.394', 'admin', 'admin', '2012-10-15 15:24:58.394');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (26, 17, 16, 6000000, 0, '2012-10-15 15:42:29.346', 'admin', 'admin', '2012-10-15 15:42:29.346');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (27, 17, 16, 0, 150000, '2012-10-15 15:42:29.346', 'admin', 'admin', '2012-10-15 15:42:29.346');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (28, 17, 9, 0, 5850000, '2012-10-15 15:42:29.346', 'admin', 'admin', '2012-10-15 15:42:29.346');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (29, 19, 13, 100000, 0, '2012-10-15 15:46:57.034', 'admin', 'admin', '2012-10-15 15:46:57.034');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (30, 19, 16, 0, 100000, '2012-10-15 15:46:57.034', 'admin', 'admin', '2012-10-15 15:46:57.034');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (31, 20, 13, 100000, 0, '2012-10-15 15:50:48.412', 'admin', 'admin', '2012-10-15 15:50:48.412');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (32, 20, 16, 0, 100000, '2012-10-15 15:50:48.412', 'admin', 'admin', '2012-10-15 15:50:48.412');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (1, 43, 9, 30000000, 0, '2012-10-21 12:00:52.135', 'admin', 'admin', '2012-10-21 12:00:52.135');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (2, 43, 17, 20000000, 0, '2012-10-21 12:00:52.135', 'admin', 'admin', '2012-10-21 12:00:52.135');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (3, 43, 19, 0, 50000000, '2012-10-21 12:00:52.135', 'admin', 'admin', '2012-10-21 12:00:52.135');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (4, 43, 24, 30000000, 0, '2012-10-21 12:00:52.135', 'admin', 'admin', '2012-10-21 12:00:52.135');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (5, 43, 16, 0, 30000000, '2012-10-21 12:00:52.135', 'admin', 'admin', '2012-10-21 12:00:52.135');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (6, 45, 9, 30000000, 0, '2012-10-21 13:43:24.878', 'admin', 'admin', '2012-10-21 13:43:24.878');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (7, 45, 17, 20000000, 0, '2012-10-21 13:43:24.878', 'admin', 'admin', '2012-10-21 13:43:24.878');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (8, 45, 19, 0, 50000000, '2012-10-21 13:43:24.878', 'admin', 'admin', '2012-10-21 13:43:24.878');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (9, 46, 9, 30000000, 0, '2012-10-21 14:13:48.048', 'admin', 'admin', '2012-10-21 14:13:48.048');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (10, 46, 17, 20000000, 0, '2012-10-21 14:13:48.048', 'admin', 'admin', '2012-10-21 14:13:48.048');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (11, 46, 19, 0, 50000000, '2012-10-21 14:13:48.048', 'admin', 'admin', '2012-10-21 14:13:48.048');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (12, 46, 24, 30000000, 0, '2012-10-21 14:13:48.048', 'admin', 'admin', '2012-10-21 14:13:48.048');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (13, 46, 16, 0, 30000000, '2012-10-21 14:13:48.048', 'admin', 'admin', '2012-10-21 14:13:48.048');
+
+
+--
+-- TOC entry 2048 (class 0 OID 18473)
+-- Dependencies: 226
+-- Data for Name: gl_header; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (13, 1, 2, 'F002', '2012-10-02', 'PEMBELIAN', 'Membeli 5 HP merk B Kredit', '2012-10-15 15:19:43.617', '2012-10-15 15:19:43.617', 'admin', 'admin', '13');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (14, 1, 2, 'F003', '2012-10-03', 'PEMBELIAN', 'Membeli 20 pulsa C Kredit', '2012-10-15 15:21:20.598', '2012-10-15 15:21:20.598', 'admin', 'admin', '14');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (15, 1, 2, '-', '2012-10-04', 'BIAYA', 'Biaya angkut pembelian HP ', '2012-10-15 15:22:50.408', '2012-10-15 15:22:50.408', 'admin', 'admin', '15');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (16, 1, 2, '-', '2012-10-05', 'HUTANG', 'Melunasi utang dan Dapat Potongan', '2012-10-15 15:24:58.394', '2012-10-15 15:24:58.394', 'admin', 'admin', '16');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (17, 1, 2, '-', '2012-10-06', 'PEMBELIAN', 'Membeli tunai 15 HP bekas merek D dari toko HP lain', '2012-10-15 15:42:29.346', '2012-10-15 15:42:29.346', 'admin', 'admin', '17');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (19, 1, 2, '-', '2012-10-07', 'PENGURANGAN', 'Meminta pengurangan harga Rp100.000', '2012-10-15 15:46:57.034', '2012-10-15 15:46:57.034', 'admin', 'admin', '19');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (20, 1, 2, '-', '2012-10-08', 'PENGURANGAN', 'Meminta pengurangan harga Rp100.000', '2012-10-15 15:50:48.412', '2012-10-15 15:50:48.412', 'admin', 'admin', '20');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (43, 1, 2, 'F0005', '2012-10-21', 'PENJUALAN', 'Test', '2012-10-21 12:00:52.135', '2012-10-21 12:00:52.135', 'admin', 'admin', '43');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (45, 1, 2, 'F0006', '2012-10-21', 'PENJUALAN', 'Test1', '2012-10-21 13:43:24.878', '2012-10-21 13:43:24.878', 'admin', 'admin', '45');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (46, 1, 2, 'F0007', '2012-10-21', 'PENJUALAN', 'Test2', '2012-10-21 14:13:48.048', '2012-10-21 14:13:48.048', 'admin', 'admin', '46');
+
+
+--
+-- TOC entry 2049 (class 0 OID 18490)
+-- Dependencies: 230
+-- Data for Name: gl_periode; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2040 (class 2606 OID 18589)
+-- Dependencies: 230 230 230 230 230 230
+-- Name: gl_periode_bulan_tahun_id_branch_id_orgn_id_acc_key; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY gl_periode
+    ADD CONSTRAINT gl_periode_bulan_tahun_id_branch_id_orgn_id_acc_key UNIQUE (bulan, tahun, id_branch, id_orgn, id_acc);
+
+
+--
+-- TOC entry 2042 (class 2606 OID 18495)
+-- Dependencies: 230 230
+-- Name: gl_periode_pk; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY gl_periode
+    ADD CONSTRAINT gl_periode_pk PRIMARY KEY (id_glperiode);
+
+
+--
+-- TOC entry 2044 (class 2606 OID 18575)
+-- Dependencies: 236 236
+-- Name: id_gldetail; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY gl_detail
+    ADD CONSTRAINT id_gldetail PRIMARY KEY (id_gldetail);
+
+
+--
+-- TOC entry 2038 (class 2606 OID 18478)
+-- Dependencies: 226 226
+-- Name: id_glheader; Type: CONSTRAINT; Schema: public; Owner: postgres; Tablespace: 
+--
+
+ALTER TABLE ONLY gl_header
+    ADD CONSTRAINT id_glheader PRIMARY KEY (id_glheader);
+
+
+--
+-- TOC entry 2047 (class 2606 OID 18581)
+-- Dependencies: 236 228
+-- Name: acc_acc_detail_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_detail
+    ADD CONSTRAINT acc_acc_detail_fk FOREIGN KEY (id_acc) REFERENCES account(id_acc);
+
+
+--
+-- TOC entry 2046 (class 2606 OID 18576)
+-- Dependencies: 236 226 2037
+-- Name: acc_header_acc_detail_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_detail
+    ADD CONSTRAINT acc_header_acc_detail_fk FOREIGN KEY (id_glheader) REFERENCES gl_header(id_glheader);
+
+
+--
+-- TOC entry 2045 (class 2606 OID 18514)
+-- Dependencies: 228 230
+-- Name: account_saldo_periode_fk; Type: FK CONSTRAINT; Schema: public; Owner: postgres
+--
+
+ALTER TABLE ONLY gl_periode
+    ADD CONSTRAINT account_saldo_periode_fk FOREIGN KEY (id_acc) REFERENCES account(id_acc);
+
+
+-- Completed on 2012-11-07 21:52:07
+
+--
+-- PostgreSQL database dump complete
+--
+
