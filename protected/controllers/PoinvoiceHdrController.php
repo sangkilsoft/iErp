@@ -1,6 +1,6 @@
 <?php
 
-class GreceiptHdrController extends Controller {
+class PoinvoiceHdrController extends Controller {
 
     /**
      * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -30,7 +30,7 @@ class GreceiptHdrController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update'),
+                'actions' => array('create', 'update', 'ajaxFillTree'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -58,39 +58,19 @@ class GreceiptHdrController extends Controller {
      * If creation is successful, the browser will be redirected to the 'view' page.
      */
     public function actionCreate() {
-        $model = new GreceiptHdr;
-        $modeldtl = new GreceiptLine;
+        $model = new PoinvoiceHdr;
 
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
-        if (isset($_GET['msg']) && $_GET['msg'] == 'search' && !isset($_POST['yt1'])) {
-            if (isset($_POST['GreceiptHdr'])) {
-                print_r($_POST['GreceiptHdr']);
-//                $registered = $model->model()->exists('do_num=:do_num', array(':do_num' => $_POST['PodeliveryHdr']['do_num'])) ? true : false;
-//                if ($registered) {
-//                    $model = $model->model()->find('do_num=:do_num', array(':do_num' => $_POST['PodeliveryHdr']['do_num']));
-//                    $this->actionView($model->id_delivery);
-//                    return;
-//                }
-            }
-            //create new delivery
-        } elseif (isset($_POST['GreceiptHdr'])&& isset($_POST['yt1'])) {
-            $model->attributes = $_POST['GreceiptHdr'];
-            $modeldtl->id_product = $_POST['items']['id_product'];
-            $modeldtl->product = $_POST['items']['product'];
-            $modeldtl->value_disc = $_POST['items']['value_disc'];
 
-            $modeldtl->id_uoms = $_POST['items']['id_uoms'];
-            $modeldtl->qty_trans = $_POST['items']['qty_trans'];
-            $modeldtl->value_trans = $_POST['items']['value_trans'];
-            $modeldtl->percent_tax = $_POST['items']['ppn'];
-            $modeldtl->value_tax = 0;
+        if (isset($_POST['PoinvoiceHdr'])) {
+            $model->attributes = $_POST['PoinvoiceHdr'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_receipt));
+                $this->redirect(array('view', 'id' => $model->id_invoice));
         }
 
         $this->render('create', array(
-            'model' => $model, 'modeldtl' => $modeldtl
+            'model' => $model,
         ));
     }
 
@@ -105,10 +85,10 @@ class GreceiptHdrController extends Controller {
         // Uncomment the following line if AJAX validation is needed
         // $this->performAjaxValidation($model);
 
-        if (isset($_POST['GreceiptHdr'])) {
-            $model->attributes = $_POST['GreceiptHdr'];
+        if (isset($_POST['PoinvoiceHdr'])) {
+            $model->attributes = $_POST['PoinvoiceHdr'];
             if ($model->save())
-                $this->redirect(array('view', 'id' => $model->id_receipt));
+                $this->redirect(array('view', 'id' => $model->id_invoice));
         }
 
         $this->render('update', array(
@@ -133,7 +113,7 @@ class GreceiptHdrController extends Controller {
      * Lists all models.
      */
     public function actionIndex() {
-        $dataProvider = new CActiveDataProvider('GreceiptHdr');
+        $dataProvider = new CActiveDataProvider('PoinvoiceHdr');
         $this->render('index', array(
             'dataProvider' => $dataProvider,
         ));
@@ -143,10 +123,10 @@ class GreceiptHdrController extends Controller {
      * Manages all models.
      */
     public function actionAdmin() {
-        $model = new GreceiptHdr('search');
+        $model = new PoinvoiceHdr('search');
         $model->unsetAttributes();  // clear any default values
-        if (isset($_GET['GreceiptHdr']))
-            $model->attributes = $_GET['GreceiptHdr'];
+        if (isset($_GET['PoinvoiceHdr']))
+            $model->attributes = $_GET['PoinvoiceHdr'];
 
         $this->render('admin', array(
             'model' => $model,
@@ -159,7 +139,7 @@ class GreceiptHdrController extends Controller {
      * @param integer the ID of the model to be loaded
      */
     public function loadModel($id) {
-        $model = GreceiptHdr::model()->findByPk($id);
+        $model = PoinvoiceHdr::model()->findByPk($id);
         if ($model === null)
             throw new CHttpException(404, 'The requested page does not exist.');
         return $model;
@@ -170,10 +150,32 @@ class GreceiptHdrController extends Controller {
      * @param CModel the model to be validated
      */
     protected function performAjaxValidation($model) {
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'greceipt-hdr-form') {
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'poinvoice-hdr-form') {
             echo CActiveForm::validate($model);
             Yii::app()->end();
         }
+    }
+
+    public function actionAjaxFillTree() {
+        Yii::import('application.extensions.MTreeView.MTreeView');
+//        if (!Yii::app()->request->isAjaxRequest) {
+//            exit();
+//        }
+        $parentId = 0;
+        if (isset($_GET['root']) && $_GET['root'] !== 'source') {
+            $parentId = (int) $_GET['root'];
+        }
+        $sql = "SELECT m1.id, m1.title AS text, m2.id IS NOT NULL AS hasChildren "
+                . "FROM treepoinv AS m1 LEFT JOIN treepoinv AS m2 ON m1.id=m2.parent_id "
+                . "WHERE m1.parent_id = $parentId "
+                . "GROUP BY m1.id, m1.title, m2.id, m1.position ORDER BY m1.position ASC";
+        $req = Yii::app()->db->createCommand($sql);
+        $children = $req->queryAll();
+
+        echo str_replace(
+                '"hasChildren":"0"', '"hasChildren":false', MTreeView::saveDataAsJson($children)
+        );
+        exit();
     }
 
 }

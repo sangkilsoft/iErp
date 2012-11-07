@@ -120,13 +120,7 @@ class PodeliveryHdrController extends Controller {
             $model->attributes = $_POST['PodeliveryHdr'];
             $model->id_orgn = Yii::app()->user->orgn;
             $model->id_branch = Yii::app()->user->branch;
-
-            $modelRcp->attributes = $_POST['GreceiptHdr'];
-            $modelRcp->id_orgn = Yii::app()->user->orgn;
-            $modelRcp->id_branch = Yii::app()->user->branch;
-            $modelRcp->receipt_date = new CDbExpression('NOW()');
-
-            //$modelDtl->id_delivery = -1;
+            
             $modelDtl->id_product = $_POST['items']['id_product'];
             $modelDtl->product = $_POST['items']['product'];
             $modelDtl->value_disc = $_POST['items']['value_disc'];
@@ -135,7 +129,12 @@ class PodeliveryHdrController extends Controller {
             $modelDtl->qty_trans = $_POST['items']['qty_trans'];
             $modelDtl->value_trans = $_POST['items']['value_trans'];
             $modelDtl->percent_tax = $_POST['items']['ppn'];
-            $modelDtl->value_tax = 0;
+            $modelDtl->value_tax = 0;            
+
+            $modelRcp->attributes = $_POST['GreceiptHdr'];
+            $modelRcp->id_orgn = Yii::app()->user->orgn;
+            $modelRcp->id_branch = Yii::app()->user->branch;
+            $modelRcp->receipt_date = new CDbExpression('NOW()');
 
 //            $modelDtl->create_by = 0; //Yii::app()->user->Id;
 //            $modelDtl->create_date = new CDbExpression('NOW()');

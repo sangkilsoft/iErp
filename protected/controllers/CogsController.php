@@ -1,6 +1,6 @@
 <?php
 
-class CustomersController extends Controller
+class CogsController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -62,16 +62,16 @@ class CustomersController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new Customers;
+		$model=new Cogs;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Customers']))
+		if(isset($_POST['Cogs']))
 		{
-			$model->attributes=$_POST['Customers'];
+			$model->attributes=$_POST['Cogs'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_cogs));
 		}
 
 		$this->render('create',array(
@@ -91,11 +91,11 @@ class CustomersController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['Customers']))
+		if(isset($_POST['Cogs']))
 		{
-			$model->attributes=$_POST['Customers'];
+			$model->attributes=$_POST['Cogs'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_cogs));
 		}
 
 		$this->render('update',array(
@@ -122,7 +122,7 @@ class CustomersController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('Customers');
+		$dataProvider=new CActiveDataProvider('Cogs');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -133,10 +133,10 @@ class CustomersController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new Customers('search');
+		$model=new Cogs('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['Customers']))
-			$model->attributes=$_GET['Customers'];
+		if(isset($_GET['Cogs']))
+			$model->attributes=$_GET['Cogs'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -150,7 +150,7 @@ class CustomersController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=Customers::model()->findByPk($id);
+		$model=Cogs::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -162,7 +162,7 @@ class CustomersController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='customers-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='cogs-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();
