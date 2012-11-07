@@ -1,28 +1,24 @@
 <?php
 
 /**
- * This is the model class for table "batch".
+ * This is the model class for table "sal_request".
  *
- * The followings are the available columns in table 'batch':
- * @property integer $id_line
- * @property string $batch_num
- * @property string $date_expire
- * @property double $qty_receipt
- * @property double $qty_issued
- * @property string $create_date
- * @property string $update_date
+ * The followings are the available columns in table 'sal_request':
+ * @property integer $id_srequest
  * @property integer $create_by
+ * @property string $create_date
  * @property integer $update_by
+ * @property string $update_date
  *
  * The followings are the available model relations:
- * @property GreceiptLine $idLine
+ * @property SrequestLine[] $srequestLines
  */
-class Batch extends CActiveRecord
+class SalRequest extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
 	 * @param string $className active record class name.
-	 * @return Batch the static model class
+	 * @return SalRequest the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -34,7 +30,7 @@ class Batch extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'batch';
+		return 'sal_request';
 	}
 
 	/**
@@ -45,14 +41,11 @@ class Batch extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('id_line, batch_num, create_date, update_date, create_by, update_by', 'required'),
-			array('id_line, create_by, update_by', 'numerical', 'integerOnly'=>true),
-			array('qty_receipt, qty_issued', 'numerical'),
-			array('batch_num', 'length', 'max'=>13),
-			array('date_expire', 'safe'),
+			array('id_srequest, create_by, create_date, update_by, update_date', 'required'),
+			array('id_srequest, create_by, update_by', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_line, batch_num, date_expire, qty_receipt, qty_issued, create_date, update_date, create_by, update_by', 'safe', 'on'=>'search'),
+			array('id_srequest, create_by, create_date, update_by, update_date', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -64,7 +57,7 @@ class Batch extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'idLine' => array(self::BELONGS_TO, 'GreceiptLine', 'id_line'),
+			'srequestLines' => array(self::HAS_MANY, 'SrequestLine', 'id_srequest'),
 		);
 	}
 
@@ -74,15 +67,11 @@ class Batch extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_line' => 'Id Line',
-			'batch_num' => 'Batch Num',
-			'date_expire' => 'Date Expire',
-			'qty_receipt' => 'Qty Receipt',
-			'qty_issued' => 'Qty Issued',
-			'create_date' => 'Create Date',
-			'update_date' => 'Update Date',
+			'id_srequest' => 'Id Srequest',
 			'create_by' => 'Create By',
+			'create_date' => 'Create Date',
 			'update_by' => 'Update By',
+			'update_date' => 'Update Date',
 		);
 	}
 
@@ -97,15 +86,11 @@ class Batch extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_line',$this->id_line);
-		$criteria->compare('batch_num',$this->batch_num,true);
-		$criteria->compare('date_expire',$this->date_expire,true);
-		$criteria->compare('qty_receipt',$this->qty_receipt);
-		$criteria->compare('qty_issued',$this->qty_issued);
-		$criteria->compare('create_date',$this->create_date,true);
-		$criteria->compare('update_date',$this->update_date,true);
+		$criteria->compare('id_srequest',$this->id_srequest);
 		$criteria->compare('create_by',$this->create_by);
+		$criteria->compare('create_date',$this->create_date,true);
 		$criteria->compare('update_by',$this->update_by);
+		$criteria->compare('update_date',$this->update_date,true);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

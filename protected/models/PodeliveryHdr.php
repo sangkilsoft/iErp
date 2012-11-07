@@ -69,7 +69,8 @@ class PodeliveryHdr extends CActiveRecord {
         return array(
             'podeliveryLines' => array(self::HAS_MANY, 'PodeliveryLine', 'id_delivery'),
             'poinvoiceHdrs' => array(self::HAS_MANY, 'PoinvoiceHdr', 'id_delivery'),
-            'dosuppliers' => array(self::BELONGS_TO, 'Suppliers', 'id_supplier'),
+            'dosuppliers' => array(self::BELONGS_TO, 'Suppliers', 'id_supplier'),            
+            'orgtodisplay' => array(self::BELONGS_TO, 'Organization', 'id_orgn'),
         );
     }
 

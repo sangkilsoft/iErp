@@ -1,22 +1,21 @@
 <?php
 
 /**
- * This is the model class for table "customer_type".
+ * This is the model class for table "srequest_line".
  *
- * The followings are the available columns in table 'customer_type':
- * @property integer $id_ctype
- * @property string $cd_ctype
- * @property integer $create_by
- * @property string $nm_ctype
- * @property string $create_date
- * @property string $update_date
- * @property integer $update_by
+ * The followings are the available columns in table 'srequest_line':
+ * @property string $id_line
+ * @property integer $id_srequest
+ *
+ * The followings are the available model relations:
+ * @property SalRequest $idSrequest
  */
-class CustomerType extends CActiveRecord
+class SrequestLine extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
-	 * @return CustomerType the static model class
+	 * @param string $className active record class name.
+	 * @return SrequestLine the static model class
 	 */
 	public static function model($className=__CLASS__)
 	{
@@ -28,7 +27,7 @@ class CustomerType extends CActiveRecord
 	 */
 	public function tableName()
 	{
-		return 'customer_type';
+		return 'srequest_line';
 	}
 
 	/**
@@ -39,13 +38,11 @@ class CustomerType extends CActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('cd_ctype, create_by, nm_ctype, create_date, update_date, update_by', 'required'),
-			array('create_by, update_by', 'numerical', 'integerOnly'=>true),
-			array('cd_ctype', 'length', 'max'=>4),
-			array('nm_ctype', 'length', 'max'=>32),
+			array('id_line, id_srequest', 'required'),
+			array('id_srequest', 'numerical', 'integerOnly'=>true),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_ctype, cd_ctype, create_by, nm_ctype, create_date, update_date, update_by', 'safe', 'on'=>'search'),
+			array('id_line, id_srequest', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -57,6 +54,7 @@ class CustomerType extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idSrequest' => array(self::BELONGS_TO, 'SalRequest', 'id_srequest'),
 		);
 	}
 
@@ -66,13 +64,8 @@ class CustomerType extends CActiveRecord
 	public function attributeLabels()
 	{
 		return array(
-			'id_ctype' => 'Id Ctype',
-			'cd_ctype' => 'Cd Ctype',
-			'create_by' => 'Create By',
-			'nm_ctype' => 'Nm Ctype',
-			'create_date' => 'Create Date',
-			'update_date' => 'Update Date',
-			'update_by' => 'Update By',
+			'id_line' => 'Id Line',
+			'id_srequest' => 'Id Srequest',
 		);
 	}
 
@@ -87,13 +80,8 @@ class CustomerType extends CActiveRecord
 
 		$criteria=new CDbCriteria;
 
-		$criteria->compare('id_ctype',$this->id_ctype);
-		$criteria->compare('cd_ctype',$this->cd_ctype,true);
-		$criteria->compare('create_by',$this->create_by);
-		$criteria->compare('nm_ctype',$this->nm_ctype,true);
-		$criteria->compare('create_date',$this->create_date,true);
-		$criteria->compare('update_date',$this->update_date,true);
-		$criteria->compare('update_by',$this->update_by);
+		$criteria->compare('id_line',$this->id_line,true);
+		$criteria->compare('id_srequest',$this->id_srequest);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

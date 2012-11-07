@@ -9,7 +9,6 @@
  * @property string $nm_cust
  * @property integer $id_ctype
  * @property integer $id_cclass
- * @property string $addrs
  * @property string $contact_name
  * @property string $contact_number
  * @property integer $status
@@ -17,11 +16,20 @@
  * @property string $update_date
  * @property integer $create_by
  * @property integer $update_by
+ *
+ * The followings are the available model relations:
+ * @property CustomerClass $idCclass
+ * @property CustomerType $idCtype
+ * @property CustomerDetail $customerDetail
+ * @property SalRequest[] $salRequests
+ * @property SalOrder[] $salOrders
+ * @property CustomerLimitation $customerLimitation
  */
 class Customers extends CActiveRecord
 {
 	/**
 	 * Returns the static model of the specified AR class.
+	 * @param string $className active record class name.
 	 * @return Customers the static model class
 	 */
 	public static function model($className=__CLASS__)
@@ -49,11 +57,11 @@ class Customers extends CActiveRecord
 			array('id_ctype, id_cclass, status, create_by, update_by', 'numerical', 'integerOnly'=>true),
 			array('cd_cust', 'length', 'max'=>4),
 			array('nm_cust', 'length', 'max'=>64),
-			array('addrs, contact_name', 'length', 'max'=>32),
+			array('contact_name', 'length', 'max'=>32),
 			array('contact_number', 'length', 'max'=>16),
 			// The following rule is used by search().
 			// Please remove those attributes that should not be searched.
-			array('id_customer, cd_cust, nm_cust, id_ctype, id_cclass, addrs, contact_name, contact_number, status, create_date, update_date, create_by, update_by', 'safe', 'on'=>'search'),
+			array('id_customer, cd_cust, nm_cust, id_ctype, id_cclass, contact_name, contact_number, status, create_date, update_date, create_by, update_by', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -65,6 +73,12 @@ class Customers extends CActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'idCclass' => array(self::BELONGS_TO, 'CustomerClass', 'id_cclass'),
+			'idCtype' => array(self::BELONGS_TO, 'CustomerType', 'id_ctype'),
+			'customerDetail' => array(self::HAS_ONE, 'CustomerDetail', 'id_customer'),
+			'salRequests' => array(self::HAS_MANY, 'SalRequest', 'id_customer'),
+			'salOrders' => array(self::HAS_MANY, 'SalOrder', 'id_customer'),
+			'customerLimitation' => array(self::HAS_ONE, 'CustomerLimitation', 'id_customer'),
 		);
 	}
 
@@ -79,7 +93,6 @@ class Customers extends CActiveRecord
 			'nm_cust' => 'Nm Cust',
 			'id_ctype' => 'Id Ctype',
 			'id_cclass' => 'Id Cclass',
-			'addrs' => 'Addrs',
 			'contact_name' => 'Contact Name',
 			'contact_number' => 'Contact Number',
 			'status' => 'Status',
@@ -106,7 +119,6 @@ class Customers extends CActiveRecord
 		$criteria->compare('nm_cust',$this->nm_cust,true);
 		$criteria->compare('id_ctype',$this->id_ctype);
 		$criteria->compare('id_cclass',$this->id_cclass);
-		$criteria->compare('addrs',$this->addrs,true);
 		$criteria->compare('contact_name',$this->contact_name,true);
 		$criteria->compare('contact_number',$this->contact_number,true);
 		$criteria->compare('status',$this->status);
