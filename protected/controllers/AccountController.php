@@ -13,7 +13,7 @@ class AccountController extends Controller {
      */
     public function filters() {
         return array(
-            'accessControl', // perform access control for CRUD operations
+                // 'accessControl', // perform access control for CRUD operations
         );
     }
 
@@ -29,7 +29,7 @@ class AccountController extends Controller {
                 'users' => array('*'),
             ),
             array('allow', // allow authenticated user to perform 'create' and 'update' actions
-                'actions' => array('create', 'update', 'CodeAccount','AjaxFillTree'),
+                'actions' => array('create', 'update', 'CodeAccount', 'AjaxFillTree'),
                 'users' => array('@'),
             ),
             array('allow', // allow admin user to perform 'admin' and 'delete' actions
@@ -142,26 +142,35 @@ class AccountController extends Controller {
         $datapost = (strlen(trim($_POST['idparent']) > 0)) ? $_POST['idparent'] : -1;
         $pjg = 0;
         $connection = Yii::app()->db;
-        $sql1 = "select cd_acc from account b where b.id_acc=$datapost";
+        $sql1 = "select cd_acc,level from account b where b.id_acc=$datapost";
         $command1 = $connection->createCommand($sql1);
         $results1 = $command1->queryAll();
-        $cd_acc = $results1[0]['cd_acc'];
+        $level= $results1[0]['level'];
+        $cd_acc = substr($results1[0]['cd_acc'],0,$level);  
         if ($datapost <> -1) {
-            $pjg = strlen($cd_acc) + 1;
+            $pjg = intval($level) + 1;
         }
         $sql = "SELECT 
                   max(account.cd_acc) as jum
                 FROM 
                   public.account
-                where left(cd_acc,$pjg-1)='$cd_acc' and length(cd_acc)=$pjg;
+                where left(cd_acc,$pjg-1)='$cd_acc' and level=$pjg;
                 ";
 
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
         if (($results[0]['jum']) != '') {
-            $hasil = intval($results[0]['jum']) + 1;
+            if(intval($level)==1){
+                $hasil = (intval(substr($results[0]['jum'],0,2) + 1)).'00';
+            }elseif(intval($level)==2){
+                $hasil = (intval($results[0]['jum']) + 1);
+            }
         } else {
-            $hasil = strval($cd_acc) . '1';
+            if(intval($level)==1){
+                $hasil = strval($cd_acc) . '100';
+            }elseif(intval($level)==2) {
+                $hasil = strval($cd_acc) . '10';
+            }
         }
         echo $hasil;
     }
@@ -189,65 +198,11 @@ class AccountController extends Controller {
         }
     }
 
-    public function actionAjaxFillTree() {
-        if (!Yii::app()->request->isAjaxRequest) {
-            exit();
-        }
-//        $parentId = "NULL";
-//        if (isset($_GET['root']) && $_GET['root'] !== 'source') {
-//            $parentId = (int) $_GET['root'];
-//        }
-        $sql = "SELECT 
-  a1.cd_acc as id, 
-  a1.nm_acc as text,
-  a2.cd_acc IS NOT NULL AS hasChildren
-FROM 
- account a1 left join account a2 on a1.id_acc = a2.parent
- order by 1";
-        $req = Yii::app()->db->createCommand($sql);
-        $children = $req->queryAll();
-
-        //$children = $this->createLinks($children);
-        $treedata=array();
-foreach($children as $child){
-     $options=array('href'=>'#','id'=>$child['id'],'class'=>'treenode');
-     $nodeText = CHtml::openTag('a', $options);
-      $nodeText.= $child['text'];
-      $nodeText.= CHtml::closeTag('a')."\n";
-      $child['text'] = $nodeText;
-      $treedata[]=$child;
-}
-        echo str_replace(
-                '"hasChildren":"0"', '"hasChildren":false', CTreeView::saveDataAsJson($treedata)
-        );
-        exit();
-    }
-
-    private function createLinks($children) {
-        $child = array();
-        $return = array();
-        foreach ($children AS $key => $value) {
-            $child['id'] = $value['id'];
-            $child['text'] = $value['text'];
-            $child['hasChildren'] = $value['hasChildren'];
-
-            if (strlen($value['url']) > 0) {
-                $child['text'] = $this->format($value['text'], $value['url'], Yii::app()->request->url);
-            }
-
-            $return[] = $child;
-            $child = array();
-        }
-
-        return $return;
-    }
-
-    private function format($text, $url, $icon = NULL) {
-        $img = '';
-        if (isset($icon))
-            $img = '<img src="' . app()->theme->baseUrl . '/images/icons/' . $icon . '">';
-
-        return sprintf('<span>%s</span>', CHtml::link(($img . ' ' . $text), app()->createUrl($url)));
+    public function actionShowPDF() {
+        $model = Account::model()->findAll();
+        $this->render('report', array(
+            'model' => $model,
+        ));
     }
 
 }
