@@ -181,7 +181,7 @@ class fico extends CComponent {
                   coa.acc_normal
                 FROM 
                   public.account coa
-                WHERE coa.level=3
+                WHERE coa.level=4
                 ORDER BY 2
                 ";
         $connection = Yii::app()->db;
@@ -189,6 +189,36 @@ class fico extends CComponent {
         $results = $command->queryAll();
         return CHtml::listData($results, 'id_acc', 'nm_acc', 'parent');
     }
+
+    public function acc_parent_list() {
+        $sql = "SELECT 
+                  acc.id_acc as parent, 
+                  concat(acc.cd_acc,'-',acc.nm_acc) as nm_acc,
+                  cd_acc
+                FROM 
+                  public.account acc
+                 order by 3;
+                ";
+        $connection = Yii::app()->db;
+        $command = $connection->createCommand($sql);
+        $results = $command->queryAll();
+        return CHtml::listData($results, 'parent', 'nm_acc');
+    }
+
+//    public function acc_subparent() {
+//        $sql = "SELECT 
+//                  acc.id_acc as id_parent, 
+//                  concat(acc.cd_acc,'-',acc.nm_acc) as nm_acc
+//                FROM 
+//                  public.account acc
+//                where level=2
+//                 order by 3;
+//                ";
+//        $connection = Yii::app()->db;
+//        $command = $connection->createCommand($sql);
+//        $results = $command->queryAll();
+//        return CHtml::listData($results, 'id_parent','nm_acc');
+//    }
 
     public function tutupBuku($param=array()) {
         $sql = "Select
@@ -261,6 +291,22 @@ Order By
         return array('type' => 'S', 'message' => 'Successfully create receipt, doc.number:', 'val' => $mdldtl);
     }
 
+    public function split($delimiter='', $data='') {
+        $temp = '';
+        $c=0;
+        for ($i = 0; $i < strlen($data) ; $i++) {
+            if (substr($data, $i, 1)!=$delimiter) {
+                $temp .= substr($data, $i, 1);
+            }else{
+                $t[$c]=$temp;
+                $c++;
+                $temp='';
+            }
+            if($i==(strlen($data)-1)){
+                $t[$c]=$temp;
+            }
+        }
+        return $t;
+    }
 }
-
 ?>
