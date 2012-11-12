@@ -51,8 +51,6 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
         
         $(".delRow").btnDelRow();  
     }); 
-    
-    
     $(function() {
         $(".kredit").keydown(function(e){
             if(e.which == 13){
