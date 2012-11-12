@@ -63,13 +63,13 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
         <thead>
             <tr>
                 <th>No</th>
-                <th>Product</th>
+                <th>Kode/Nama Product</th>
                 <th>Qty</th>
                 <th>Uom</th>
                 <th>Price (@Rp)</th>
                 <th>Diskon (@Rp)</th>
                 <th>PPN (%)</th>
-                <th>Sub Total</th>
+                <th>Locator</th>
                 <th style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/plus.png" border="0" class="addRow"></th>
             </tr>
         </thead>
@@ -82,7 +82,10 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                     <td>
                         <?php
                         echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0'));
-                        echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product, array('class' => 'id_product', 'id' => 'id_product0'));
+                        //echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product, array('class' => 'id_product', 'id' => 'id_product0'));
+                        echo CHtml::activehiddenField($modeldtl,'id_product', array('name' => 'items[id_product][]', 'class' => 'id_product', 'id' => 'id_product0', 'size' => '8'));
+                        echo CHtml::textField('items[cd_product][]', '', array('class' => 'cd_product', 'id' => 'cd_product0', 'size' => '8'));
+                            
                         //echo '&nbsp;';
                         echo CHtml::textField('items[product][]', $modeldtl->product, array('class' => 'product', 'id' => 'product0', 'size' => '24'));
                         ?>
@@ -96,7 +99,14 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                     <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans, array('class' => 'value_trans', 'id' => 'value_trans0', 'size' => '6')); ?></td>
                     <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size' => '4')); ?></td>
                     <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size' => '4')); ?></td>
-                    <td><?php echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
+                    <td>
+                        <?php
+                        $mlktr = Locator::model()->findAll();
+                        $llist = CHtml::listData($mlktr, 'id_locator', 'nm_locator');
+                        echo CHtml::activeDropDownList($modeldtl, 'id_locator', $llist, 
+                                array('empty' => '-- Pilih Lokator --', 'id' => 'lock0','class' => 'lock'));
+                        ?>
+                        <?php //echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
                     <td style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/minus.png" border="0" class="delRow"></td>
                 </tr>                
             <?php else: for ($i = 0; $i < sizeof($modeldtl->id_product); ++$i): ?>
@@ -107,7 +117,7 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                         <td>
                             <?php
                             echo CHtml::hiddenField('items[id_line][]', $modeldtl->id_line, array('class' => 'id_line', 'id' => 'id_line0'));
-                            echo CHtml::hiddenField('items[id_product][]', $modeldtl->id_product[$i], array('class' => 'id_product', 'id' => 'id_product0'));
+                            echo CHtml::activeTextField($modeldtl,'id_product', array('name' => 'items[id_product][]', 'class' => 'id_product', 'id' => 'id_product0'));
                             //echo '&nbsp;';
                             echo CHtml::textField('items[product][]', $modeldtl->product[$i], array('class' => 'product', 'id' => 'product0', 'size' => '24'));
                             ?>
@@ -121,7 +131,13 @@ $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
                         <td><?php echo CHtml::textField('items[value_trans][]', $modeldtl->value_trans[$i], array('class' => 'value_trans', 'id' => 'value_trans0', 'size' => '6')); ?></td>
                         <td><?php echo CHtml::textField('items[value_disc][]', 0, array('class' => 'value_disc', 'id' => 'value_disc0', 'size' => '5')); ?></td>
                         <td><?php echo CHtml::textField('items[ppn][]', 10, array('class' => 'ppn', 'id' => 'ppn0', 'size' => '2')); ?></td>
-                        <td><?php echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
+                        <td>
+                            <?php
+                            $mlktr = Locator::model()->findAll();
+                            $llist = CHtml::listData($mlktr, 'id_locator', 'nm_locator');
+                            echo CHtml::activeDropDownList($modeldtl, 'id_locator', $llist, array('empty' => '-- Pilih Lokator --', 'id' => 'lock0','class' => 'lock'));
+                            ?>
+                            <?php //echo CHtml::label('0', false, array('class' => 'sub_total', 'id' => 'sub_total0', 'style' => 'text-align: right')); ?></td>
                         <td style="width: 10px; text-align: center;"><img src="<?php echo Yii::app()->theme->baseUrl ?>/images/minus.png" border="0" class="delRow" ></td>
                     </tr> 
                     <?php
