@@ -76,7 +76,7 @@ input:focus
 div.form fieldset
 {
 	border: 1px solid #DDD;
-	padding: 10px;
+	padding: 5px;
         padding-bottom: 0px;
 	margin: 0 0 10px 0;
     -moz-border-radius:7px;
@@ -91,7 +91,7 @@ div.form label
 
 div.form .row
 {
-	margin: 5px 0;
+	margin: 10px;
 }
 
 div.form .hint

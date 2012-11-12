@@ -60,14 +60,15 @@
             // additional javascript options for the dialog plugin
             'options' => array(
                 'title' => '<b>'.$this->id.'</b>',
-                'width' => '400px',
-                'height' => '300',
+                'width' => '600px',
+                'height' => '400',
                 #'position' => 'top',
                 'top' => '50px',
                 'modal' => true,
-//            'buttons' => array(
-//                'Ok' => 'js:function(){alert("ok")}',
-//                'Cancel' => 'js:function(){alert("cancel")}',),
+            'buttons' => array(
+                'Close' => 'js:function(){$(\'#mydialog\').dialog(\'close\');}',
+//                'Cancel' => 'js:function(){alert("cancel")}',
+                ),
                 'autoOpen' => false,
                 )));
         ?>
