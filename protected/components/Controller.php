@@ -16,7 +16,6 @@ class Controller extends CController {
      * @var array context menu items. This property will be assigned to {@link CMenu::items}.
      */
     public $menu = array();
-    
     public $mmenu = array(
         'items' => array(
             array('label' => 'Home', 'url' => array('/site/index'), 'itemOptions' => array('class' => 'test')),
@@ -34,5 +33,23 @@ class Controller extends CController {
      * for more details on how to specify this property.
      */
     public $breadcrumbs = array();
+
+    public function dateConvert($text_origin = '') {
+        if (!$text_origin == '') {
+            $ntgl = explode('-', $text_origin);
+            $time = gmmktime(0, 0, 0, $ntgl[1], $ntgl[0], $ntgl[2]);
+            return date('Y-m-d', $time);
+        } else
+            return date('Y-m-d');
+    }
+    
+    public function dateRevert($text_origin = '') {
+        if (!$text_origin == '') {
+            $ntgl = explode('-', $text_origin);
+            $time = gmmktime(0, 0, 0, $ntgl[1], $ntgl[2], $ntgl[0]);
+            return date('d-m-Y', $time);
+        } else
+            return date('d-m-Y');
+    }
 
 }
