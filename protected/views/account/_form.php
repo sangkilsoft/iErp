@@ -3,17 +3,6 @@ Yii::app()->clientScript->registerCssFile(
         Yii::app()->clientScript->getCoreScriptUrl() . '/jui/css/base/jquery-ui.css');
 
 Yii::app()->clientScript->registerCoreScript('jquery.ui');
-$sql = "SELECT 
-  acc.id_acc as parent, 
-  concat(acc.cd_acc,'-',acc.nm_acc) as nm_acc,
-  acc.cd_acc
-FROM 
-  public.account acc
- order by 3;
-";
-$connection = Yii::app()->db;
-$command = $connection->createCommand($sql);
-$results = $command->queryAll();
 ?>
 <script type="text/javascript">
     //    $(function(){
@@ -39,14 +28,12 @@ $results = $command->queryAll();
         <table border="0">
             <tbody>
                 <tr>
-                    
                     <td>
-                        
                         <?php 
                         echo $form->labelEx($model, 'parent'); 
                         ?>                        
                         <?php
-                        echo $form->dropDownList($model, 'parent', CHtml::listData($results, 'parent', 'nm_acc'), array(
+                        echo $form->dropDownList($model, 'parent', fico::acc_parent_list(), array(
                             'empty' => 'Select a parent',
                             'ajax' => Array(
                                 'type' => 'POST',
@@ -84,7 +71,11 @@ $results = $command->queryAll();
                         <?php echo $form->dropDownList($model, 'acc_normal', array('D' => 'Debet', 'K' => 'Kredit')); ?>
                         <?php echo $form->error($model, 'acc_normal'); ?>
                     </td>
-                    <td></td>
+                    <td>
+                        <?php echo $form->labelEx($model, 'balance'); ?>
+                        <?php echo $form->textField($model, 'balance'); ?>
+                        <?php echo $form->error($model, 'balance'); ?>
+                    </td>
                 </tr>
             </tbody>
         </table>

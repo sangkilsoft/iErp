@@ -138,38 +138,56 @@ class AccountController extends Controller {
     }
 
     public function actionCodeAccount() {
-        $hasil = 0;
+        $hasil = "";
         $datapost = (strlen(trim($_POST['idparent']) > 0)) ? $_POST['idparent'] : -1;
-        $pjg = 0;
         $connection = Yii::app()->db;
         $sql1 = "select cd_acc,level from account b where b.id_acc=$datapost";
         $command1 = $connection->createCommand($sql1);
         $results1 = $command1->queryAll();
-        $level= $results1[0]['level'];
-        $cd_acc = substr($results1[0]['cd_acc'],0,$level);  
-        if ($datapost <> -1) {
-            $pjg = intval($level) + 1;
+        $level = $results1[0]['level'];
+        $temp = fico::split('.', $results1[0]['cd_acc']);
+        if ($level == 1) {
+            $sql = "Select
+                      Max(SubString(account.cd_acc From 3 For 2 )) as jum
+                    From
+                      account
+                    Where
+                      account.level = " . ($level) . " and parent=" . $datapost . "
+                    Group By
+                      account.level";
+        } elseif ($level == 2) {
+            $sql = "Select
+                      Max(SubString(account.cd_acc From 6 For 3 )) as jum
+                    From
+                      account
+                    Where
+                      account.level = " . ($level) . " and parent=" . $datapost . "
+                    Group By
+                      account.level";
         }
-        $sql = "SELECT 
-                  max(account.cd_acc) as jum
-                FROM 
-                  public.account
-                where left(cd_acc,$pjg-1)='$cd_acc' and level=$pjg;
-                ";
-
+        $connection = Yii::app()->db;
         $command = $connection->createCommand($sql);
         $results = $command->queryAll();
-        if (($results[0]['jum']) != '') {
-            if(intval($level)==1){
-                $hasil = (intval(substr($results[0]['jum'],0,2) + 1)).'00';
-            }elseif(intval($level)==2){
-                $hasil = (intval($results[0]['jum']) + 1);
+        if (intval($level) == 1) {
+
+            $t = intval($results[0]['jum']) + 1;
+            if (strlen(strval($t)) == 1) {
+                $hasil = $temp[0] . '.0' . $t . '.000';
+            } elseif (strlen(strval($t)) == 2) {
+                $hasil = $temp[0] . '.' . $t . '.000';
             }
-        } else {
-            if(intval($level)==1){
-                $hasil = strval($cd_acc) . '100';
-            }elseif(intval($level)==2) {
-                $hasil = strval($cd_acc) . '10';
+        } elseif (intval($level) == 2) {
+            if (empty($results[0]['jum'])) {
+                $hasil = $temp[0] . '.' . $temp[1] . '.' . (intval($temp[2]) + 1);
+            } else {
+                $t = intval($results[0]['jum']) + 1;
+                if (strlen(strval($t)) == 1) {
+                    $hasil = $temp[0] . '.' . $temp[1] . '.00' . $t;
+                } elseif (strlen(strval($t)) == 2) {
+                    $hasil = $temp[0] . '.' . $temp[1] . '.0' . $t;
+                } else {
+                    $hasil = $temp[0] . '.' . $temp[1] . '.' . $t;
+                }
             }
         }
         echo $hasil;

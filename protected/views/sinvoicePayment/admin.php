@@ -1,12 +1,12 @@
 <?php
 $this->breadcrumbs=array(
-	'Accounts'=>array('index'),
+	'Sinvoice Payments'=>array('index'),
 	'Manage',
 );
 
 $this->menu=array(
-	array('label'=>'List Account', 'url'=>array('index')),
-	array('label'=>'Create Account', 'url'=>array('create')),
+	array('label'=>'List SinvoicePayment', 'url'=>array('index')),
+	array('label'=>'Create SinvoicePayment', 'url'=>array('create')),
 );
 
 Yii::app()->clientScript->registerScript('search', "
@@ -15,7 +15,7 @@ $('.search-button').click(function(){
 	return false;
 });
 $('.search-form form').submit(function(){
-	$.fn.yiiGridView.update('account-grid', {
+	$.fn.yiiGridView.update('sinvoice-payment-grid', {
 		data: $(this).serialize()
 	});
 	return false;
@@ -23,7 +23,7 @@ $('.search-form form').submit(function(){
 ");
 ?>
 
-<h1>Manage Accounts</h1>
+<h1>Manage Sinvoice Payments</h1>
 
 <p>
 You may optionally enter a comparison operator (<b>&lt;</b>, <b>&lt;=</b>, <b>&gt;</b>, <b>&gt;=</b>, <b>&lt;&gt;</b>
@@ -38,24 +38,27 @@ or <b>=</b>) at the beginning of each of your search values to specify how the c
 </div><!-- search-form -->
 
 <?php $this->widget('zii.widgets.grid.CGridView', array(
-	'id'=>'account-grid',
+	'id'=>'sinvoice-payment-grid',
 	'dataProvider'=>$model->search(),
 	'filter'=>$model,
 	'columns'=>array(
-                array('header'=>'No',
-                    'value'=>'$this->grid->dataProvider->pagination->currentPage * $this->grid->dataProvider->pagination->pageSize + ($row+1)',
-                    'htmlOptions'=>array('align'=>'center')),
-		//'id_acc',
-		'cd_acc',
-		'nm_acc',
-		'acc_normal',
-		'parent',
-                'level',
-		/*'create_date',		
-		'update_by',
+		'id_pyment',
+		'pyment_num',
+		'id_branch',
+		'id_orgn',
+		'pyment_date',
+		'actual_pyment',
+		/*
+		'currency',
+		'ref_num',
+		'py_method',
+		'deposit_to',
+		'cleared',
+		'create_date',
 		'create_by',
 		'update_date',
-		'level',
+		'update_by',
+		'id_customer',
 		*/
 		array(
 			'class'=>'CButtonColumn',
