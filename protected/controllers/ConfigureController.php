@@ -1,6 +1,6 @@
 <?php
 
-class CustomerLimitationController extends Controller
+class ConfigureController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -15,6 +15,7 @@ class CustomerLimitationController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -61,16 +62,16 @@ class CustomerLimitationController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new CustomerLimitation;
+		$model=new Configure;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CustomerLimitation']))
+		if(isset($_POST['Configure']))
 		{
-			$model->attributes=$_POST['CustomerLimitation'];
+			$model->attributes=$_POST['Configure'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_conf));
 		}
 
 		$this->render('create',array(
@@ -90,11 +91,11 @@ class CustomerLimitationController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CustomerLimitation']))
+		if(isset($_POST['Configure']))
 		{
-			$model->attributes=$_POST['CustomerLimitation'];
+			$model->attributes=$_POST['Configure'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_conf));
 		}
 
 		$this->render('update',array(
@@ -109,17 +110,11 @@ class CustomerLimitationController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -127,7 +122,7 @@ class CustomerLimitationController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('CustomerLimitation');
+		$dataProvider=new CActiveDataProvider('Configure');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +133,10 @@ class CustomerLimitationController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new CustomerLimitation('search');
+		$model=new Configure('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['CustomerLimitation']))
-			$model->attributes=$_GET['CustomerLimitation'];
+		if(isset($_GET['Configure']))
+			$model->attributes=$_GET['Configure'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +150,7 @@ class CustomerLimitationController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=CustomerLimitation::model()->findByPk($id);
+		$model=Configure::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +162,7 @@ class CustomerLimitationController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='customer-limitation-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='configure-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

@@ -1,6 +1,6 @@
 <?php
 
-class CustomerDetailController extends Controller
+class PriceCatController extends Controller
 {
 	/**
 	 * @var string the default layout for the views. Defaults to '//layouts/column2', meaning
@@ -15,6 +15,7 @@ class CustomerDetailController extends Controller
 	{
 		return array(
 			'accessControl', // perform access control for CRUD operations
+			'postOnly + delete', // we only allow deletion via POST request
 		);
 	}
 
@@ -61,16 +62,16 @@ class CustomerDetailController extends Controller
 	 */
 	public function actionCreate()
 	{
-		$model=new CustomerDetail;
+		$model=new PriceCat;
 
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CustomerDetail']))
+		if(isset($_POST['PriceCat']))
 		{
-			$model->attributes=$_POST['CustomerDetail'];
+			$model->attributes=$_POST['PriceCat'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_price_cat));
 		}
 
 		$this->render('create',array(
@@ -90,11 +91,11 @@ class CustomerDetailController extends Controller
 		// Uncomment the following line if AJAX validation is needed
 		// $this->performAjaxValidation($model);
 
-		if(isset($_POST['CustomerDetail']))
+		if(isset($_POST['PriceCat']))
 		{
-			$model->attributes=$_POST['CustomerDetail'];
+			$model->attributes=$_POST['PriceCat'];
 			if($model->save())
-				$this->redirect(array('view','id'=>$model->id_customer));
+				$this->redirect(array('view','id'=>$model->id_price_cat));
 		}
 
 		$this->render('update',array(
@@ -109,17 +110,11 @@ class CustomerDetailController extends Controller
 	 */
 	public function actionDelete($id)
 	{
-		if(Yii::app()->request->isPostRequest)
-		{
-			// we only allow deletion via POST request
-			$this->loadModel($id)->delete();
+		$this->loadModel($id)->delete();
 
-			// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
-			if(!isset($_GET['ajax']))
-				$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
-		}
-		else
-			throw new CHttpException(400,'Invalid request. Please do not repeat this request again.');
+		// if AJAX request (triggered by deletion via admin grid view), we should not redirect the browser
+		if(!isset($_GET['ajax']))
+			$this->redirect(isset($_POST['returnUrl']) ? $_POST['returnUrl'] : array('admin'));
 	}
 
 	/**
@@ -127,7 +122,7 @@ class CustomerDetailController extends Controller
 	 */
 	public function actionIndex()
 	{
-		$dataProvider=new CActiveDataProvider('CustomerDetail');
+		$dataProvider=new CActiveDataProvider('PriceCat');
 		$this->render('index',array(
 			'dataProvider'=>$dataProvider,
 		));
@@ -138,10 +133,10 @@ class CustomerDetailController extends Controller
 	 */
 	public function actionAdmin()
 	{
-		$model=new CustomerDetail('search');
+		$model=new PriceCat('search');
 		$model->unsetAttributes();  // clear any default values
-		if(isset($_GET['CustomerDetail']))
-			$model->attributes=$_GET['CustomerDetail'];
+		if(isset($_GET['PriceCat']))
+			$model->attributes=$_GET['PriceCat'];
 
 		$this->render('admin',array(
 			'model'=>$model,
@@ -155,7 +150,7 @@ class CustomerDetailController extends Controller
 	 */
 	public function loadModel($id)
 	{
-		$model=CustomerDetail::model()->findByPk($id);
+		$model=PriceCat::model()->findByPk($id);
 		if($model===null)
 			throw new CHttpException(404,'The requested page does not exist.');
 		return $model;
@@ -167,7 +162,7 @@ class CustomerDetailController extends Controller
 	 */
 	protected function performAjaxValidation($model)
 	{
-		if(isset($_POST['ajax']) && $_POST['ajax']==='customer-detail-form')
+		if(isset($_POST['ajax']) && $_POST['ajax']==='price-cat-form')
 		{
 			echo CActiveForm::validate($model);
 			Yii::app()->end();

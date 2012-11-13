@@ -170,7 +170,9 @@ class LocatorController extends Controller {
     }
 
     public function actionOptLocators() {        
-        $whse = isset($_POST['GreceiptHdr']['id_warehouse']) ? $_POST['GreceiptHdr']['id_warehouse'] : -1;
+        //$whse = isset($_POST['GreceiptHdr']['id_warehouse']) ? $_POST['GreceiptHdr']['id_warehouse'] : -1;
+        $whse = isset($_POST['idwhse']) ? $_POST['idwhse'] : -1;
+        
         $data = Locator::model()->findAll('id_warehouse=:id_warehouse', array(':id_warehouse' => $whse));
         foreach ($data as $rows) {
             echo CHtml::tag('option', array('value' => $rows->id_locator), CHtml::encode($rows->nm_locator . " (" . $rows->cd_locator . ")"), true);
