@@ -1,0 +1,188 @@
+--
+-- PostgreSQL database dump
+--
+
+-- Dumped from database version 9.1.4
+-- Dumped by pg_dump version 9.1.4
+-- Started on 2012-11-13 09:40:35
+
+SET statement_timeout = 0;
+SET client_encoding = 'UTF8';
+SET standard_conforming_strings = on;
+SET check_function_bodies = false;
+SET client_min_messages = warning;
+
+SET search_path = public, pg_catalog;
+
+--
+-- TOC entry 2107 (class 0 OID 0)
+-- Dependencies: 227
+-- Name: account_id_acc_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('account_id_acc_seq', 70, true);
+
+
+--
+-- TOC entry 2108 (class 0 OID 0)
+-- Dependencies: 235
+-- Name: gl_detail_id_gldetail_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_detail_id_gldetail_seq', 30, true);
+
+
+--
+-- TOC entry 2109 (class 0 OID 0)
+-- Dependencies: 225
+-- Name: gl_header_id_glheader_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_header_id_glheader_seq', 47, true);
+
+
+--
+-- TOC entry 2110 (class 0 OID 0)
+-- Dependencies: 229
+-- Name: gl_periode_id_glperiode_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('gl_periode_id_glperiode_seq', 98, true);
+
+
+--
+-- TOC entry 2111 (class 0 OID 0)
+-- Dependencies: 233
+-- Name: mapping_coa_id_mappingcoa_seq; Type: SEQUENCE SET; Schema: public; Owner: postgres
+--
+
+SELECT pg_catalog.setval('mapping_coa_id_mappingcoa_seq', 11, true);
+
+
+--
+-- TOC entry 2101 (class 0 OID 18481)
+-- Dependencies: 228
+-- Data for Name: account; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (61, '1105.001', 'PERSEDIAAN BARANG DAGANGAN', 'K', 16, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (62, '1106.001', 'BIAYA DIBAYAR DIMUKA', 'K', 47, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (63, '2101.100', 'HUTANG DAGANG', 'K', 13, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (64, '5101.001', 'HARGA POKOK PENJUALAN', 'D', 24, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (65, '4101.002', 'DISKON PENJUALAN', 'D', 18, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (25, '2103', 'PAJAK KELUAR', 'K', 12, 3, '2012-10-29 08:23:32.851', 'admin', 'admin', '2012-10-29 08:23:32.851', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (66, '2103.001', 'PPN KELUARAN', 'K', 25, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (67, '1101.001', 'KAS KECIL', 'D', 9, 4, '2012-11-13 09:07:26.827', 'admin', 'admin', '2012-11-13 09:07:26.827', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (68, '1101.002', 'KAS', 'D', 9, 4, '2012-11-13 09:09:25.496', 'admin', 'admin', '2012-11-13 09:09:25.496', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (69, '1107', 'PPN MASUKAN', 'D', 45, 3, '2012-11-13 09:15:18.884', 'admin', 'admin', '2012-11-13 09:15:18.884', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (70, '1107.001', 'PPN MASUKAN', 'D', 69, 4, '2012-11-13 09:15:48.867', 'admin', 'admin', '2012-11-13 09:15:48.867', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (1, '1', 'HARTA', 'D', NULL, 1, '2012-10-03 08:39:39.32', 'admin', 'admin', '2012-11-06 10:30:59.272', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (45, '11', 'AKTIVA LANCAR', 'D', 1, 2, '2012-10-03 08:39:39.32', 'admin', 'admin', '2012-11-06 10:30:59.272', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (8, '12', 'AKTIVA TETAP', 'D', 1, 2, '2012-10-03 08:49:48.537', 'admin', 'admin', '2012-10-03 08:49:48.537', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (47, '1106', 'BIAYA DIBAYAR DIMUKA', 'K', 45, 3, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (11, '1201', 'AKTIFA TETAP', 'D', 8, 3, '2012-10-03 15:31:22.214', 'admin', 'admin', '2012-10-03 15:33:19.179', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (2, '2', 'HUTANG', 'K', NULL, 1, '2012-10-03 08:40:11.652', 'admin', 'admin', '2012-10-03 08:40:11.652', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (53, '2105', 'HUTANG BIAYA', 'K', 49, 3, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (3, '3', 'MODAL', 'K', NULL, 1, '2012-10-03 08:42:09.626', 'admin', 'admin', '2012-10-03 08:42:09.626', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (37, '31', 'MODAL', 'K', 3, 2, '2012-11-03 13:15:33.891', 'admin', 'admin', '2012-11-03 13:15:33.891', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (48, '1201.001', 'TANAH', 'K', 11, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (49, '21', 'HUTANG LANCAR', 'K', 2, 2, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (52, '2201', 'UANG MUKA', 'K', 49, 3, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (56, '4', 'PENDAPATAN', 'K', NULL, 1, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (57, '41', 'PENJUALAN', 'K', 56, 2, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (18, '4101', 'PENDAPATAN USAHA', 'D', 4, 2, '2012-10-18 09:00:15.288', 'admin', 'admin', '2012-10-18 09:00:15.288', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (5, '5', 'HARGA POKOK PENJUALAN', 'D', NULL, 1, '2012-10-03 08:43:40.873', 'admin', 'admin', '2012-10-03 08:43:40.873', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (23, '51', 'HARGA POKOK PENJUALAN', 'K', 5, 2, '2012-10-18 09:14:39.717', 'admin', 'admin', '2012-10-18 09:14:39.717', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (24, '5101', 'HARGA POKOK PENJUALAN', 'K', 23, 3, '2012-10-18 09:15:02.509', 'admin', 'admin', '2012-10-18 09:15:02.509', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (6, '6', 'BIAYA', 'D', NULL, 1, '2012-10-03 08:44:08.872', 'admin', 'admin', '2012-10-03 08:44:08.872', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (26, '61', 'BIAYA USAHA', 'K', 6, 2, '2012-10-30 15:07:56.009', 'admin', 'admin', '2012-10-30 15:07:56.009', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (58, '6101', 'BIAYA USAHA', 'K', 26, 3, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (9, '1101', 'KAS', 'D', 45, 3, '2012-10-03 08:54:38.74', 'admin', 'admin', '2012-10-03 15:21:14.007', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (10, '1102', 'BANK', 'D', 45, 3, '2012-10-03 15:26:38.881', 'admin', 'admin', '2012-10-03 15:32:26.084', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (17, '1103', 'PIUTANG DAGANG', 'D', 45, 3, '2012-10-16 16:59:56.919', 'admin', 'admin', '2012-10-16 16:59:56.919', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (54, '1102.001', 'BANK BCA', 'K', 10, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (38, '3101.001', 'MODAL SAHAM', 'K', 37, 4, '2012-11-03 13:15:56.664', 'admin', 'admin', '2012-11-03 13:15:56.664', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (39, '3101.002', 'LABA DITAHAN', 'K', 37, 4, '2012-11-03 13:16:15.722', 'admin', 'admin', '2012-11-03 13:16:15.722', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (19, '4101.001', 'PENJUALAN', 'D', 18, 4, '2012-10-18 09:01:04.936', 'admin', 'admin', '2012-10-18 09:01:04.936', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (27, '6101.001', 'BIAYA LISTRIK', 'K', 26, 4, '2012-10-30 15:08:23.109', 'admin', 'admin', '2012-10-30 15:08:23.109', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (30, '6101.002', 'BIAYA MAKAN', 'K', 26, 4, '2012-10-30 15:10:50.617', 'admin', 'admin', '2012-10-30 15:10:50.617', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (31, '6101.003', 'BIAYA SERVICE', 'K', 26, 4, '2012-10-30 15:11:44.876', 'admin', 'admin', '2012-10-30 15:11:44.876', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (32, '6101.004', 'BIAYA DISKON', 'K', 26, 4, '2012-10-30 15:12:02.778', 'admin', 'admin', '2012-10-30 15:12:02.778', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (33, '6101.005', 'BIAYA BENGKEL', 'K', 26, 4, '2012-10-30 15:12:21.854', 'admin', 'admin', '2012-10-30 15:12:21.854', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (34, '6101.006', 'BIAYA KUE', 'K', 26, 4, '2012-10-30 15:12:44.169', 'admin', 'admin', '2012-10-30 15:12:44.169', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (35, '6101.007', 'BIAYA CALO', 'K', 26, 4, '2012-10-30 15:13:02.217', 'admin', 'admin', '2012-10-30 15:13:02.217', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (28, '6101.008', 'BIAYA GAJI', 'K', 26, 4, '2012-10-30 15:09:06.094', 'admin', 'admin', '2012-10-30 15:09:06.094', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (29, '6101.009', 'BIAYA JALAN', 'K', 26, 4, '2012-10-30 15:09:26.948', 'admin', 'admin', '2012-10-30 15:09:26.948', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (16, '1105', 'PERSEDIAAN BARANG DAGANGAN', 'D', 45, 2, '2012-10-15 15:16:26.746', 'admin', 'admin', '2012-10-15 15:16:26.746', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (13, '2101', 'HUTANG DAGANG
+', 'K', 49, 3, '2012-10-03 15:36:37.204', 'admin', 'admin', '2012-10-03 15:36:37.204', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (59, '1103.001', 'PIUTANG USAHA', 'K', 17, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (46, '1104', 'UANG MUKA PEMBELIAN', 'K', 45, 3, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+INSERT INTO account (id_acc, cd_acc, nm_acc, acc_normal, parent, level, create_date, update_by, create_by, update_date, balance) VALUES (60, '1104.001', 'UANG MUKA PEMBELIAN', 'K', 46, 4, '2012-10-30 00:00:00', 'admin', 'admin', '2012-10-30 00:00:00', 0);
+
+
+--
+-- TOC entry 2100 (class 0 OID 18473)
+-- Dependencies: 226
+-- Data for Name: gl_header; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (13, 1, 2, 'F002', '2012-10-02', 'PEMBELIAN', 'Membeli 5 HP merk B Kredit', '2012-11-13 09:05:51.698', '2012-10-15 15:19:43.617', 'admin', 'admin', '13');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (14, 1, 2, 'F003', '2012-10-03', 'PEMBELIAN', 'Membeli 20 pulsa C Kredit', '2012-11-13 09:06:26.689', '2012-10-15 15:21:20.598', 'admin', 'admin', '14');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (15, 1, 2, '-', '2012-10-04', 'BIAYA', 'Biaya angkut pembelian HP ', '2012-11-13 09:12:08.173', '2012-10-15 15:22:50.408', 'admin', 'admin', '15');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (16, 1, 2, '-', '2012-10-05', 'HUTANG', 'Melunasi utang dan Dapat Potongan', '2012-11-13 09:13:17.297', '2012-10-15 15:24:58.394', 'admin', 'admin', '16');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (17, 1, 2, '-', '2012-10-06', 'PEMBELIAN', 'Membeli tunai 15 HP bekas merek D dari toko HP lain', '2012-11-13 09:17:59.595', '2012-10-15 15:42:29.346', 'admin', 'admin', '17');
+INSERT INTO gl_header (id_glheader, id_branch, id_orgn, refnum, tgl_trans, trans_type, description, update_date, create_date, create_by, update_by, cd_gl_header) VALUES (19, 1, 2, '-', '2012-10-07', 'PENGURANGAN', 'Meminta pengurangan harga Rp100.000', '2012-10-15 15:46:57.034', '2012-10-15 15:46:57.034', 'admin', 'admin', '19');
+
+
+--
+-- TOC entry 2104 (class 0 OID 18570)
+-- Dependencies: 236 2100 2101
+-- Data for Name: gl_detail; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (29, 19, 13, 100000, 0, '2012-10-15 15:46:57.034', 'admin', 'admin', '2012-10-15 15:46:57.034');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (30, 19, 16, 0, 100000, '2012-10-15 15:46:57.034', 'admin', 'admin', '2012-10-15 15:46:57.034');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (16, 13, 54, 10000000, 0, '2012-11-13 09:05:51.698', 'admin', 'admin', '2012-11-13 09:05:51.698');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (17, 13, 63, 0, 10000000, '2012-11-13 09:05:51.698', 'admin', 'admin', '2012-11-13 09:05:51.698');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (18, 14, 54, 2000000, 0, '2012-11-13 09:06:26.689', 'admin', 'admin', '2012-11-13 09:06:26.689');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (19, 14, 63, 0, 2000000, '2012-11-13 09:06:26.689', 'admin', 'admin', '2012-11-13 09:06:26.689');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (20, 15, 29, 200000, 0, '2012-11-13 09:12:08.173', 'admin', 'admin', '2012-11-13 09:12:08.173');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (21, 15, 67, 0, 200000, '2012-11-13 09:12:08.173', 'admin', 'admin', '2012-11-13 09:12:08.173');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (22, 16, 63, 7500000, 0, '2012-11-13 09:13:17.297', 'admin', 'admin', '2012-11-13 09:13:17.297');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (23, 16, 68, 0, 7500000, '2012-11-13 09:13:17.297', 'admin', 'admin', '2012-11-13 09:13:17.297');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (24, 17, 61, 6000000, 0, '2012-11-13 09:17:59.595', 'admin', 'admin', '2012-11-13 09:17:59.595');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (25, 17, 70, 600000, 0, '2012-11-13 09:17:59.595', 'admin', 'admin', '2012-11-13 09:17:59.595');
+INSERT INTO gl_detail (id_gldetail, id_glheader, id_acc, debet, kredit, create_date, update_by, create_by, update_date) VALUES (26, 17, 68, 0, 6600000, '2012-11-13 09:17:59.595', 'admin', 'admin', '2012-11-13 09:17:59.595');
+
+
+--
+-- TOC entry 2102 (class 0 OID 18490)
+-- Dependencies: 230 2101
+-- Data for Name: gl_periode; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+
+
+--
+-- TOC entry 2103 (class 0 OID 18530)
+-- Dependencies: 234
+-- Data for Name: mapping_coa; Type: TABLE DATA; Schema: public; Owner: postgres
+--
+
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (3, 'PENJUALAN', 'PENJUALAN', 19, 'K', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-10-20 15:50:00.987');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (2, 'PENJUALAN', 'PIUTANG', 59, 'D', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-11-12 18:11:37.529');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (4, 'PENJUALAN', 'HPP', 64, 'D', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-11-12 18:12:01.2');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (9, 'PEMBELIAN', 'HUTANG', 63, 'K', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-11-12 18:33:02.301');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (5, 'PENJUALAN', 'PERSEDIAAN', 61, 'K', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-11-12 18:33:57.637');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (6, 'PEMBELIAN', 'PERSEDIAAN', 61, 'D', '2012-10-20 15:50:00.987', 'admin', 'admin', '2012-11-12 18:34:13.869');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (10, 'PENJUALAN', 'DISKONJUAL', 65, 'D', '2012-10-29 08:14:40.097', 'admin', 'admin', '2012-11-12 18:38:39.21');
+INSERT INTO mapping_coa (id_mappingcoa, trans_type, mappingname, id_acc, dk, create_date, create_by, update_by, update_date) VALUES (11, 'PENJUALAN', 'PPNJUAL', 66, 'K', '2012-10-29 08:25:22.253', 'admin', 'admin', '2012-11-12 18:41:07.992');
+
+
+-- Completed on 2012-11-13 09:40:36
+
+--
+-- PostgreSQL database dump complete
+--
+
