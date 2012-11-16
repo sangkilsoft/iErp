@@ -99,17 +99,7 @@ class GlPeriodeController extends Controller {
             Select
   account.id_acc As id_acc,
   account.cd_acc As cd_acc,
-  account.nm_acc As nm_acc,
-  Coalesce((Select
-    gl_periode.saldo As gl_periode_saldo
-  From
-    gl_periode gl_periode
-  Where
-    gl_periode.bulan = " . (($param['bulan'] - 1) == 0 ? 12 : ($param['bulan'] - 1)) . " And
-    gl_periode.tahun = " . (($param['bulan'] - 1) == 0 ? ($param['tahun']) - 1 : ($param['tahun'])) . " And
-    gl_periode.id_acc = account.id_acc And
-    gl_periode.id_branch = " . $param['id_branch'] . " And
-    gl_periode.id_orgn = " . $param['id_orgn'] . "), 0) As saldo,
+  account.nm_acc As nm_acc,account.balance As Saldo,
   Coalesce((Select
     Sum(gl_detail.debet) As debet
   From
