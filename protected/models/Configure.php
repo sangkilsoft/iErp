@@ -12,6 +12,7 @@
  * @property string $update_date
  * @property integer $create_by
  * @property string $create_date
+ * update by mujib
  */
 class Configure extends CActiveRecord
 {
