@@ -18,6 +18,7 @@
  * The followings are the available model relations:
  * @property Districs $idDistric
  * @property Customers $idCustomer
+ * update by mujib
  */
 class CustDetail extends CActiveRecord {
 

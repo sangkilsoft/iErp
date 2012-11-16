@@ -16,7 +16,7 @@
  *
  * The followings are the available model relations:
  * @property SalOrder $idSorder
- * update by mujib manually
+ * update by mujib
  */
 class SorderInfo extends CActiveRecord
 {

@@ -17,6 +17,7 @@
  *
  * The followings are the available model relations:
  * @property Customers $idCustomer
+ * update by mujib
  */
 class CustLimitation extends CActiveRecord
 {

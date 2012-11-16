@@ -19,6 +19,7 @@
  *
  * The followings are the available model relations:
  * @property PorderLine[] $porderLines
+ * update by mujib
  */
 class PorderHdr extends CActiveRecord
 {

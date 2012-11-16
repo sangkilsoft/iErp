@@ -13,6 +13,7 @@
  *
  * The followings are the available model relations:
  * @property Price[] $prices
+ * update by mujib
  */
 class PriceCat extends CActiveRecord
 {
