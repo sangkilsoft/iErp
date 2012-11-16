@@ -58,7 +58,7 @@ Yii::app()->clientScript->registerScriptFile(Yii::app()->theme->baseUrl . '/js/j
 $muom = Uoms::model()->findAll();
 $luom = CHtml::listData($muom, 'id_uoms', 'cd_uom');
 ?>
-<div class="grid-view" cellpadding="0" cellspacing="0">
+<div class="grid-view" cellpadding="0" cellspacing="0" style="overflow-x: scroll">
     <table class="item-class">
         <thead>
             <tr>
