@@ -18,20 +18,24 @@ $this->menu=array(
 
 <h1>View Customers #<?php echo $model->id_customer; ?></h1>
 
-<?php $this->widget('zii.widgets.CDetailView', array(
-	'data'=>$model,
-	'attributes'=>array(
-		'id_customer',
-		'cd_cust',
-		'nm_cust',
-		'id_ctype',
-		'id_cclass',
-		'contact_name',
-		'contact_number',
-		'status',
-		'create_date',
-		'update_date',
-		'create_by',
-		'update_by',
-	),
-)); ?>
+<?php
+//$this->widget('zii.widgets.CDetailView', array(
+//	'data'=>$model,
+//	'attributes'=>array(
+//		'id_customer',
+//		'cd_cust',
+//		'nm_cust',
+//		'id_ctype',
+//		'id_cclass',
+//		'contact_name',
+//		'contact_number',
+//		'status',
+//		'create_date',
+//		'update_date',
+//		'create_by',
+//		'update_by',
+//	),
+//)); 
+?>
+
+<?php echo $this->renderPartial('_form', array('model' => $model, 'limit' => $limit, 'dtl' => $dtl)); ?>

@@ -29,6 +29,7 @@
                     'empty' => '-- Pilih Warehouse --',
                     'ajax' => array(
                         'type' => 'POST',
+                        'data'=>array('idwhse'=>'js:this.value'),
                         'url' => CController::createUrl('locator/optLocators'),
                         'update' => '#GreceiptHdr_id_locator',
                         )));
