@@ -1,4 +1,4 @@
-TinyErp
+iErp
 =======
 
 Very small erp application
